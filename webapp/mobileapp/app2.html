@@ -1,0 +1,79 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <title>BUI</title>
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="css/bui.css" />
+</head>
+<body>
+    <div class="bui-page">
+        <header class="bui-bar">
+            <div class="bui-bar-left">
+                <a class="bui-btn" onclick="bui.back();"><i class="icon-back"></i></a>
+            </div>
+            <div class="bui-bar-main">页面标题</div>
+            <div class="bui-bar-right">
+                <!-- 右边按钮位置 -->
+            </div>
+        </header>
+        <main>
+            <!-- 正文内容 -->
+            <div id="uiTab" class="bui-tab">
+                <div class="bui-tab-head">
+                    <ul class="bui-nav">
+                        <li class="bui-btn">首页</li>
+                        <li class="bui-btn">新闻</li>
+                        <li class="bui-btn">图片</li>
+                        <li class="bui-btn">视频</li>
+                        <li class="bui-btn">视频</li>
+                        <li class="bui-btn">视频</li>
+                        <li class="bui-btn">视频</li>
+                        <li class="bui-btn">视频</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 文本导航菜单 -->
+            <span>文本导航菜单</span>
+            <ul id="footnav" class="bui-nav">
+            	<li class="bui-btn"><span>首页</span></li>
+            	<li class="bui-btn"><span>微信</span></li>
+            	<li class="bui-btn"><span>购物车</span></li>
+            	<li class="bui-btn"><span>搜索</span></li>
+            </ul>
+
+            <!-- 水平图标居左导航菜单 -->
+            <span>水平图标居左导航菜单</span>
+            <ul id="footnav" class="bui-nav">
+            	<li class="bui-btn bui-box-align-left"><i class="icon-home"></i><span>首页</span></li>
+            	<li class="bui-btn bui-box-align-left"><i class="icon-chat"></i><span>微信</span></li>
+            	<li class="bui-btn bui-box-align-left"><i class="icon-shoppingcartfill"></i><span>购物车</span></li>
+            	<li class="bui-btn bui-box-align-left"><i class="icon-search"></i><span>搜索</span></li>
+            </ul>
+
+            <span>纵向图标导航菜单</span>
+            <div class="bui-nav" style="height: 200px;">
+              <ul id="sidenav" class="bui-slit bui-tab-sidenav">
+                <li class="bui-btn bui-box-align-left"><i class="icon-home"></i><span>首页</span></li>
+            	<li class="bui-btn bui-box-align-left"><i class="icon-chat"></i><span>微信</span></li>
+            	<li class="bui-btn bui-box-align-left"><i class="icon-shoppingcartfill"></i><span>购物车</span></li>
+            	<li class="bui-btn bui-box-align-left"><i class="icon-search"></i><span>搜索</span></li>
+              </ul>
+            </div>
+            
+        </main>
+        <footer>
+            <!-- 底部内容 此处内容固定在页面底部 -->
+        </footer>
+    </div>
+    <script src="js/zepto.js"></script>
+    <script src="js/bui.js"></script>
+    <script>
+        bui.ready(function () {
+            // 控件初始化
+        })
+    </script>
+</body>
+</html>

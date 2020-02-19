@@ -1,0 +1,158 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <title>BUI</title>
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="css/bui.css" />
+</head>
+<body>
+    <!-- 第二天 -->
+    <div class="bui-page">
+        <header class="bui-bar">
+            <div class="bui-bar-left">
+                <a class="bui-btn" onclick="bui.back();"><i class="icon-back"></i></a>
+            </div>
+            <div class="bui-bar-main">页面标题</div>
+            <div class="bui-bar-right">
+                <!-- 右边按钮位置 -->
+            </div>
+        </header>
+        <main>
+
+            <!-- 正文内容 -->
+
+            <div id="uiList" class="bui-scroll">
+                <div class="bui-scroll-head"></div>
+                <div class="bui-scroll-main">
+                    <ul class="bui-list">
+                        <li class="bui-box bui-btn">
+                            <div class="bui-thumbnail">
+                                <img src="images/applogo.png">
+                            </div>
+                            <div class="span1">
+                                <h3 class="item-title">美味蛋卷</h3>
+                            </div>
+                            <i class="icon-listright"></i>
+                        </li>
+                    </ul>
+
+                </div>
+                <div class="bui-scroll-foot"></div>
+            </div>
+
+              <!-- 分屏 -->
+            <div id="uiTab" class="bui-tab">
+                <div class="bui-tab-head">
+                    <ul class="bui-nav">
+                    	<!-- 分屏菜单active是激活的TAB样式 -->
+                        <li class="bui-btn active">Tab1</li>
+                        <li class="bui-btn">Tab2</li>
+                    </ul>
+                </div>
+                <div class="bui-tab-main">
+                    <ul>
+                    	<!-- 第一屏 -->
+                        <li>
+                        	<h2>图标列表</h2>
+                            <ul class="bui-nav-icon bui-fluid-4">
+                            	<li class="bui-btn">
+                            		<div class="bui-icon primary">
+                            			<i class="icon-home"></i>
+                            		</div>
+                            		<div class="item-title">
+                            			我家
+                            		</div>
+                            	</li>
+                            	<li class="bui-btn">
+                            		<div class="bui-icon warning">
+                            			<i class="icon-chat"></i>
+                            		</div>
+                            		<div class="item-title">
+                            			微信
+                            		</div>
+                            	</li>
+                            </ul>
+                        </li>
+                        <!-- 第二屏 -->
+                        <li style="display: none;">
+
+                        	<!-- 图标 -->
+            <div id="uiList" class="bui-scroll">
+                <div class="bui-scroll-head"></div>
+                <div class="bui-scroll-main">
+                    <ul class="bui-list-pic bui-fluid-space-4">
+                    	<li>
+                    		<div class="bui-pic">
+                    			<div class="bui-pic-img">
+                    				<img src="images/applogo.png" alt="">
+                    			</div>
+                    			<div class="bui-pic-title">
+                    				图片标题
+                    			</div>
+                    		</div>
+                    	</li>
+                    	<li>
+                    		<div class="bui-pic">
+                    			<div class="bui-pic-img">
+                    				<img src="images/applogo.png" alt="">
+                    			</div>
+                    			<div class="bui-pic-title">
+                    				图片标题
+                    			</div>
+                    		</div>
+                    	</li>
+                    	<li>
+                    		<div class="bui-pic">
+                    			<div class="bui-pic-img">
+                    				<img src="images/applogo.png" alt="">
+                    			</div>
+                    			<div class="bui-pic-title">
+                    				图片标题
+                    			</div>
+                    		</div>
+                    	</li>
+                    	<li>
+                    		<div class="bui-pic">
+                    			<div class="bui-pic-img">
+                    				<img src="images/applogo.png" alt="">
+                    			</div>
+                    			<div class="bui-pic-title">
+                    				图片标题
+                    			</div>
+                    		</div>
+                    	</li>
+                    </ul>
+                </div>
+                <div class="bui-scroll-foot"></div>
+            </div>
+
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+        </main>
+        <footer>
+            <!-- 底部内容 此处内容固定在页面底部 -->
+            <ul id="footnav" class="bui-nav">
+            	<li class="bui-btn"><i class="icon-home"></i><span>首页</span></li>
+            	<li class="bui-btn"><i class="icon-chat"></i><span>微信</span></li>
+            	<li class="bui-btn"><i class="icon-shoppingcartfill"></i><span>购物车</span></li>
+            	<li class="bui-btn"><i class="icon-search"></i><span>搜索</span></li>
+            </ul>
+        </footer>
+    </div>
+    <script src="js/zepto.js"></script>
+    <script src="js/bui.js"></script>
+    <script>
+        bui.ready(function () {
+            // 控件初始化
+            var uiTab = bui.tab({
+            	id:"#uiTab"
+            })
+        })
+    </script>
+</body>
+</html>

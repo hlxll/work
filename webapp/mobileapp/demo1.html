@@ -1,0 +1,153 @@
+<!-- ui-html -->
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <title>BUI</title>
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="css/bui.css" />
+</head>
+<body>
+    <!-- 第一天 -->
+    <div class="bui-page">
+        <header class="bui-bar">
+            <div class="bui-bar-left">
+                <a class="bui-btn" onclick="bui.back();"><i class="icon-back"></i></a>
+            </div>
+            <div class="bui-bar-main">页面标题</div>
+            <div class="bui-bar-right">
+                <!-- 右边按钮位置 -->
+            </div>
+        </header>
+        <main>
+            <!-- 正文内容 -->
+            <div class="bui-box" style="height: 100px;">
+                <div class="span1" style="background-color: red">
+                    江西
+                </div>
+                <div class="span1" style="background-color: blue">
+                    中国
+                </div>
+                <div class="span1" style="background-color: red">
+                    上饶
+                </div>
+            </div>
+            <div class="bui-box-vertical">
+                <div class="span1" style="background-color: green;">
+                    南昌
+                </div>
+            </div>
+            <!-- reverse反序，span3和span9是平分比例 -->
+            <div class="bui-box-reverse" style="height: 100px;">
+                <div class="span1" style="background-color: red">
+                    江西
+                </div>
+                <div class="span1" style="background-color: blue">
+                    中国
+                </div>
+                <div class="span1" style="background-color: red">
+                    上饶
+                </div>
+            </div>
+
+            <div class="bui-box-reverse" style="height: 100px;">
+                <div class="span3" style="background-color: red">
+                    江西
+                </div>
+                <div class="span9" style="background-color: blue">
+                    <div class="bui-box-align-right" style="background-color: red">
+                      zhongguo
+                    </div>
+                </div>
+            </div>
+            <div class="bui-box-align-right" style="background-color: red">
+                    江西
+                </div>
+                <div class="bui-box-space">
+                    <!-- danger为角标加颜色 -->
+                    <div class="span1 bui-sub danger" data-sub="新品" style="height: 100px;background-color: red;">
+                    A
+                    </div>
+                    <div class="span1 bui-sub" data-sub="黄林" style="height: 100px;background-color: red;">A</div>
+                </div>
+
+                <h2>标签</h2>
+                <div class="bui-fluid-space">
+                    <div class="span1">
+                        <span class="bui-tag">有病</span>
+                    </div>
+                    <div class="span1">
+                        <span class="bui-tag danger">没病</span>
+                    </div>
+                    <div class="span1">
+                        <input type="radio" class="bui-tag" ubcheck="youbing" check="meibing" name="">
+                    </div>
+                </div>
+
+                <div id="uiList" class="bui-scroll">
+                    <div class="bui-scroll-head"></div>
+                    <div class="bui-scroll-main">
+                        <ul class="bui-list">
+                            <li class="bui-btn">
+                                <h3 class="item-title"></h3>
+                                <p class="item-text">2018-1-1</p>
+                            </li>
+                            <li class="bui-btn">
+                                <h3 class="item-title"></h3>
+                                <p class="item-text">2018-1-1</p>
+                            </li>
+                            <li class="bui-btn">
+                                <h3 class="item-title"></h3>
+                                <p class="item-text">2018-1-1</p>
+                            </li>
+                            <li class="bui-btn">
+                                <h3 class="item-title">恭喜</h3>
+                                <p class="item-text">2018-1-1</p>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="bui-scroll-foot"></div>
+                </div>
+                <table class="bui-table bui-table-odd">
+                    <thead>
+                        <tr>
+                            <th>header</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>data</td>
+                        </tr>
+                    </tbody>
+                </table>
+        </main>
+        <footer>
+            <!-- 底部内容 此处内容固定在页面底部 -->
+            <ul class="bui-bar">
+                <li class="primary-reverse"><li class="icon-back"></li>编辑</li>
+            </ul>
+        </footer>
+    </div>
+    <script src="js/zepto.js"></script>
+    <script src="js/bui.js"></script>
+    <script>
+        bui.ready(function () {
+            // 控件初始化
+        })
+
+        console.log('start')
+        setTimeout(function() {
+            console.log('settimeout')
+        },0);
+        setTimeout(Promise.resolve().then(function() {
+            console.log('1');
+        }))
+        console.log('end')
+    </script>
+    <!-- 单页面和多页面
+        多页面跳转会刷新所有资源，
+          
+     -->
+</body>
+</html>
