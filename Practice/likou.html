@@ -54,6 +54,140 @@ var merdata = merge2(number)
 console.log(merdata)
 
 
+// 排序
+var Arr = [1,2,4,6,8,0,3]
+// 冒泡排序
+    function mpSort(array){
+        if (array.length == 0)
+            return array;
+        for (var i = 0; i < array.length; i++)
+            for (var j = 0; j < array.length - 1 - i; j++)
+                if (array[j + 1] < array[j]) {
+                    var temp = array[j + 1];
+                    array[j + 1] = array[j];
+                    array[j] = temp;
+                }
+        console.log(array);
+    }
+
+    // mpSort(Arr)    最佳情况：T(n) = O(n)
+    // 最差情况：T(n) = O(n2)
+    // 平均情况：T(n) = O(n2)
+
+// 选择排序
+    function xzSort(array){
+        if (array.length == 0)
+            return array;
+        for (var i = 0; i < array.length; i++) {
+            var minIndex = i;
+            for (var j = i; j < array.length; j++) {
+                if (array[j] < array[minIndex]) //找到最小的数
+                    minIndex = j; //将最小数的索引保存
+            }
+            var temp = array[minIndex];
+            array[minIndex] = array[i];
+            array[i] = temp;
+        }
+        return array;
+    }
+    console.log(xzSort(Arr)+'选择排序')
+// 最佳情况：T(n) = O(n2)
+// 最差情况：T(n) = O(n2)
+// 平均情况：T(n) = O(n2)
+
+// 插入排序
+function insertionSort(array) {
+        if (array.length == 0)
+            return array;
+        var current;
+        for (var i = 0; i < array.length - 1; i++) {
+            current = array[i + 1];
+            var preIndex = i;
+            while (preIndex >= 0 && current < array[preIndex]) {
+                array[preIndex + 1] = array[preIndex];
+                preIndex--;
+            }
+            array[preIndex + 1] = current;
+        }
+        return array;
+    }
+    console.log(insertionSort(Arr)+'插入排序')
+// 最佳情况：T(n) = O(n)
+// 最坏情况：T(n) = O(n2)
+// 平均情况：T(n) = O(n2)
+
+
+// 希尔排序
+function ShellSort(array) {
+        var len = array.length;
+        var temp, gap = len / 2;
+        while (gap > 0) {
+            for (var i = gap; i < len; i++) {
+                temp = array[i];
+                var preIndex = i - gap;
+                while (preIndex >= 0 && array[preIndex] > temp) {
+                    array[preIndex + gap] = array[preIndex];
+                    preIndex -= gap;
+                }
+                array[preIndex + gap] = temp;
+            }
+            gap /= 2;
+        }
+        return array;
+    }
+// 最佳情况：T(n) = O(nlog2 n)
+// 最坏情况：T(n) = O(nlog2 n)
+// 平均情况：T(n) =O(nlog2n)
+
+
+// 归并排序
+
+function mergeArray(arr, first, mid, last, temp) {
+  let i = first; 
+  let m = mid;
+  let j = mid+1;
+  let n = last;
+  let k = 0;
+  while(i<=m && j<=n) {
+    if(arr[i] < arr[j]) {
+      temp[k++] = arr[i++];
+    } else {
+      temp[k++] = arr[j++];
+    }
+  }
+  while(i<=m) {
+    temp[k++] = arr[i++];
+  }
+  while(j<=n) {
+    temp[k++] = arr[j++];
+  } 
+  for(let l=0; l<k; l++) {
+    arr[first+l] = temp[l];
+  }
+  return arr;
+}
+function mergeSort(arr, first, last, temp) {
+  if(first<last) {
+    let mid = Math.floor((first+last)/2);
+    mergeSort(arr, first, mid, temp);    // 左子数组有序
+    mergeSort(arr, mid+1, last, temp);   // 右子数组有序
+    arr = mergeArray(arr, first, mid, last, temp);  
+  }
+  return arr;
+}
+
+// example
+let arr = [10, 3, 1, 5, 11, 2, 0, 6, 3];
+let temp = new Array();
+let SortedArr = mergeSort(arr, 0 ,arr.length-1, temp);
+console.log(SortedArr);
+
+    // 最佳情况：T(n) = O(n)
+    // 最差情况：T(n) = O(nlogn)
+    // 平均情况：T(n) = O(nlogn)
+
+
+
 
 </script>
 
