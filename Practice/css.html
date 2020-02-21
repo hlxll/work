@@ -42,6 +42,13 @@ column-gap:40px;
 -webkit-column-rule:4px outset #ff0000; /* Safari and Chrome */
 column-rule:4px outset #ff0000;
 }
+.resize{
+	border:2px solid;
+    padding:10px 40px; 
+    width:300px;
+    resize:both;/*可以调整大小*/
+    overflow:auto;/*规定溢出元素的显示，auto是内容修改，显示滚动条*/
+}
 </style>
 </head>
 <body>
@@ -68,7 +75,7 @@ column-rule:4px outset #ff0000;
 </div>
 
 <p>用户界面</p>
-<div style="resize: both;background-color: red;">
+<div class="resize">
 	
 </div>
 </body>
