@@ -8,6 +8,7 @@
       </div>
       <div class="right">
         <router-view name="right" class="area right"/>
+        <button>数据</button>
       </div>
   </div>
 </template>
