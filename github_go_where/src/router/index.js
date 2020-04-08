@@ -76,6 +76,20 @@ export default new Router({
 		components: {
 		    default: login
 		}
-	}
+	},
+  {
+  	path: '/fbhome',
+  	component: r =>
+  	  require.ensure([], () =>
+  	    r(require('../components/fb/shouye'))
+  	  )
+  },
+  {
+  	path: '/fbdetail',
+  	component: r =>
+  	  require.ensure([], () =>
+  	    r(require('../components/fb/xianqing'))
+  	  )
+  }
   ]
 })
