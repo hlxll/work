@@ -1,5 +1,29 @@
 <template>
   <div class="hello">
+    <div class="hello_tr">
+        <div class="hellodiv">请<router-link to="/login">登陆</router-link>或<router-link to="/register">免费注册</router-link></div>
+        <div style="cursor:pointer;" class="hellotrdiv"><router-link to="/news">消息</router-link></div>
+        <div style="cursor:pointer;" class="hellotrdiv"><router-link to="/order">查看订单</router-link></div>
+        <div style="cursor:pointer;" class="hellotrdiv"><router-link to="/shopp">积分商城</router-link></div>
+        <div style="cursor:pointer;" class="hellotrdiv"><router-link to="/contact">联系客服</router-link></div>
+    </div>
+    <div class="search">
+      <img src=""/>
+      <input value="搜索目的地" type="text" class="searchInput"/><span class="searchSpan">搜索</span>
+      <div class="searchDiv">
+        <img class="searchImg"/>
+        <div class="searchMain">
+          <div class="searchMainText">
+            <textarea>国内客服</textarea>
+            <textarea>95117</textarea>
+          </div>
+          <div class="searchMainText">
+            <textarea>国际客服</textarea>
+            <textarea>+(8610)82872677</textarea>
+          </div>
+        </div>
+      </div>
+    </div>
 	  <!-- 路由跳转，传递值，使用$route -->
 	  <p>提示：{{this.$route.query.alert}}</p>
      <td class="hello_td">
@@ -10,26 +34,6 @@
       <tr>扫码</tr>
       <tr>用户</tr>
      </td>
-      <div class="hello_tr">
-      <tr>
-       <td>请<router-link to="/login">登陆</router-link></td>
-       <td>或<router-link to="/register">免费注册</router-link></td>
-       <td style="cursor:pointer;"><router-link to="/news">消息</router-link></td>
-       <td style="cursor:pointer;"><router-link to="/order">查看订单</router-link></td>
-       <td style="cursor:pointer;"><router-link to="/shopp">积分商城</router-link></td>
-       <td style="cursor:pointer;"><router-link to="/contact">联系客服</router-link></td>
-      </tr>
-  </div>
-  <div class="hello_data">
-      <input value="搜索目的地" type="text" /><span>搜索</span>
-      <table>
-      <td>图片</td>
-      <td>
-        <tr>国内</tr>
-        <tr>国际</tr>
-      </td>
-      </table>
-  </div>
   <img />
     <div>
     <tr class="right_tr">
@@ -61,23 +65,42 @@ export default {
   }
 }
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 	.hello_td{
 		display: inline-block;
 	}
-    .hello_tr tr td span{
-      color: aqua;
-    }
+  .hello_tr tr td span{
+    color: aqua;
+  }
 	.hello_data{
-		float: right;
 		display: inline-block;
 	}
 	.hello_tr{
-		float: right;
-		display: inline-block;
+		width: 100%;
+    height: 21px;
+    display: flex;
+    display: -webkit-flex;
+    flex-direction: row;
+    align-items: center;
+    margin-left: auto;
+    width: 500px;
 	}
+  .helloonediv{
+    width: 32%;
+    line-height: 14px;
+    height: 14px;
+    text-align: center;
+  }
+  .hellotrdiv {
+    text-align: center;
+    width: 17%;
+    height: 14px;
+    line-height: 14px;
+  }
+  .hello_tr div a{
+    text-decoration:none;
+    font-size: 12px;
+  }
 	.right_tr{
 		background-color:#00FFFF;
 		color: white;
@@ -89,4 +112,28 @@ export default {
 		text-align: center;
 		padding: 3px;
 	}
+  .search{
+    width: 1200px;
+    margin: 0 auto;
+    height: 50px;
+    display: flex;
+    display: -webkit-flex;
+    flex-direction: row;
+  }
+  .searchDiv{
+    width: 18%;
+    display: flex;
+    display: -webkit-flex;
+    flex-direction: row;
+  }
+  .searchMain{
+    display: flex;
+    display: -webkit-flex;
+    flex-direction: column;
+  }
+  .searchMainText{
+    width: 160px;
+    height: 25px;
+    line-height: 25px;
+  }
 </style>

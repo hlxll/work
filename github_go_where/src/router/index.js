@@ -64,19 +64,18 @@ export default new Router({
         }
 		
       ]
-  },
-  {
-	      path: '/register',
-	      components: {
-	        default: register
-	         }
-        },
-		{
-		  path: '/login',
-		  // 下面的地址 components: login报错
-		  components: {
-		       default: login
-		  }
-	  }
+  	},
+ 	{
+	    path: '/register',
+	    components: {
+	    	default: register
+	    }
+	},
+	{
+		path: '/login',
+		components: {
+		    default: login
+		}
+	}
   ]
 })

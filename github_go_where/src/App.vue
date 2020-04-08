@@ -4,15 +4,13 @@
         <router-view/>
       </div>
       <div class="left">
-          <router-view name="left" class="area left"/>
+        <router-view name="left" class="area left"/>
       </div>
       <div class="right">
         <router-view name="right" class="area right"/>
-        <button>数据</button>
       </div>
   </div>
 </template>
-
 <script>
 import Vue from 'vue'
 import VueRouter from 'vue-router'

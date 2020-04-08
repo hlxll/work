@@ -12,7 +12,7 @@ import axios from 'axios'
 import Vueaxios from 'vue-axios'
 Vue.use(Vueaxios, axios)
 export default {
-  data() {
+  data(){
     return {
       telephone: '',
       password: ''

@@ -24,7 +24,9 @@ module.exports = {
     // allow async-await
     'indent': 'off',
     'generator-star-spacing': 'off',
-	  'no-tabs': 'off',
+    'no-tabs': 'off',
+    'eslint-disable' : 'off',
+    'eslint-disable-next-line' : 'off',
     // allow debugger during development
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off'
   }
