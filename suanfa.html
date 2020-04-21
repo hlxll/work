@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //全排列
+        function permutate(str) {
+            //split字符串转数组
+    var array = str.split('');
+    function loop(array, pre = []) {
+        if (array.length == 1) {
+            //concat数组拼接，join数组转字符串
+            return [pre.concat(array).join('')];
+        }
+        let res = [];
+        for (let index = 0; index < array.length; index++) {
+            //pop删除数组最后一个并返回最后一个
+            var first = array.pop();
+            res = res.concat(loop(array, [...pre, first]));
+            //向数组开头添加元素，返回新长度
+            array.unshift(first);
+        }
+        return res;
+    }
+    return Array.from(new Set(loop(array)))
+}
+var str = '123'
+console.log(permutate(str))
+
+function BubbleStr(arr){
+    const length = arr.length
+    for(var i=0;i<length-1;i++){
+        for(var j=0;j<length - i;j++){
+            arr[j+1]>arr[j]
+            const temp = arr[j]
+            arr[j] = arr[j+1]
+            arr[j+1]=temp
+        }
+    }
+    return arr;
+}
+
+function InsertionSort (arr) {
+    //规定前面市排好序的，取没有排好序的最左边一个，提前保存在常量，和排好序的从右往左比较，将符合排序要求的数往右赋值
+    //，然后j一直减一，最后不符合排序要求之后，j+1就是没有往右赋值，这个位置就是原先保存的常量插入的位置
+    const length = arr.length
+    for (let i = 1; i < length; i++) {
+        const temp = arr[i]//2
+        let j
+        for (j = i - 1; j >= 0 && temp < arr[j]; j--) {
+            arr[j+1] = arr[j]
+        }
+        console.log(j+1)
+        arr[j+1] = temp
+    }
+    return arr
+}
+var data = [1,2,4,3,6,5]
+console.log(InsertionSort(data))
+function IsURL(str_url){
+var strRegex = "^(ht|f)tp(s?)\:\/\/[a-zA-Z0-9\-\._]+(\.[a-zA-Z0-9\-\._]+){2,}(\/?)([a-zA-Z0-9\-\.\?\,\'\/\\\+&amp;%\$#_]*)?$"
+var re=new RegExp(strRegex);
+//re.test()
+if (re.test(str_url)){
+return (true);
+}else{
+alert("请输入正确的公司主页地址!")
+return (false);
+}
+}
+IsURL('http://www.sbsb.com:80')
+    </script>
+</body>
+</html>

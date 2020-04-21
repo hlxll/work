@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>省份下钻</title>
+    <script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+</head>
+<body>
+    <div id="main" style="height:400px"></div>
+    <!-- ECharts单文件引入 -->
+    <script src="echarts/dist/echarts.min.js"></script>
+    <script src="echarts/map/js/province/anhui.js"></script>
+	<script src="echarts/map/js/province/jiangxi.js"></script>
+    <script src="echarts/map/js/china.js"></script>
+    <script type="text/javascript">
+         // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('main'));
+         // 指定图表的配置项和数据
+            var option = {
+				//提示款组件
+                tooltip: {
+					show: false,
+                    trigger: 'item',
+                    formatter: '{b}<br/>{c}'
+                },
+                //图例组件
+				legend:{
+                    data:'2017'
+                },
+				xAxis:{
+                    type:'value',
+                    position: 'top',
+                    splitLine:{
+                        show:false
+                    },
+                    axisLine:{
+                        show:true
+                    },
+                    axisTick:{
+                        show:false
+                    },
+                    axisLabel:{
+                        show:false
+                    }
+
+                },
+                yAxis:{
+                    type:'category',
+                    data:['合肥市','黄山市','安庆市'],
+                    splitLine:{
+                        show:false
+                    },
+                    axisLine:{
+                        symbol:['arrow','none']
+                    },
+                    axisTick:{
+                        length:2
+                    }
+                },
+                //网格线显示
+				grid: {
+                    show: true,
+                    top: '12%',
+                    left: '10%',
+                    right: '60%',
+                    bottom:'5%',
+                    containLabel: true
+                },
+                visualMap: {
+                    type: 'continuous',
+                    //min: 0,
+                    //max: 10000,
+                    text:['High','Low'],
+                    right:'30%',
+                    hoverLink:true,  //高亮
+                    //show:false,
+                    //realtime: false,
+                    calculable : true,
+                    seriesIndex: 0,
+                    inRange:{
+                        color: ['#d0f4fc','#a9dbf6','#9cd3f4','#93cdf3','#83c2f0','#6eb5ed','#51a2e9']
+                    }
+                },
+                // 图标
+				series: [{
+                    type: 'map',//地图类型
+                    map: 'china',  //根据不同的省份切换脚本,省用中文
+                    selectedMode: 'single',
+                    roam: 'scale',
+                    //layoutCenter: ,  设置位置
+                    //layoutSize: ,
+					// 图形文本标签
+                    label: {
+                        normal: {//地图一级样式
+                            show: true,
+                            textStyle:{color:"#b6a38a"}
+                        },
+                        emphasis: {//地图二级样式
+                            show: true,
+                            textStyle:{color:"#800080"}
+                        }
+                    },
+                    // 地图区域样式
+					itemStyle: {
+                        normal: {
+							color: "blue",
+                            borderWidth: 1,
+							borderType: 'dashed',
+                            areaColor:"green",
+							shadowColor: 'rgba(0, 0, 0, 0.5)',
+							shadowBlur: 10
+                        },
+                        emphasis: {
+                            areaColor:"#f9df33",
+                            borderWidth: 0
+                        }
+                    },
+                    data:[
+                          //{name:'福建', selected:true}//福建为选中状态
+                          {name:'安徽',value:'200'},
+                          {name:'合肥市',value:'200'},
+                          {name:'安庆市',value:'100'},
+                          {name:'黄山市',value:'50'}
+                        ]
+                },{
+                    name:'2017',
+                    type:'bar',
+                    barWidth:30,
+                    data:[200,300,350]
+                }],
+            };       
+            myChart.setOption(option);
+            myChart.on('mouseover', function (params) {//回调鼠标放上去的地址节点
+                var dataIndex = params.dataIndex;
+				//console.log(params);
+				// console.log('over')
+            });
+            //下钻其实就是点击事件，切换脚本而已
+            myChart.on('click', function (chinaParam) {//回调鼠标点击的地址节点
+				console.log(chinaParam.name)
+				// console.log('click')
+    //             if(chinaParam.name == '安徽'){
+    //                 var option = myChart.getOption();//获取myChart信息
+    //                 option.series[0].map = '安徽';
+    //                 myChart.setOption(option); 
+    //             }
+				// if(chinaParam.name == '江西'){
+				//     var option = myChart.getOption();
+				//     option.series[0].map = '江西';
+				//     myChart.setOption(option); 
+				// }
+				var option = myChart.getOption();
+				option.series[0].map = chinaParam.name;
+				console.log(option)
+				// $.get(
+				//   'echarts/map/json/province/' + 
+				  
+				//   , function (chinaJson) {
+				//     echarts.registerMap('china', chinaJson);
+				//     var chart = echarts.init(document.getElementById('main'));
+				//     chart.setOption({
+				//         series: [{
+				//             type: 'map',
+				//             map: 'china'
+				//         }]
+				//     });
+				// });
+				myChart.setOption(option);
+            });
+    </script>
+</body>
+</html>
