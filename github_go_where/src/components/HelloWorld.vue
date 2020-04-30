@@ -6,6 +6,7 @@
         <div style="cursor:pointer;" class="hellotrdiv"><router-link to="/order">查看订单</router-link></div>
         <div style="cursor:pointer;" class="hellotrdiv"><router-link to="/shopp">积分商城</router-link></div>
         <div style="cursor:pointer;" class="hellotrdiv"><router-link to="/contact">联系客服</router-link></div>
+        <div @click="download">下载文件</div>
     </div>
     <div class="search">
       <img src=""/>
@@ -53,14 +54,22 @@
 	</tr>
     </div>
 	<router-view/>
-      
+
   </div>
 </template>
 <script>
+  var FileSaver = require('file-saver');
 export default {
   name: 'HelloWorld',
   data () {
     return {
+    }
+  },
+  methods:{
+    download(){
+      var content = JSON.stringify(Jsondata);
+      var blob = new Blob([content], {type: "text/plain;charset=utf-8"});
+      saveAs(blob, "save.json");
     }
   }
 }

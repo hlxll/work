@@ -6,6 +6,8 @@
     <title>Document</title>
 </head>
 <body>
+	<script src="http://iapi.websaas.cn/cloud-waf/api/common/getChinaLocations"></script>
+	<input type="button" id="export" value="保存"/>
     <script>
         //全排列
         function permutate(str) {
@@ -45,7 +47,7 @@ function BubbleStr(arr){
 }
 
 function InsertionSort (arr) {
-    //规定前面市排好序的，取没有排好序的最左边一个，提前保存在常量，和排好序的从右往左比较，将符合排序要求的数往右赋值
+    //规定前面是排好序的，取没有排好序的最左边一个，提前保存在常量，和排好序的从右往左比较，将符合排序要求的数往右赋值
     //，然后j一直减一，最后不符合排序要求之后，j+1就是没有往右赋值，这个位置就是原先保存的常量插入的位置
     const length = arr.length
     for (let i = 1; i < length; i++) {
@@ -62,17 +64,41 @@ function InsertionSort (arr) {
 var data = [1,2,4,3,6,5]
 console.log(InsertionSort(data))
 function IsURL(str_url){
-var strRegex = "^(ht|f)tp(s?)\:\/\/[a-zA-Z0-9\-\._]+(\.[a-zA-Z0-9\-\._]+){2,}(\/?)([a-zA-Z0-9\-\.\?\,\'\/\\\+&amp;%\$#_]*)?$"
-var re=new RegExp(strRegex);
-//re.test()
-if (re.test(str_url)){
-return (true);
-}else{
-alert("请输入正确的公司主页地址!")
-return (false);
-}
+	var strRegex = "^(ht|f)tp(s?)\:\/\/[a-zA-Z0-9\-\._]+(\.[a-zA-Z0-9\-\._]+){2,}(\/?)([a-zA-Z0-9\-\.\?\,\'\/\\\+&amp;%\$#_]*)?$"
+	var re=new RegExp(strRegex);
+	if (re.test(str_url)){
+	return (true);
+	}else{
+	alert("请输入正确的公司主页地址!")
+	return (false);
+	}
 }
 IsURL('http://www.sbsb.com:80')
+function yuname(str){
+	var strRegex =  "^(?=^.{3,255}$)[a-zA-Z0-9][-a-zA-Z0-9]{0,62}(\.[a-zA-Z0-9][-a-zA-Z0-9]{0,62})+$"
+	var re = new RegExp(strRegex)
+	if(re.test(str)){
+		return (true)
+	}else{
+		alert("域名不正确")
+		return false
+	}
+}
+yuname('www.sbsb')
+
+ 
+ var button = document.getElementById("export");
+ button.addEventListener("click", saveHandler, false);
+ function saveHandler(){
+      let data = {
+          name:"hanmeimei",
+          age:88
+      }
+      var content = JSON.stringify(data);
+      var blob = new Blob([content], {type: "text/plain;charset=utf-8"});
+      saveAs(blob, "save.json");
+ }
+
     </script>
 </body>
 </html>
