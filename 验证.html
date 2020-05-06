@@ -5,6 +5,7 @@
 		<title>正则验证</title>
 	</head>
 	<body>
+		<button onclick="copy()">复制</button>
 		<script>
 			function IsURL(str_url){
 			var strRegex ="^((https|http|ftp|rtsp|mms)?://)"
@@ -55,6 +56,20 @@
 			// +"(:[0-9]{1,4})?"
 			// +"((/?)|"
 			// +"(/[0-9a-z_!~*'().;?:@&=+$,%#-]+)+/?)$";
+			function copy(){
+				var textarea = document.createElement("textarea");
+			                  document.body.appendChild(textarea);
+			                  textarea.setAttribute('readonly', 'readonly');
+			                  textarea.value = '复制数据'
+			                  textarea.select();
+			                  if (document.execCommand('copy')) {
+			                    document.execCommand('copy');
+			                    console.log('复制成功')
+			                  }
+			     document.body.removeChild(textarea)
+			}
+			
 		</script>
+		
 	</body>
 </html>
