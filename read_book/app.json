@@ -1,0 +1,48 @@
+{
+  "pages": [
+    "pages/read/read",
+    "pages/read/fankui",
+    "pages/read/child/paihengChild/biaosheng",
+    "pages/read/child/paihengChild/xinshu",
+    "pages/read/child/paihengChild/zongdang",
+    "pages/read/bookjia",
+    "pages/welfare/welfare",
+    "pages/move/move"
+  ],
+  "subPackages": [],
+  "window": {
+    "navigationBarTextStyle": "white",
+    "navigationBarTitleText": "uni-app",
+    "navigationBarBackgroundColor": "#007AFF",
+    "backgroundColor": "#FFFFFF"
+  },
+  "tabBar": {
+    "color": "#666666",
+    "selectedColor": "#3882e2",
+    "borderStyle": "black",
+    "backgroundColor": "#feffff",
+    "fontSize": "28px",
+    "list": [
+      {
+        "pagePath": "pages/welfare/welfare",
+        "iconPath": "static/images/index_icon.png",
+        "selectedIconPath": "static/images/index_icon_active.png",
+        "text": "福利"
+      },
+      {
+        "pagePath": "pages/read/read",
+        "iconPath": "static/images/own_icon.png",
+        "selectedIconPath": "static/images/own_icon_active.png",
+        "text": "阅读"
+      },
+      {
+        "pagePath": "pages/move/move",
+        "iconPath": "static/images/own_icon.png",
+        "selectedIconPath": "static/images/own_icon_active.png",
+        "text": "视频"
+      }
+    ]
+  },
+  "usingComponents": {},
+  "sitemapLocation": "sitemap40.json"
+}

@@ -6,7 +6,10 @@
 	</head>
 	<body>
 		<button onclick="copy()">复制</button>
+		<span style="color: #ED5056;background-color: rgba(237,80,86,0.16);">未解析</span>
+		<span style="color: #999999;background-color: rgba(155,155,155,0.16);">已解析</span>
 		<script>
+			//安恒域名验证 /^((\*\.)?([a-zA-Z0-9]([\w\-]*[\w\-])?\.)+([a-zA-Z0-9]+)|([a-zA-Z0-9]([\w\-]*[\w\-])?\.)+([a-zA-Z0-9\-]+|\*))$/
 			function IsURL(str_url){
 			var strRegex ="^((https|http|ftp|rtsp|mms)?://)"
 			+"?(([0-9a-z_!~*'().&=+$%-]+: )?[0-9a-z_!~*'().&=+$%-]+@)?"

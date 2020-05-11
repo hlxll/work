@@ -1,0 +1,10 @@
+{
+  "navigationBarTitleText": "阅读",
+  "usingComponents": {
+    "tui-jian": "/pages/read/child/tuijian",
+    "fen-lei": "/pages/read/child/fenlei",
+    "man": "/pages/read/child/man",
+    "pai-hang": "/pages/read/child/paihang",
+    "wo-man": "/pages/read/child/woman"
+  }
+}

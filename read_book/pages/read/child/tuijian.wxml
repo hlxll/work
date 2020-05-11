@@ -1,0 +1,1 @@
+<view class="book"><view class="_ul"><block wx:for="{{bookData}}" wx:for-item="item" wx:for-index="index" wx:key="index"><view class="_li"><image src="{{item.url}}"></image><view class="bookmain"><label class="_span">{{item.title}}</label><label class="_span">{{item.name+"|"+item.num+"分"}}</label><label class="_span">{{item.tuijian}}</label></view></view></block></view></view>

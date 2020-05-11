@@ -1,0 +1,1 @@
+<view class="move"><view><video id="myVideo" src="{{$root.m0}}" danmu-list="{{danmuList}}" enable-danmu danmu-btn controls></video></view></view>
