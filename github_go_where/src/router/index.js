@@ -88,7 +88,7 @@ export default new Router({
 		components: {
 		    default: login
 		}
-	},
+	}
   // {
   // 	path: '/fbhome',
   // 	component: r =>
@@ -96,12 +96,12 @@ export default new Router({
   // 	    r(require('../components/fb/shouye.vue'))
   // 	  )
   // },
-  {
-  	path: '/fbdetail',
-  	component: r =>
-  	  require.ensure([], () =>
-  	    r(require('../components/fb/xianqing.vue'))
-  	  )
-  }
+  // {
+  // 	path: '/fbdetail',
+  // 	component: r =>
+  // 	  require.ensure([], () =>
+  // 	    r(require('../components/fb/xianqing.vue'))
+  // 	  )
+  // }
   ]
 })

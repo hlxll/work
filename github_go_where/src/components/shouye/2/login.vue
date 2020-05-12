@@ -2,7 +2,7 @@
 	<div>
 		<tr>手机号码<input type="number" name="telephone" placeholder="请输入手机号码" v-model="telephone"/></tr>
 		<tr>登录密码<input type="number" name="password" placeholder="请输入登录密码" v-model="password"/></tr>
-		<tr><input @click="login" value="登陆"/></tr>
+		<tr><input type="button" @click="login" value="登陆"/></tr>
 	</div>
 </template>
 
@@ -27,7 +27,10 @@ export default {
           }
       })
         .then((res) => {
-          this.$router.push({path: '/', query: {alert: true}})
+          console.log(res.data)
+          if(res.data){
+            this.$router.push({path: '/', query: {alert: true}})
+          }
         })
         .catch(function (error) {
           console.log(error)
