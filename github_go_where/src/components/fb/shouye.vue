@@ -368,7 +368,7 @@
 <script>
 	import headNav from './common/headNav.vue'
 	import Base from './common/Base.vue'
-  import Lunbo from './common/lunbo.vue'
+  import Lunbo from './vueLunbo.vue'
   export default {
   name:"fbhome",
   data() {

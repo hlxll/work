@@ -405,7 +405,7 @@ export default {
 }
 </script>
 
-<style socped lang="scss">
+<style lang="scss" scoped>
 	#xiangqing{
     // *{
     // 	  margin: 0;
@@ -441,7 +441,7 @@ export default {
     		.blockImg{
     			width: 100%;
     		}
-    
+
     	}
     	@media (min-width:1200px) {
     		.block{
@@ -460,7 +460,7 @@ export default {
     			display: none;
     		}
     	}
-    
+
     	@media (min-width:1200px) {
     		.product{
     			width: 30%;
@@ -553,7 +553,7 @@ export default {
     				color: #7a8599;
     		}
     	}
-    
+
     	/* .productMain{
     		width: 95%;
     		margin: 0 auto;
@@ -612,7 +612,7 @@ export default {
     		/* margin-left: 27px;
     		margin-top: 21px; */
     	}
-    
+
     	/* 解决方案 */
     	.JjFaproductp{
     		font-size: 1.75rem;
@@ -658,7 +658,7 @@ export default {
     	}
     	} */
     	@media (min-width:769px) {
-    
+
     	.JjFaproductpp{
     			line-height: 46px;
     			width: 100%;
@@ -746,7 +746,7 @@ export default {
     		display: -webkit-flex;
     		display: flex;
     		align-items: center;
-    
+
     	}
     	.JjFaMain div{
     		width: 68px;
@@ -802,7 +802,7 @@ export default {
     	}
     	.JjFaTextU li i{
     		display: inline-block;
-    
+
     		width: 8px;
     		height: 8px;
     		border-radius: 50%;
@@ -832,7 +832,7 @@ export default {
     		color: #7a8599;
     		line-height: 46px;
     	}
-    
+
     	/* 产品套餐 */
     	/* .ProductTC{
     		width: 100%;
@@ -846,7 +846,7 @@ export default {
     		align-items: center;
     		justify-content: center;
     		flex-direction: column;
-    
+
     	}
     	.TCTitlep{
     		/* text-align: center; */
@@ -1095,7 +1095,7 @@ export default {
     			height: 280px;
     		}
     	}
-    
+
     	.TCMainTextpp img{
     		margin-right: 10px;
     	}
@@ -1225,8 +1225,8 @@ export default {
     			justify-content: center;
     			border-bottom: 1px solid #b8c7e6;
     			font-size: 0;
-    
-    
+
+
     		}
     		.Pagina > div{
     			box-sizing: border-box;
@@ -1266,13 +1266,13 @@ export default {
     			height: 80%;
     			width: 83%;
     		}
-    
+
     	}
-    
+
     	.AppImg img{
     		width: 60%;
     	}
-    
+
     	.APPTextUl li{
     		text-align: left;
     		color: rgb(125, 143, 178);
@@ -1289,7 +1289,7 @@ export default {
     		line-height: 36px;
     		letter-spacing: 0px;
     		color: #7a8599;
-    
+
     	}
     	/* 地板样式 */
     	.fbQR img{

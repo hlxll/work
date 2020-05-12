@@ -1,0 +1,14 @@
+{
+  "name": "verser",
+  "version": "1.0.0",
+  "description": "oneServer",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "ken.x",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}

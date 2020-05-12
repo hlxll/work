@@ -18,12 +18,24 @@ Vue.use(Router)
 export default new Router({
   routes: [
     {
+      path: '/anh/changePwd',
+      meta: {
+        width: 1920,
+        height: 1080
+      },
+      component: r =>
+        require.ensure([], () =>
+          r(require('../components/anhen/iCountUp.vue'))
+        ),
+      name: 'iCountUp'
+    },
+    {
       path: '/',
       name: 'HelloWorld',
       components: {
-         default: HelloWorld,
-         left: containerLeft,
-		 right: containerRight
+        default: HelloWorld,
+        left: containerLeft,
+        right: containerRight
     },
 	children: [
 	        {
@@ -46,7 +58,7 @@ export default new Router({
 			  },
                  {
 				  path: '2',
-				  component: s_jiudian 
+				  component: s_jiudian
               },
 			  {
 				  path: '3',
@@ -55,14 +67,14 @@ export default new Router({
 			  {
 				  path: '4',
 				  component: s_dujia
-			  }  
+			  }
 		  ]
         },
         {
           path: 'jipiao',
           component: jipiao
         }
-		
+
       ]
   	},
  	{
@@ -77,18 +89,18 @@ export default new Router({
 		    default: login
 		}
 	},
-  {
-  	path: '/fbhome',
-  	component: r =>
-  	  require.ensure([], () =>
-  	    r(require('../components/fb/shouye'))
-  	  )
-  },
+  // {
+  // 	path: '/fbhome',
+  // 	component: r =>
+  // 	  require.ensure([], () =>
+  // 	    r(require('../components/fb/shouye.vue'))
+  // 	  )
+  // },
   {
   	path: '/fbdetail',
   	component: r =>
   	  require.ensure([], () =>
-  	    r(require('../components/fb/xianqing'))
+  	    r(require('../components/fb/xianqing.vue'))
   	  )
   }
   ]
