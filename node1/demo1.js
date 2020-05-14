@@ -6,6 +6,7 @@ var fs = require('fs');
 var http = require('http');
 var os = require('os');
 const dns = require('dns');
+var jwt = require('jsonwebtoken');
 var vueServerRender = require('vue-server-renderer').createRenderer(
 // {
 // 	template:require('fs').readFileSync(path.join(__dirname,"./App.html"),'utf-8')
@@ -107,7 +108,7 @@ app.get('/register',function (req, res) {
 	        db.close();
 	    });
 	});
-   res.send('成功');
+   res.send('成功注册');
 })
 //删除数据
 app.get('/delete',function (req, res) {
@@ -158,16 +159,27 @@ app.get('/login',function (req, res) {
 		if(err) throw err;
 		var dbo = db.db("runoob");
 		var whereStr = data;  // 查询条件
-		var bloom = '';
 		//find是查询条件，limit是返回条数
-		dbo.collection("site").find(whereStr).limit(2).toArray(function(err, result) {
+		dbo.collection("site").find(whereStr).limit(10).toArray(function(err, result) {
 		    if (err) throw err;
 		    db.close();
-			if(result) {
-				bloom = true
+			if(result[0]) {
+				let rule={id:result[0]._id,telephone:result[0].telephone,password:result[0].password}
+					jwt.sign(rule, 'Bearer ',{ expiresIn: 3600 }, function(err, token) {
+					if(err) throw err;
+						res.json({
+						status:0,
+						token:'Bearer '+token
+						})
+				});
+				console.log(rule)
+			}else{
+				res.json({
+				status:1,
+				message:'账号名或密码错误'
+				})
 			}
-			console.log(result)//获取的数据
-			res.send(bloom)
+			
 		});
 	})
 	

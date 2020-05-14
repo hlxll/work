@@ -8,11 +8,11 @@ import jipiao from '@/components/jipiao'
 import s_jipiao from '@/components/shouye/jipiao'
 import s_jiudian from '@/components/shouye/jiudian'
 import s_huochepiao from '@/components/shouye/huochepiao'
-import s_dujia from '@/components/shouye/dujia'
+// import s_dujia from '@/components/shouye/dujia'
 import china from '@/components/shouye/1/china'
 import internation from '@/components/shouye/1/internation'
 import register from '@/components/shouye/2/register'
-import login from '@/components/shouye/2/login'
+// import login from '@/components/shouye/2/login'
 Vue.use(Router)
 
 export default new Router({
@@ -40,54 +40,81 @@ export default new Router({
 	children: [
 	        {
 	          path: 'shouye',
-	          component: shouye,
+            component: r =>
+              require.ensure([], () =>
+                r(require('../components/shouye.vue'))
+              ),
 			  children: [
 				  {
 					  path: '1',
 					  component: s_jipiao,
+            component: r =>
+              require.ensure([], () =>
+                r(require('../components/shouye/jipiao.vue'))
+              ),
 					  children: [
 						  {
 							  path: 'china',
-							  component: china
+                component: r =>
+                  require.ensure([], () =>
+                    r(require('../components/shouye/1/china.vue'))
+                  ),
 						  },
 						  {
 							  path: 'internation',
-							  component: internation
+                component: r =>
+                  require.ensure([], () =>
+                    r(require('../components/shouye/1/internation.vue'))
+                  ),
 						  }
 				  ]
 			  },
                  {
 				  path: '2',
-				  component: s_jiudian
+          component: r =>
+            require.ensure([], () =>
+              r(require('../components/shouye/jiudian.vue'))
+            ),
               },
 			  {
 				  path: '3',
-				  component: s_huochepiao
+          component: r =>
+            require.ensure([], () =>
+              r(require('../components/shouye/huochepiao.vue'))
+            ),
 			  },
 			  {
 				  path: '4',
-				  component: s_dujia
+          component: r =>
+            require.ensure([], () =>
+              r(require('../components/shouye/dujia.vue'))
+            ),
 			  }
 		  ]
         },
         {
           path: 'jipiao',
-          component: jipiao
+          component: r =>
+            require.ensure([], () =>
+              r(require('../components/jipiao.vue'))
+            ),
         }
 
       ]
   	},
  	{
 	    path: '/register',
-	    components: {
-	    	default: register
-	    }
+      component: r =>
+        require.ensure([], () =>
+          r(require('../components/shouye/2/register.vue'))
+        ),
 	},
 	{
 		path: '/login',
-		components: {
-		    default: login
-		}
+    component: r =>
+      require.ensure([], () =>
+        r(require('../components/shouye/2/login.vue'))
+      ),
 	}
   // {
   // 	path: '/fbhome',

@@ -65,6 +65,9 @@ export default {
     return {
     }
   },
+  created() {
+    console.log(window.sessionStorage.getItem('token') || '')
+  },
   methods:{
     download(){
       var content = JSON.stringify(Jsondata);
