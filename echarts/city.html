@@ -130,41 +130,14 @@
                 }],
             };       
             myChart.setOption(option);
-            myChart.on('mouseover', function (params) {//回调鼠标放上去的地址节点
+            myChart.on('mouseover', function (params) {
                 var dataIndex = params.dataIndex;
-				//console.log(params);
-				// console.log('over')
             });
-            //下钻其实就是点击事件，切换脚本而已
-            myChart.on('click', function (chinaParam) {//回调鼠标点击的地址节点
+            myChart.on('click', function (chinaParam) {
 				console.log(chinaParam.name)
-				// console.log('click')
-    //             if(chinaParam.name == '安徽'){
-    //                 var option = myChart.getOption();//获取myChart信息
-    //                 option.series[0].map = '安徽';
-    //                 myChart.setOption(option); 
-    //             }
-				// if(chinaParam.name == '江西'){
-				//     var option = myChart.getOption();
-				//     option.series[0].map = '江西';
-				//     myChart.setOption(option); 
-				// }
 				var option = myChart.getOption();
 				option.series[0].map = chinaParam.name;
 				console.log(option)
-				// $.get(
-				//   'echarts/map/json/province/' + 
-				  
-				//   , function (chinaJson) {
-				//     echarts.registerMap('china', chinaJson);
-				//     var chart = echarts.init(document.getElementById('main'));
-				//     chart.setOption({
-				//         series: [{
-				//             type: 'map',
-				//             map: 'china'
-				//         }]
-				//     });
-				// });
 				myChart.setOption(option);
             });
     </script>

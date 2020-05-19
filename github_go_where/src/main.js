@@ -4,20 +4,24 @@ import Vue from 'vue'
 import App from './App'
 import store from './vuex'
 import router from './router'
-import SIdentify from './components/shouye/2/identify' 
-//注意引入路径
+import SIdentify from './components/shouye/2/identify'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
-
+import VueRouter from 'vue-router'
+import echarts from 'echarts'
+Vue.prototype.$echarts = echarts
+import axios from 'axios'
+import Vueaxios from 'vue-axios'
+Vue.use(Vueaxios, axios)
 // 使用插件
 Vue.use(ElementUI)
 Vue.use(SIdentify)
-
+Vue.use(VueRouter)
 Vue.config.productionTip = false
-
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
+  axios,
   store,
   router,
   components: { App },

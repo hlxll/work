@@ -1,5 +1,4 @@
 <template>
-	<div>首页 dujia</div>
 </template>
 
 <script>

@@ -1,22 +1,12 @@
 import Vue from 'vue'
-import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
+import VueRouter from 'vue-router'
+import Hello from '@/components/Hello'
 import containerLeft from '@/components/containerLeft'
 import containerRight from '@/components/containerRight'
-import shouye from '@/components/shouye'
-import jipiao from '@/components/jipiao'
-import s_jipiao from '@/components/shouye/jipiao'
-import s_jiudian from '@/components/shouye/jiudian'
-import s_huochepiao from '@/components/shouye/huochepiao'
-// import s_dujia from '@/components/shouye/dujia'
-import china from '@/components/shouye/1/china'
-import internation from '@/components/shouye/1/internation'
-import register from '@/components/shouye/2/register'
-// import login from '@/components/shouye/2/login'
-Vue.use(Router)
+Vue.use(VueRouter)
 
-export default new Router({
-  routes: [
+
+  const routes = [
     {
       path: '/anh/changePwd',
       meta: {
@@ -24,111 +14,157 @@ export default new Router({
         height: 1080
       },
       component: r =>
-        require.ensure([], () =>
-          r(require('../components/anhen/iCountUp.vue'))
-        ),
+      require.ensure([], () =>
+        r(require('../components/anhen/iCountUp.vue'))
+      ),
       name: 'iCountUp'
     },
     {
       path: '/',
-      name: 'HelloWorld',
+      name: '首页',
       components: {
-        default: HelloWorld,
+        default: Hello,
         left: containerLeft,
         right: containerRight
     },
-	children: [
+    children: [
 	        {
 	          path: 'shouye',
             component: r =>
-              require.ensure([], () =>
-                r(require('../components/shouye.vue'))
-              ),
-			  children: [
-				  {
-					  path: '1',
-					  component: s_jipiao,
-            component: r =>
-              require.ensure([], () =>
-                r(require('../components/shouye/jipiao.vue'))
-              ),
-					  children: [
-						  {
-							  path: 'china',
-                component: r =>
-                  require.ensure([], () =>
-                    r(require('../components/shouye/1/china.vue'))
-                  ),
-						  },
-						  {
-							  path: 'internation',
-                component: r =>
-                  require.ensure([], () =>
-                    r(require('../components/shouye/1/internation.vue'))
-                  ),
-						  }
-				  ]
-			  },
-                 {
-				  path: '2',
-          component: r =>
             require.ensure([], () =>
-              r(require('../components/shouye/jiudian.vue'))
+              r(require('../components/home/index.vue'))
             ),
-              },
-			  {
-				  path: '3',
-          component: r =>
-            require.ensure([], () =>
-              r(require('../components/shouye/huochepiao.vue'))
-            ),
-			  },
-			  {
-				  path: '4',
-          component: r =>
-            require.ensure([], () =>
-              r(require('../components/shouye/dujia.vue'))
-            ),
-			  }
-		  ]
-        },
-        {
-          path: 'jipiao',
-          component: r =>
-            require.ensure([], () =>
-              r(require('../components/jipiao.vue'))
-            ),
-        }
-
-      ]
+            children: [
+            {
+              path: 'plane',
+              name: '机票',
+              component: r =>
+                require.ensure([], () =>
+                  r(require('../components/home/jipiao.vue'))
+                ),
+                children: [
+                  {
+                    path: 'china',
+                    component: r =>
+                    require.ensure([], () =>
+                      r(require('../components/home/planeChild/china.vue'))
+                    ),
+                  },
+                  {
+                    path: 'internation',
+                    component: r =>
+                    require.ensure([], () =>
+                      r(require('../components/home/planeChild/internation.vue'))
+                    ),
+                  }
+                ]
+            },
+            {
+              path: 'hotel',
+              name: '酒店',
+              component: r =>
+                require.ensure([], () =>
+                  r(require('../components/home/hotel.vue'))
+                ),
+            },
+            {
+              path: 'trainTicket',
+              name: '火车票',
+              component: r =>
+                require.ensure([], () =>
+                  r(require('../components/home/trainTicket.vue'))
+                ),
+            },
+            {
+              path: 'holiday',
+              name: '度假',
+              component: r =>
+                require.ensure([], () =>
+                  r(require('../components/home/holiday.vue'))
+                ),
+            },
+            {
+              path: 'tickets',
+              name: '门票',
+              component: r =>
+                require.ensure([], () =>
+                  r(require('../components/home/tickets.vue'))
+                ),
+            },
+            {
+              path: 'shopp',
+              name: '购物',
+              component: r =>
+                require.ensure([], () =>
+                  r(require('../components/home/shopp.vue'))
+                ),
+            },
+            {
+              path: 'car_car',
+              name: '车车',
+              component: r =>
+                require.ensure([], () =>
+                  r(require('../components/home/car_car.vue'))
+                ),
+            },
+            {
+              path: 'independent',
+              name: '自由行',
+              component: r =>
+                require.ensure([], () =>
+                  r(require('../components/home/independent.vue'))
+                ),
+            },
+            ]
+          }
+    ]
   	},
- 	{
-	    path: '/register',
+    {
+          path: '/register',
+          component: r =>
+            require.ensure([], () =>
+              r(require('../components/login/register.vue'))
+            ),
+          meta: {
+            title: '注册'
+          }
+    },
+    {
+      path: '/login',
+      meta: {
+        title: '登陆'
+      },
       component: r =>
         require.ensure([], () =>
-          r(require('../components/shouye/2/register.vue'))
+          r(require('../components/login/login.vue'))
         ),
-	},
-	{
-		path: '/login',
-    component: r =>
-      require.ensure([], () =>
-        r(require('../components/shouye/2/login.vue'))
-      ),
-	}
-  // {
-  // 	path: '/fbhome',
-  // 	component: r =>
-  // 	  require.ensure([], () =>
-  // 	    r(require('../components/fb/shouye.vue'))
-  // 	  )
-  // },
-  // {
-  // 	path: '/fbdetail',
-  // 	component: r =>
-  // 	  require.ensure([], () =>
-  // 	    r(require('../components/fb/xianqing.vue'))
-  // 	  )
-  // }
+    },
+    {
+      path: '/train',
+      meta: {
+        title: '火车票查询'
+      },
+      component: r =>
+        require.ensure([], () =>
+          r(require('../components/train/index.vue'))
+        ),
+    }
   ]
+const router = new VueRouter({
+  mode: 'history',
+  routes // （缩写）相当于 routes: routes
 })
+router.beforeEach((to, from, next) => {
+  const AppToken = window.sessionStorage.getItem('token') || ''
+  // if (!AppToken && to.path !== '/login') {
+  //   router.push({
+  //     path: '/login'
+  //   })
+  //   return
+  // }
+  // document.title = to.meta.title || '首页'
+
+  next()
+})
+
+export default router

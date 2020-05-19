@@ -163,16 +163,17 @@ app.get('/login',function (req, res) {
 		dbo.collection("site").find(whereStr).limit(10).toArray(function(err, result) {
 		    if (err) throw err;
 		    db.close();
+			console.log(result)
 			if(result[0]) {
 				let rule={id:result[0]._id,telephone:result[0].telephone,password:result[0].password}
-					jwt.sign(rule, 'Bearer ',{ expiresIn: 3600 }, function(err, token) {
+					jwt.sign(rule, 'Bearer',{ expiresIn: 3600 }, function(err, token) {
 					if(err) throw err;
 						res.json({
 						status:0,
-						token:'Bearer '+token
+						token:token
 						})
 				});
-				console.log(rule)
+				
 			}else{
 				res.json({
 				status:1,
@@ -182,6 +183,43 @@ app.get('/login',function (req, res) {
 			
 		});
 	})
+})
+//验证登陆
+app.get('/Verifylogin',function (req, res) {
+	var MongoClient = require('mongodb').MongoClient;
+	var url = 'mongodb://localhost:27017';
+	MongoClient.connect(url, { useUnifiedTopology: true ,useNewUrlParser: true }, function(err, db) {
+		if(err) throw err;
+		var dbo = db.db("runoob");
+		var token = req.query.token;
+		var tele = ''
+		var pass = ''
+		jwt.verify(token, 'Bearer', (err, data)=> {
+			if (err) {
+				console.log(err)
+			}else{
+				tele = data.telephone
+				pass = data.password
+			}
+			
+		})
+		//find是查询条件，limit是返回条数
+		dbo.collection("site").find({telephone: tele,password: pass}).limit(1).toArray(function(err, result) {
+		    if (err) throw err;
+			if(result[0]) {
+				db.close();
+				res.json({
+					status:1,
+					message:'登陆成功'
+				})
+			}else{
+				res.json({
+				status:0,
+				message:'账号名或密码错误'
+			})
+		}
+	})
+})
 	
 })
 //查看域名
@@ -191,7 +229,24 @@ app.get('/dns',function(req,res){
 	  res.send('address: %j family: IPv%s', address, family)
 	});
 })
-
+//查看火车车次
+app.get('/queryTrain',function (req, res) {
+	var data = req.query;
+	var MongoClient = require('mongodb').MongoClient;
+	var url = 'mongodb://localhost:27017';
+	MongoClient.connect(url, { useUnifiedTopology: true ,useNewUrlParser: true }, function(err, db) {
+		if(err) throw err;
+		var dbo = db.db("runoob");
+		var whereStr = data;  // 查询条件
+		//find是查询条件，limit是返回条数
+		dbo.collection("train").find(whereStr).limit(10).toArray(function(err, result) {
+		    if (err) throw err;
+		    db.close();
+			console.log(result)
+			res.send(result)
+		});
+	})
+})
 var server = app.listen(8081, function () {
  
   var host = server.address().address
