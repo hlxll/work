@@ -170,7 +170,8 @@ app.get('/login',function (req, res) {
 					if(err) throw err;
 						res.json({
 						status:0,
-						token:token
+						token:token,
+						name: whereStr.telephone
 						})
 				});
 				
@@ -246,6 +247,60 @@ app.get('/queryTrain',function (req, res) {
 			res.send(result)
 		});
 	})
+})
+app.get('/addTrain',function (req, res) {
+	var data = req.query;
+	var MongoClient = require('mongodb').MongoClient;
+	var url = "mongodb://localhost:27017/";
+	 
+	MongoClient.connect(url, { useNewUrlParser: true }, function(err, db) {
+	    if (err) throw err;
+	    var dbo = db.db("runoob");
+	    var myobj = {
+			telephone: data.telephone,
+			trainTicket: data.trainTicket,
+			Money: data.Money,
+			day: data.day
+		};
+	    dbo.collection("people_train").insertOne(myobj, function(err, res) {
+	        if (err) throw err;
+	        db.close();
+	    });
+	});
+	//查询票数量
+	let NumTicket = []
+	MongoClient.connect(url, { useUnifiedTopology: true ,useNewUrlParser: true }, function(err, db) {
+		if(err) throw err;
+		var dbo = db.db("runoob");
+		let whereStr = {
+			name: data.trainTicket
+		};
+		dbo.collection("train").find(whereStr).limit(10).toArray(function(err, result) {
+		    if (err) throw err;
+			console.log(result[0].num[data.index])
+			for(let i=0;i<3;i++){
+				if(i == data.index){
+					NumTicket.push(result[0].num[i] - 1)
+				}else{
+					NumTicket.push(result[0].num[i])
+				}
+			}
+			// 减少票数量
+			MongoClient.connect(url, { useNewUrlParser: true }, function(err, db) {
+			    if (err) throw err;
+			    var dbo = db.db("runoob");
+			    var whereStr = {"name": data.trainTicket};
+			    var updateStr = {$set: { "num" : NumTicket }};
+			    dbo.collection("train").updateOne(whereStr, updateStr, function(err, res) {
+			        if (err) throw err;
+			        console.log("文档更新成功");
+			    });
+			});
+		    db.close();
+	})
+	})
+	
+   res.send('成功注册');
 })
 var server = app.listen(8081, function () {
  

@@ -79,6 +79,7 @@ export default {
                 let resp = {...response.data};
                 if(resp.status===0){
                    $this.$store.commit('set_token',resp.token);       //本地存入token
+                   $this.$store.commit('set_name',resp.name)
                    $this.$message({
                     showClose: true,
                     message: '登录成功',

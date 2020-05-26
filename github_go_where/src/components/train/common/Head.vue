@@ -12,32 +12,6 @@
         <div style="cursor:pointer;" class="hellotrdiv"><router-link to="/shopp">积分商城</router-link></div>
         <div style="cursor:pointer;" class="hellotrdiv"><router-link to="/contact">联系客服</router-link></div>
     </div>
-    <div class="search">
-      <el-row style="width: 100%;">
-        <el-col :span="4">
-          <img src=""/>
-        </el-col>
-        <el-col :span="16">
-          <input placeholder="搜索目的地" type="text" class="searchInput"/>
-          <el-button type="primary" icon="el-icon-search"></el-button>
-        </el-col>
-        <el-col :span="4">
-          <div class="searchDiv">
-            <img class="searchImg"/>
-            <div class="searchMain">
-              <div class="searchMainText">
-                <span>国内客服</span>
-                <span>95117</span>
-              </div>
-              <div class="searchMainText">
-                <span>国际客服</span>
-                <span>+(8610)82872677</span>
-              </div>
-            </div>
-          </div>
-        </el-col>
-      </el-row>
-    </div>
     <div>
     <div class="right_tr">
       <router-link to="/shouye">首页</router-link>
@@ -56,13 +30,9 @@
     </div>
     </div>
 	<router-view/>
-  <div class="remind">
-    <remind></remind>
-  </div>
   </div>
 </template>
 <script>
-  import remind from './home/remind.vue'
   import Vue from 'vue'
   import axios from 'axios'
   import Vueaxios from 'vue-axios'
@@ -70,9 +40,6 @@
   var FileSaver = require('file-saver');
 export default {
   name: 'HelloWorld',
-  components:{
-    remind
-  },
   data () {
     return {
       versityLogin: false
@@ -87,6 +54,7 @@ export default {
          }
     })
     .then((res)=>{
+      console.log(res.data)
       if(res.data.status == 1){
         this.versityLogin = true
       }else{
@@ -137,10 +105,9 @@ export default {
     font-size: 12px;
   }
 	.right_tr{
-		background-color:#00FFFF;
-		color: white;
+		color: black;
 		width: 90%;
-    padding-left: 10%;
+		padding-left: 10%;
 	}
 	.right_tr a{
 		width: 8%;
@@ -150,7 +117,7 @@ export default {
 		text-align: center;
 		padding: 3px;
     text-decoration: none;
-    color: #FFFFFF;
+    color: #000000;
 	}
   .search{
     width: 100%;
