@@ -148,6 +148,17 @@ Vue.use(VueRouter)
         require.ensure([], () =>
           r(require('../components/train/index.vue'))
         ),
+    },
+    {
+      path: '/personal',
+      name: '个人中心',
+      meta: {
+        title: '个人中心'
+      },
+      component: r =>
+        require.ensure([], () =>
+          r(require('../components/personal/index.vue'))
+        ),
     }
   ]
 const router = new VueRouter({

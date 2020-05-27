@@ -5,7 +5,7 @@
           请<router-link to="/login">登陆</router-link>或<router-link to="/register">免费注册</router-link>
         </div>
         <div v-show="versityLogin">
-          <span>登陆成功</span>
+          <img src="./fb/imgs/product/Owubaofuwu.png" @click="Topersonal" class="loginSuccess"/>
         </div>
         <div style="cursor:pointer;" class="hellotrdiv"><router-link to="/news">消息</router-link></div>
         <div style="cursor:pointer;" class="hellotrdiv"><router-link to="/order">查看订单</router-link></div>
@@ -78,6 +78,17 @@ export default {
       versityLogin: false
     }
   },
+  methods:{
+    Topersonal(){
+      let Ticket = 'G101'
+      let tele = 13407934178
+      window.open('/personal?telephone='+
+          tele+
+          '&trainTicket='+
+          Ticket
+      )
+    }
+  },
   created() {
     console.log(window.sessionStorage.getItem('token') || '')
     let loginToken = window.sessionStorage.getItem('token') || ''
@@ -97,6 +108,10 @@ export default {
 }
 </script>
 <style scoped>
+  .loginSuccess{
+    width: 30px;
+    margin-top: 9px;
+  }
 	.hello_td{
 		display: inline-block;
 	}

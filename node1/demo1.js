@@ -16,7 +16,7 @@ var vueServerRender = require('vue-server-renderer').createRenderer(
 	data:{
 		message:'hello ssr'
 	},
-	template:'<div><p>欢迎学习node</p></div>'
+	template:'<div><p>使用服务端渲染技术</p></div>'
 })
 
 
@@ -139,7 +139,6 @@ app.get('/updata',function (req, res) {
 	MongoClient.connect(url, { useNewUrlParser: true }, function(err, db) {
 	    if (err) throw err;
 	    var dbo = db.db("runoob");
-		var OneID = '5dbfd43a1157282e90892934,'
 	    var whereStr = {"name": data.name};  // 查询条件
 	    var updateStr = {$set: { "work" : data.work }};//修改数据
 	    dbo.collection("site").updateOne(whereStr, updateStr, function(err, res) {
@@ -248,7 +247,99 @@ app.get('/queryTrain',function (req, res) {
 		});
 	})
 })
+//添加火车票
 app.get('/addTrain',function (req, res) {
+	var data = req.query;
+	var MongoClient = require('mongodb').MongoClient;
+	var url = "mongodb://localhost:27017/";
+	var Repetition = false
+	MongoClient.connect(url, { useUnifiedTopology: true ,useNewUrlParser: true }, function(err, db) {
+		if(err) throw err;
+		var dbo = db.db("runoob");
+		var duplicate = {
+			telephone: data.telephone,
+			trainTicket: data.trainTicket
+		}
+		dbo.collection("people_train").find(duplicate).toArray(function(err, result) {
+		    if (err) throw err;
+		    db.close();
+			console.log(result)
+			if(!result){
+				MongoClient.connect(url, { useNewUrlParser: true }, function(err, db) {
+					if (err) throw err;
+					var dbo = db.db("runoob");
+					var myobj = {
+						telephone: data.telephone,
+						trainTicket: data.trainTicket,
+						Money: data.Money,
+						day: data.day
+					};
+					dbo.collection("people_train").insertOne(myobj, function(err, res) {
+						if (err) throw err;
+						db.close();
+					});
+				});
+	//查询票数量
+				let NumTicket = []
+				MongoClient.connect(url, { useUnifiedTopology: true ,useNewUrlParser: true }, function(err, db) {
+					if(err) throw err;
+					var dbo = db.db("runoob");
+					let whereStr = {
+						name: data.trainTicket
+					};
+					dbo.collection("train").find(whereStr).limit(10).toArray(function(err, result) {
+						if (err) throw err;
+						console.log(result[0].num[data.index])
+						for(let i=0;i<3;i++){
+							if(i == data.index){
+								NumTicket.push(result[0].num[i] - 1)
+							}else{
+								NumTicket.push(result[0].num[i])
+							}
+						}
+						// 减少票数量
+						MongoClient.connect(url, { useNewUrlParser: true }, function(err, db) {
+							if (err) throw err;
+							var dbo = db.db("runoob");
+							var whereStr = {"name": data.trainTicket};
+							var updateStr = {$set: { "num" : NumTicket }};
+							dbo.collection("train").updateOne(whereStr, updateStr, function(err, res) {
+								if (err) throw err;
+								console.log("文档更新成功");
+							});
+						});
+						db.close();
+					})
+				})
+				
+				res.send(true);
+			}else{
+				res.send('冲突')
+			}
+		});
+	})
+	
+})
+//查询已经购买的火车票
+app.get('/searchShopping',function(req,res){
+	var data = req.query;
+	var MongoClient = require('mongodb').MongoClient;
+	var url = 'mongodb://localhost:27017';
+	MongoClient.connect(url, { useUnifiedTopology: true ,useNewUrlParser: true }, function(err, db) {
+		if(err) throw err;
+		var dbo = db.db("runoob");
+		var whereStr = data;  // 查询条件
+		//find是查询条件，limit是返回条数
+		dbo.collection("people_train").find(whereStr).limit(10).toArray(function(err, result) {
+		    if (err) throw err;
+		    db.close();
+			console.log(result)
+			res.send(result)
+		});
+	})
+})
+//退票
+app.get('/deleteTrain',function (req, res) {
 	var data = req.query;
 	var MongoClient = require('mongodb').MongoClient;
 	var url = "mongodb://localhost:27017/";
@@ -256,51 +347,14 @@ app.get('/addTrain',function (req, res) {
 	MongoClient.connect(url, { useNewUrlParser: true }, function(err, db) {
 	    if (err) throw err;
 	    var dbo = db.db("runoob");
-	    var myobj = {
-			telephone: data.telephone,
-			trainTicket: data.trainTicket,
-			Money: data.Money,
-			day: data.day
-		};
-	    dbo.collection("people_train").insertOne(myobj, function(err, res) {
+	    var whereStr = {"telephone": data.telephone,"trainTicket":data.trainTicket};  // 查询条件
+	    dbo.collection("people_train").deleteOne(whereStr, function(err, obj) {
 	        if (err) throw err;
+	        // console.log(obj);
 	        db.close();
 	    });
 	});
-	//查询票数量
-	let NumTicket = []
-	MongoClient.connect(url, { useUnifiedTopology: true ,useNewUrlParser: true }, function(err, db) {
-		if(err) throw err;
-		var dbo = db.db("runoob");
-		let whereStr = {
-			name: data.trainTicket
-		};
-		dbo.collection("train").find(whereStr).limit(10).toArray(function(err, result) {
-		    if (err) throw err;
-			console.log(result[0].num[data.index])
-			for(let i=0;i<3;i++){
-				if(i == data.index){
-					NumTicket.push(result[0].num[i] - 1)
-				}else{
-					NumTicket.push(result[0].num[i])
-				}
-			}
-			// 减少票数量
-			MongoClient.connect(url, { useNewUrlParser: true }, function(err, db) {
-			    if (err) throw err;
-			    var dbo = db.db("runoob");
-			    var whereStr = {"name": data.trainTicket};
-			    var updateStr = {$set: { "num" : NumTicket }};
-			    dbo.collection("train").updateOne(whereStr, updateStr, function(err, res) {
-			        if (err) throw err;
-			        console.log("文档更新成功");
-			    });
-			});
-		    db.close();
-	})
-	})
-	
-   res.send('成功注册');
+   res.send();
 })
 var server = app.listen(8081, function () {
  
@@ -320,23 +374,6 @@ http.get('http://aicoder.com', res => {
   });
 });
 
-// const hostname = '127.0.0.1';
-// const port = 3000
-// const server = http.createServer((req, res) => {
-//   res.statusCode = 200;
-//   res.setHeader('Content-Type', 'text/plain');
-//   res.end('Hello, World!\n');
-// });
-// server.listen(port, hostname, () => {
-//   console.log('Server running at http://${hostname}:${port}/');
-// });
-//不能在服务之后设置头部error
-// server.on('request', (req, res) => {
-// 	console.log(req.url);
-// 	res.writeHead(200, { 'Content-Type': 'text/html' });
-// 	res.write('hello we are family<br>');
-// 	res.end('server already end\n');
-// });
 server.on('connection', () => {
   console.log('握手');
 });
