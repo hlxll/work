@@ -21,7 +21,7 @@
       </div>
       <div class="hellodiv">
         <span>{{username}}</span>
-        <span>退出</span>
+        <span @click="backLogin">退出</span>
         <div style="cursor:pointer;" class="hellotrdiv">
           <router-link to="/news">消息</router-link>
         </div>
@@ -38,17 +38,17 @@
     </div>
     <div class="datafenlei">
       <img src=""/>
-      <p>个人信息</p>
-      <p>账号安全</p>
-      <p>我的账户</p>
-      <p>消息</p>
+      <p @click="change(0)">个人信息</p>
+      <p @click="change(1)">账号安全</p>
+      <p @click="change(2)">我的账户</p>
+      <p @click="change(3)">消息</p>
     </div>
     <div>
-      <el-carousel :interval="5000" arrow="always">
-          <el-carousel-item v-for="item in 4" :key="item">
-            <account></account>
-          </el-carousel-item>
-        </el-carousel>
+      <el-carousel :interval="5000" arrow="never" :autoplay="false" ref="carousel">
+        <el-carousel-item v-for="item in 4" :key="item">
+          <account></account>
+        </el-carousel-item>
+      </el-carousel>
     </div>
   </div>
 </template>
@@ -56,7 +56,6 @@
 <script>
 import Account from './account.vue'
   export default {
-
     components:{
       account:Account
     },
@@ -66,7 +65,13 @@ import Account from './account.vue'
       }
     },
     methods:{
-
+      change(index){
+        this.$refs.carousel.setActiveItem(index)
+      },
+      backLogin(){
+        window.sessionStorage.removeItem('token');
+        this.$router.push({path: '/'});
+      }
     }
   }
 </script>
@@ -80,7 +85,18 @@ import Account from './account.vue'
   }
   .hellodiv{
     display: flex;
+    width: 50%;
     margin-left: auto;
+  }
+  .hellodiv>span{
+    cursor: pointer;
+  }
+  .hellodiv>div{
+    width: 15%;
+    text-align: center;
+  }
+  .hellodiv>div>a{
+    text-decoration: none;
   }
   .datafenlei{
     display: flex;
@@ -90,5 +106,6 @@ import Account from './account.vue'
     width: 10%;
     line-height: 40px;
     height: 40px;
+    cursor: pointer;
   }
 </style>
