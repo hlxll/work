@@ -6,5 +6,34 @@
 	</head>
 	<body>
 		<!-- 服务端渲染 -->
+		<div>
+			<input placeholder="请输入电话号码" id="tele"/>
+			<button onclick="login()">登陆</button>
+			<div id="myDiv"></div>
+		</div>
+		<script>
+			function login()
+			{
+			var xmlhttp;
+			if (window.XMLHttpRequest)
+			  {// code for IE7+, Firefox, Chrome, Opera, Safari
+			  xmlhttp=new XMLHttpRequest();
+			  }
+			else
+			  {// code for IE6, IE5
+			  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+			  }
+			xmlhttp.onreadystatechange=function()
+			  {
+			  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+			    {
+			    document.getElementById("myDiv").innerHTML=xmlhttp.responseText;
+			    }
+			  }
+			  let teleData = document.getElementById('tele').value
+			xmlhttp.open("GET","http://127.0.0.1:8081/login?telephone="+teleData,true);
+			xmlhttp.send();
+			}
+		</script>
 	</body>
 </html>

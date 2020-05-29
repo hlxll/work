@@ -184,6 +184,17 @@ app.get('/login',function (req, res) {
 		});
 	})
 })
+//二维码登陆
+app.get('/codeLogin',function(req,res){
+	res.writeHead(200,{'Content-Type':'text/html'});
+	fs.readFile('App.html','utf-8',function(err,data){
+	    if(err){
+	        throw err ;
+	    }
+		console.log(data)
+	    res.end(data);
+	});
+})
 //验证登陆
 app.get('/Verifylogin',function (req, res) {
 	var MongoClient = require('mongodb').MongoClient;

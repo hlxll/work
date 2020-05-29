@@ -27,6 +27,10 @@ module.exports = {
     'no-tabs': 'off',
     'eslint-disable' : 'off',
     'eslint-disable-next-line' : 'off',
+	'comma-spacing': 'off',
+	'keyword-spacing': 'off',
+	'space-before-blocks':'off',
+	'space-before-function-paren': 'off',
     // allow debugger during development
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off'
   }

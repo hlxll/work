@@ -6,6 +6,7 @@
 <script>
   import echarts from "echarts";
   import '../../../node_modules/echarts/map/js/china.js' // 引入中国地图数据
+  // import {jiangxi}  from '../../../node_modules/echarts/map/js/province'
   export default {
     name: "echarts",
     props: ["userJson"],

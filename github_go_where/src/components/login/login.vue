@@ -1,7 +1,9 @@
 <template>
   <div class="BackImg">
     <div class="loginmain">
-      <div class="TitleImg"></div>
+      <div class="TitleImg">
+        <img src="/static/imgs/home/.png" @error="defaultIng($event)" ref="defaultImgRef"/>
+      </div>
       <div class="loginText">
         <div class="loginTitle">
           <p :class="{'colorClass':colorVersity}" @click="changeColor(true)">二维码登陆</p>
@@ -16,8 +18,8 @@
 </template>
 
 <script>
-  import telLogin from './telLogin.vue'
-  import qrCode from './qrCode.vue'
+  import telLogin from './telLogin'
+  import qrCode from './qrCode'
   export default {
     components:{
       telLogin,
@@ -29,6 +31,11 @@
       }
     },
     methods: {
+      defaultIng(){
+        let data = 'defaultImgRef'
+        console.log(this.$refs[data].src)
+        this.$refs.defaultImgRef.src = '/static/img/big.png'
+      },
       changeColor(bloom){
         this.colorVersity = bloom
       }
@@ -36,8 +43,9 @@
   }
 </script>
 
-<style scoped="scoped">
+<style scoped="scoped" lang="scss">
   .colorClass{
+    padding: 0 10px;
     border-bottom: 2px solid #2b85e4;
   }
   .BackImg{

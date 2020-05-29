@@ -58,7 +58,6 @@ export default {
       }, 1000);
       },
     login () {
-      // console.log(window.sessionStorage.getItem(token))
           let $this = this;
           if (this.telephone === '' || this.password === '') {
             $this.$message({

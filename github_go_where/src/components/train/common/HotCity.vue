@@ -4,7 +4,7 @@
       <i class="el-icon-close"></i>
     </p>
     <div class="HotCityP">
-      <p v-for="item in HotCity">
+      <p v-for="(item,index) in HotCity" :key="index">
         {{item}}
       </p>
     </div>

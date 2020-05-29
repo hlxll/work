@@ -26,24 +26,27 @@ module.exports = {
   },
   output: {
     path: config.build.assetsRoot,
-    filename: '[name].js',
+    filename: '[name].js',//输出文件名。[]是占位符，表示多个入口，文件名不同
     publicPath: process.env.NODE_ENV === 'production'
       ? config.build.assetsPublicPath
       : config.dev.assetsPublicPath
   },
   resolve: {
+    //自动解析，在引入时候可以不带扩展名
     extensions: ['.js', '.vue', '.json'],
     alias: {
       'vue$': 'vue/dist/vue.esm.js',
       '@': resolve('src'),
+      //让引入模块更简单，比如static文件夹下得东西，引入时候可以不加类似../，直接加static别名
+      static: path.resolve(__dirname, 'static')
     }
   },
   module: {
     rules: [
       ...(config.dev.useEslint ? [createLintingRule()] : []),
       {
-        test: /\.scss$/, 
-        loaders: ['style', 'css', 'sass'] 
+        test: /\.scss$/,
+        loaders: ['style', 'css', 'sass']
       },
       {
         test: /\.vue$/,
