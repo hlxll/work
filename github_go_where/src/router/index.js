@@ -20,6 +20,18 @@ Vue.use(VueRouter)
       name: 'iCountUp'
     },
     {
+      path: '/home',
+      meta: {
+        width: 1920,
+        height: 1080
+      },
+      component: r =>
+      require.ensure([], () =>
+        r(require('../components/anhen/home.vue'))
+      ),
+      name: 'home'
+    },
+    {
       path: '/',
       name: '首页',
       components: {
