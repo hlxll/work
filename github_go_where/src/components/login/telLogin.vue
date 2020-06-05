@@ -8,7 +8,7 @@
         <!-- <input type="number" name="password" placeholder="请输入登录密码" v-model="password"/> -->
         <span>验证码</span><br>
         <el-input v-model="versityPass" placeholder="请输入验证码" class="apply"></el-input>
-        <span style="color: #409EFF;cursor: pointer;"@click="getCode" v-show="isShow">获取验证码</span>
+        <span style="color: #409EFF;cursor: pointer;" @click="getCode" v-show="isShow">获取验证码</span>
         <span v-show="!isShow">{{btnText}}秒</span>
         <!-- <input type="button" @click="login" value="登陆"/> -->
         <el-button type="primary" round @click="login">登陆</el-button>
@@ -36,7 +36,7 @@ export default {
       password: '',
       Headers: {
         Authorization: 'Bearer ' + window.sessionStorage.getItem('token')
-      },
+      }
      }
   },
   destroyed() {
@@ -44,58 +44,61 @@ export default {
   },
   methods: {
     toRegister(){
-      router.push({ path: 'register' })
+      this.$router.push({ path: 'register' })
     },
     getCode() {
       this.timer = setInterval(() => {
         if (this.btnText > 0) {
-            this.btnText--;
-            this.isShow = false;
+            this.btnText--
+            this.isShow = false
         } else {
-          clearInterval(this.timer);
-          this.isShow = true;
+          clearInterval(this.timer)
+          this.isShow = true
         }
-      }, 1000);
-      },
+      }, 1000)
+    },
     login () {
-          let $this = this;
-          if (this.telephone === '' || this.password === '') {
-            $this.$message({
-              showClose: true,
-              message: '账号或密码不能为空',
-              type: 'error'
-            })
-            return false
-          } else {
-           axios.get('http://127.0.0.1:8081/login',{
-             params: {
-                  telephone: this.telephone,
-                  password: this.password
-                }
-           })   //get方法和post方法的区别是get有参数加‘params:’
-            .then((response)=>{
-                console.log('response',response);
-                let resp = {...response.data};
-                if(resp.status===0){
-                   $this.$store.commit('set_token',resp.token);       //本地存入token
-                   $this.$store.commit('set_name',resp.name)
-                   $this.$message({
-                    showClose: true,
-                    message: '登录成功',
-                    type:'success'
-                  });
-                  this.$router.push({path: '/'});
-                }else{
-                  $this.$message({
-                      showClose: true,
-                      message: resp.message,
-                      type: 'error'
-                    })
-                }
-            })                                                                                                                                                                                                                                                                                                             }
+      let $this = this
+      if (this.telephone === '' || this.password === '') {
+        $this.$message({
+          showClose: true,
+          message: '账号或密码不能为空',
+          type: 'error'
+        })
+        return false
+      } else {
+        axios.get('http://127.0.0.1:8081/login',{
+          params: {
+              telephone: this.telephone,
+              password: this.password
+            }
+        })
+        // get方法和post方法的区别是get有参数加‘params:’
+        .then((response) => {
+            console.log('response',response)
+            let resp = {...response.data}
+            if(resp.status === 0){
+                $this.$store.commit('set_token',resp.token)
+                // 本地存入token
+                $this.$store.commit('set_name',resp.name)
+                $this.$message({
+                showClose: true,
+                message: '登录成功',
+                type: 'success'
+              })
+              this.$router.push({path: '/'})
+            }else{
+              $this.$message({
+                  showClose: true,
+                  message: resp.message,
+                  type: 'error'
+                })
+            }
+        })
+      }
     }
   }
-  }
+}
 </script>
 
 <style>

@@ -14,13 +14,13 @@
   Vue.use(Vueaxios, axios)
   import QRCode from 'qrcodejs2';  //在指定页面引入，也可以在main.js里面全局引用
     export default {
-        name: "qrCode",
+        name: "qrcode",
       data() {
         return {}
       },
       mounted: function () {
         this.$nextTick(function () {
-          this.bindQRCode();
+          this.bindQRCode()
         })
       },
       methods: {
@@ -29,9 +29,9 @@
             text: 'http://127.0.0.1:8081/codeLogin',
             width: 200,
             height: 200,
-            colorDark: "#333333", //二维码颜色
-            colorLight: "#ffffff", //二维码背景色
-            correctLevel: QRCode.CorrectLevel.L//容错率，L/M/H
+            colorDark: "#333333", // 二维码颜色
+            colorLight: "#ffffff", // 二维码背景色
+            correctLevel: QRCode.CorrectLevel.L // 容错率，L/M/H
           })
         }
       }

@@ -27,7 +27,7 @@ Vue.use(VueRouter)
       },
       component: r =>
       require.ensure([], () =>
-        r(require('../components/anhen/home.vue'))
+        r(require('../components/anhen/index.vue'))
       ),
       name: 'home'
     },

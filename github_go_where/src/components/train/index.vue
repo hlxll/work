@@ -80,15 +80,15 @@
             <template slot-scope="scope" class="shoppTrain">
               <p>
                 <el-button @click="shoppTicket(scope.$index, scope.row,0)" type="text" size="small"
-                  >{{scope.row.tag = scope.row.num[0] <=50 ? '抢票' : '购买'}}</el-button>
+                  >{{scope.row.tag = scope.row.num[0] <= 50 ? '抢票' : '购买'}}</el-button>
               </p>
               <p>
                 <el-button @click="shoppTicket(scope.$index, scope.row,1)" type="text" size="small"
-                  >{{scope.row.tag = scope.row.num[1] <=50 ? '抢票' : '购买'}}</el-button>
+                  >{{scope.row.tag = scope.row.num[1] <= 50 ? '抢票' : '购买'}}</el-button>
               </p>
               <p>
                 <el-button @click="shoppTicket(scope.$index, scope.row,2)" type="text" size="small"
-                  >{{scope.row.tag = scope.row.num[2] <=50 ? '抢票' : '购买'}}</el-button>
+                  >{{scope.row.tag = (scope.row.num[2] <= 50) ? '抢票' : '购买'}}</el-button>
               </p>
             </template>
           </el-table-column>
@@ -99,12 +99,12 @@
 </template>
 
 <script>
+  import hotCity from './common/HotCity.vue'
+  import tHead from './common/Head.vue'
   import Vue from 'vue'
   import axios from 'axios'
   import Vueaxios from 'vue-axios'
   Vue.use(Vueaxios, axios)
-  import hotCity from './common/HotCity.vue'
-  import tHead from './common/Head.vue'
   export default {
     data(){
       return{
@@ -120,14 +120,13 @@
     created() {
       console.log(this.$store.state.name)
     },
-    methods:{
+    methods: {
       shoppTicket(row,column,index){
         console.log(column.num[index])
-        if(column.num[index]<=0){
+        if(column.num[index] <= 0){
           this.$message('车票已售完')
           return false
         }
-        let loginToken = window.sessionStorage.getItem('token') || null
         let telephone = this.$store.state.name || null
         let trainTicket = column.name || null
         let Money = column.money[index] || null
@@ -141,12 +140,11 @@
             day: day
           }
         })
-        .then((res)=>{
+        .then((res) => {
           console.log('插入成功')
           this.searchTrain()
         })
-        //买完票刷新页面票数量
-        
+        // 买完票刷新页面票数量
       },
       searchTrain(){
         this.tableData = []
@@ -158,9 +156,9 @@
             Overurl: Overurl
           }
         })
-        .then((res)=>{
+        .then((res) => {
           let trainData = [...res.data]
-          for(let i=0;i<trainData.length;i++){
+          for(let i = 0; i < trainData.length; i++){
             let url = []
             let date = []
              // var d = new Date(trainData[i].date[0]);
@@ -186,7 +184,7 @@
         })
       }
     },
-    components:{
+    components: {
       hotCity,
       tHead
     }
