@@ -1,6 +1,8 @@
 <template>
     <div class="shouye">
-        <p class="HeadTitle">{{Allname}}</p>
+        <div class="titlePadd">
+            <p class="HeadTitle">{{Allname}}</p>
+        </div>
         <div class="searchTitle">
             <p>资产管理/首页</p>
             <el-cascader
@@ -9,7 +11,7 @@
                 @change="handleChange">
             </el-cascader>
         </div>
-        <home></home>
+        <home :cascaJson="Plantionvalue"></home>
     </div>
 </template>
 <script>
@@ -18,15 +20,15 @@ import home from './home.vue'
         data() {
             return {
                 Allname: '江苏省点击',
-                Plantionvalue:'',
+                Plantionvalue: [],
                 options: [
                     {
-                        value: 'one',
-                        label: 'one'
+                        value: 'jiangxi',
+                        label: 'jiangxi'
                     },
                     {
-                        value: 'two',
-                        label: 'two'
+                        value: 'anhui',
+                        label: 'anhui'
                     }
                 ]
             }
@@ -46,8 +48,12 @@ div , p{
     margin: 0;
 }
 .shouye{
+    width: 100%;
     background-color: #eff2fa;
 }
+.titlePadd{
+    width: 100%;
+    overflow: hidden;
     .HeadTitle{
         font-size: 32px;
         line-height: 80px;
@@ -57,6 +63,8 @@ div , p{
         padding-left: 45px;
         background-color: #4a93fe;
     }
+}
+    
     .searchTitle{
         width: 100%;
         height: 39px;
@@ -64,14 +72,17 @@ div , p{
         flex-direction: row;
         margin-top: 20px;
         background-color: #eff2fa;
+        margin-bottom: 0.039rem;
         p{
             line-height: 39px;
 	        letter-spacing: 1px;
 	        color: #515a6e;
             margin-right: auto;
             margin-left: 45px;
+            font-size: 0.055rem;
         }
         .el-cascader{
+            margin-right: 0.26rem;
             .el-input{
                 height: 39px;
                 .el-input__inner{

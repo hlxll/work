@@ -28,13 +28,23 @@ import echarts from "echarts";
                 let myChart = echarts.init(this.$refs.moneymyEchart); //这里是为了获得容器所在位置
                 window.onresize = myChart.resize;
                 myChart.setOption({
+                    color: ['#9170ca', '#4c9afb', '#5ad8a6'],
+                    title: {
+                        text: '资产发现形式分布',
+                        left: 10,
+                        top: 10
+                    },
                     tooltip: {
                         trigger: 'item',
                         formatter: '{a} <br/>{b}: {c} ({d}%)'
                     },
                     legend: {
                         orient: 'vertical',
-                        left: 10,
+                        right: 0,
+                        top: 100,
+                        itemWidth:14,
+                        itemHeight:14,
+                        borderRadius: 14,
                         data: ['云端', 'gedb', '第三方']
                     },
                     series: [
@@ -57,10 +67,16 @@ import echarts from "echarts";
                             labelLine: {
                                 show: false
                             },
+                            itemStyle: {
+                                normal: {
+                                    borderColor: '#eff2fa',
+                                    borderWidth: 4
+                                }
+                            },
                             data: [
-                                {value: 335, name: '云端'},
-                                {value: 310, name: 'gedb'},
-                                {value: 234, name: '第三方'}
+                                {value: 40, name: '云端'},
+                                {value: 35, name: 'gedb'},
+                                {value: 25, name: '第三方'}
                             ]
                         }
                     ]

@@ -41,7 +41,7 @@
             </div>
             <div class="Alltable">
                 <div class="AlltableOne">
-                    <moneyLoca></moneyLoca>
+                    <moneyLoca :localname = "localname" :cascaJson="cascaJson"></moneyLoca>
                     <moneyFind></moneyFind>
                 </div>
             </div>
@@ -49,15 +49,27 @@
         <div class="backlog">
             <backlog></backlog>
         </div>
+        <div style="width: 100%;">
+            <assetgo></assetgo>
+        </div>
+        <div class="BottomThree">
+            <ThreeTable></ThreeTable>
+        </div>
     </div>
 </template>
 <script>
 import moneyLoca from './moneyLoca.vue'
 import backlog from './backlog.vue'
 import moneyFind from './moneyFind.vue'
+import assetgo from './assetgo.vue'
+import ThreeTable from './ThreeTable.vue'
     export default{
+        props: {
+            cascaJson: Array
+        },
         data(){
             return{
+                localname: 'anhui',
                 //获取到的动态数据
                 Allincreas:[144,143,142],
                 problemincreas:[244,243,242],
@@ -160,7 +172,9 @@ import moneyFind from './moneyFind.vue'
         components: {
             backlog,
             moneyLoca,
-            moneyFind
+            moneyFind,
+            assetgo,
+            ThreeTable
         }
     }
 </script>
@@ -180,6 +194,7 @@ import moneyFind from './moneyFind.vue'
     }
     .homeMain{
         display: flex;
+        flex-wrap: wrap;
     }
     .numShow{
         padding-left: 18px;
@@ -205,7 +220,7 @@ import moneyFind from './moneyFind.vue'
                     // width: 148px;
                     color: #333333;
                     line-height: 41px;
-                    font-size: 41px;
+                    font-size: 0.16rem;
                     height: 41px;
                     text-align:left;
                     margin-left: 32px;
@@ -216,7 +231,7 @@ import moneyFind from './moneyFind.vue'
                     color: #333333;
                     opacity: 0.8;
                     line-height: 26px;
-                    font-size: 19px;
+                    font-size: 0.074rem;
                     height: 26px;
                     text-align:left;
                     margin-left: 32px;
@@ -238,6 +253,7 @@ import moneyFind from './moneyFind.vue'
                         text-align:left;
                         margin-left: 32px;
                         margin-bottom:13px;
+                        font-size: 0.094rem;
                     }
                     .ChildunitTwo{
                         text-align:left;
@@ -246,7 +262,7 @@ import moneyFind from './moneyFind.vue'
                         // width: 95px;
                         height:26px;
                         line-height: 26px;
-                        font-size: 19px;
+                        font-size: 0.074rem;
                     }
                 }
             }
@@ -278,14 +294,14 @@ import moneyFind from './moneyFind.vue'
                         height: 34px;
                         line-height: 34px;
                         width: 123px;
-                        font-size: 34px;
+                        font-size: 0.133rem;
                         padding-bottom: 5px;
                     }
                     .unitTwo{
                         color: #666666;
                         height: 28px;
                         line-height: 28px;
-                        font-size: 20px;
+                        font-size: 0.078rem;
                     }
                 }
             }
@@ -312,14 +328,14 @@ import moneyFind from './moneyFind.vue'
                         height: 34px;
                         line-height: 34px;
                         width: 123px;
-                        font-size: 34px;
+                        font-size: 0.133rem;
                         padding-bottom: 5px;
                     }
                     .peopleTwo{
                         color: #666666;
                         height: 28px;
                         line-height: 28px;
-                        font-size: 20px;
+                        font-size: 0.078rem;
                     }
                 }
             }
@@ -331,15 +347,24 @@ import moneyFind from './moneyFind.vue'
         margin-top: 20px;
         .AlltableOne{
             display:flex;
-            div{
+            .echarts{
+                width: 45%;
+                background-color: #ffffff;
+            }
+            .moneyecharts{
+                margin-left: 0.078rem;
                 width: 50%;
+                background-color: #ffffff;
             }
         }
     }
     .backlog{
-        width: 23%;
+        width: 23.4%;
         height: 770px;
         margin-left: 20px;
         background-color: #ffffff;
+    }
+    .BottomThree{
+        width: 100%
     }
 </style>
