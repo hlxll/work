@@ -1,7 +1,7 @@
 <template>
     <div class="shouye">
         <div class="titlePadd">
-            <p class="HeadTitle">{{Allname}}电击</p>
+            <p class="HeadTitle">{{Allname}}</p>
         </div>
         <div class="searchTitle">
             <p>资产管理/首页</p>
@@ -19,7 +19,7 @@ import home from './home.vue'
     export default {
         data() {
             return {
-                Allname: '',
+                Allname: '江苏省点击',
                 Plantionvalue: [],
                 options: [
                     {
@@ -33,13 +33,9 @@ import home from './home.vue'
                 ]
             }
         },
-        mounted() {
-            this.Allname = this.$route.query.name || ''
-        },
         methods: {
             handleChange(value) {
                 console.log(value)
-                this.Allname = value[0]
             }
         },
         components: {
@@ -53,19 +49,23 @@ div , p{
 }
 .shouye{
     width: 100%;
+    min-width: 1100px;
     background-color: #eff2fa;
+    overflow: hidden;
 }
 .titlePadd{
     width: 100%;
     overflow: hidden;
+    height:0.313rem;
+    background-color: #4a93fe;
+    line-height: 0.313rem;
     .HeadTitle{
-        font-size: 32px;
-        line-height: 80px;
+        font-size: 0.125rem;
+        line-height: 0.313rem;
         color: #ffffff;
         width: 100%;
-        height: 80px;
-        padding-left: 45px;
-        background-color: #4a93fe;
+        height: 0.313rem;
+        padding-left: 0.156rem;
     }
 }
     
@@ -74,23 +74,24 @@ div , p{
         height: 39px;
         display: flex;
         flex-direction: row;
-        margin-top: 20px;
+        margin-top: 0.063rem;
         background-color: #eff2fa;
         margin-bottom: 0.039rem;
+        align-items: center;
         p{
-            line-height: 39px;
+            line-height: 0.082rem;
 	        letter-spacing: 1px;
 	        color: #515a6e;
             margin-right: auto;
-            margin-left: 45px;
+            margin-left: 0.156rem;
             font-size: 0.055rem;
         }
         .el-cascader{
             margin-right: 0.26rem;
             .el-input{
-                height: 39px;
+                height: 0.141rem;
                 .el-input__inner{
-                    height: 39px;
+                    height: 0.141rem;
                 }
             }
         }

@@ -47,9 +47,9 @@
         }
     }
     .examine{
-        margin: 0 20px;
-        margin-top: 25px;
-        height: 123px;
+        margin: 0 0.055rem;
+        margin-top: 0.066rem;
+        height: 0.48rem;
         display: flex;
         border-bottom: 2px solid #eeeeee;
         // padding-bottom: 21px;
@@ -57,6 +57,7 @@
             width: 0.094rem;
             height: 0.094rem;
             margin-right: 0.109rem;
+            margin-left: 0.054rem;
         }
         div{
             .examineTitle{
@@ -72,6 +73,7 @@
             .examineButton{
                 display: flex;
                 align-items: center;
+                margin-top: 0.039rem;
                 p{
                     font-size: 0.07rem;
                     line-height: 0.184rem;
@@ -81,6 +83,7 @@
                 .el-button{
                     padding: 0;
                     // margin-left: ;
+                    // margin-top: 0.039rem;
                     background-color: #66afff;
                     color: #ffffff;
                     height: 0.133rem;

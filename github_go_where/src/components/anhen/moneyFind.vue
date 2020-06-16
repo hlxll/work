@@ -1,6 +1,6 @@
 <template>
     <div class="moneyecharts">
-        <div :style="{height:'400px',width:'100%'}" ref="moneymyEchart"></div>
+        <div :style="{height:'1.523rem',width:'100%'}" ref="moneymyEchart"></div>
     </div>
 </template>
 <script>
@@ -9,6 +9,11 @@ import echarts from "echarts";
         props: ["userJson"],
         data() {
         return {
+            tableData :[
+                {value: 40, name: '云端'},
+                {value: 35, name: 'gedb'},
+                {value: 25, name: '第三方'}
+            ],
             chart: null
         };
         },
@@ -23,14 +28,16 @@ import echarts from "echarts";
         this.chart = null;
         },
         methods: {
-            chinaConfigure() {
-                console.log(this.userJson)
+            chinaConfigure() { 
+                var that = this
+                console.log(that.tableData)
                 let myChart = echarts.init(this.$refs.moneymyEchart); //这里是为了获得容器所在位置
                 window.onresize = myChart.resize;
                 myChart.setOption({
                     color: ['#9170ca', '#4c9afb', '#5ad8a6'],
                     title: {
                         text: '资产发现形式分布',
+                        x:'left',
                         left: 10,
                         top: 10
                     },
@@ -38,19 +45,49 @@ import echarts from "echarts";
                         trigger: 'item',
                         formatter: '{a} <br/>{b}: {c} ({d}%)'
                     },
-                    legend: {
+                    legend: [{
                         orient: 'vertical',
-                        right: 0,
-                        top: 100,
+                        top: 'center',
                         itemWidth:14,
-                        itemHeight:14,
-                        borderRadius: 14,
-                        data: ['云端', 'gedb', '第三方']
-                    },
+                        padding: [5,0,5,0],
+                        itemHeight:34,
+                        // height: 20,
+                        right: '20%',
+                        icon: 'circle',
+                        data: that.tableData,
+                        textStyle: { 
+                            fontSize: '10'
+                        },
+                        formatter: function(params) {
+                            return params
+                        }
+                    },{
+                        orient: 'vertical',
+                        top: 'center',
+                        itemWidth: 7,
+                        itemHeight: 16,
+                        right: '10%',
+                        bottom: 2,
+                        icon: 'none',
+                        data: that.tableData,
+                        textStyle: { 
+                            fontSize: '10'
+                        },
+                        formatter: function(params) {
+                            let tip = ''
+                            for(let i=0;i<that.tableData.length;i++){
+                                if(params == that.tableData[i].name){
+                                    tip = that.tableData[i].value
+                                }
+                            }
+                            return tip+'%'
+                        }
+                    }],
                     series: [
                         {
                             name: '访问来源',
                             type: 'pie',
+                            center: ['35%','55%'],
                             radius: ['50%', '70%'],
                             avoidLabelOverlap: false,
                             label: {
@@ -73,11 +110,7 @@ import echarts from "echarts";
                                     borderWidth: 4
                                 }
                             },
-                            data: [
-                                {value: 40, name: '云端'},
-                                {value: 35, name: 'gedb'},
-                                {value: 25, name: '第三方'}
-                            ]
+                            data: that.tableData
                         }
                     ]
                 })

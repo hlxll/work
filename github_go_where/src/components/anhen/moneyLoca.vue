@@ -1,6 +1,6 @@
 <template>
   <div class="echarts">
-    <div :style="{height:'400px',width:'100%'}" ref="myEchart"></div>
+    <div :style="{height:'1.523rem',width:'100%'}" ref="myEchart"></div>
   </div>
 </template>
 <script>
@@ -95,13 +95,21 @@
             			y:60
             		},
             		itemSytle:{
-            			emphasis:{
-                    label:{show:false}
-                  }
+            			emphasis: {
+                    borderWidth:2,
+                    borderColor:'#fff',
+                    areaColor: 'red',
+                    label: {
+                        show: true,
+                        textStyle: {
+                            color: '#fff'
+                        }
+                    }
+                 } 
             		},
             		data: this.subordinateData
             	}
-            ],
+            ]
         })
       }
     }

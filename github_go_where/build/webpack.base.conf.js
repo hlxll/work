@@ -20,8 +20,8 @@ const createLintingRule = () => ({
 })
 
 module.exports = {
-  context: path.resolve(__dirname, '../'),
-  entry: {
+  context: path.resolve(__dirname, 'app'),
+  entry: {//入口
     app: './src/main.js'
   },
   output: {
@@ -29,7 +29,10 @@ module.exports = {
     filename: '[name].js',//输出文件名。[]是占位符，表示多个入口，文件名不同
     publicPath: process.env.NODE_ENV === 'production'
       ? config.build.assetsPublicPath
-      : config.dev.assetsPublicPath
+      : config.dev.assetsPublicPath,
+    chunkLoadTimeout: 120000,// 加载快超时的时间
+    crossOriginLoading: "anonymous",// 只在对象是web时候，jsonp加载快时候，跨域
+    hashDigest: 'hex',//生成hash时候使用的编码方式
   },
   resolve: {
     //自动解析，在引入时候可以不带扩展名

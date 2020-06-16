@@ -1,17 +1,13 @@
 <template>
     <div class="assetEcharts">
-        <div :style="{height:'400px',width:'70%'}" ref="assetEchart"></div>
+        <div :style="{height:'1.797rem',width:'70%'}" ref="assetEchart"></div>
         <div class="Titledata">
             <p class="assetTitle">备案情况</p>
             <div v-for="(item,index) in TitleText" :key="index" class="beianArr">
                 <p>{{item.name}}</p><p>{{item.num}}</p>
             </div>
         </div>
-        <div class="assetFenlei">
-            <li style="background-color: #9170ca;"></li>系统
-            <li style="background-color: #4c9afb;"></li>域名
-            <li style="background-color: #5ad8a6"></li>IP
-        </div>
+        
     </div>
 </template>
 <script>
@@ -76,7 +72,7 @@
                 grid: {
                     left: '3%',
                     right: '4%',
-                    bottom: '3%',
+                    bottom: '12%',
                     containLabel: true
                 },
                 // toolbox: {
@@ -93,6 +89,17 @@
                     type: 'value'
                 },
                 color: ['#9170ca', '#4c9afb', '#5ad8a6'],
+                legend: {
+                    orient: 'horizontal',
+                    left: 'center',
+                    bottom: 5,
+                    itemWidth:14,
+                    itemHeight:14,
+                    icon: 'circle',
+                    formatter: function(params) {
+                        return params
+                    }
+                },
                 series: [
                     {
                         name: '系统',
@@ -147,16 +154,17 @@
             background-color: #ffffff;
         }
         .Titledata{
-            width: 23%;
-            height: 400px;
+            width: 23.4%;
+            height: 1.797rem;
             margin-left: 0.082rem;
-            padding: 0 0.082rem;
             .assetTitle{
+                padding: 0 0.082rem;
                 margin-top: 0.059rem;
                 font-size: 0.086rem;
-                margin-bottom: 0.129rem;
+                height: 0.305rem;
             }
             .beianArr{
+                margin: 0 0.082rem;
                 height: 0.391rem;
                 line-height: 0.391rem;
                 text-align: center;

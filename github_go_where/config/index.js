@@ -13,7 +13,7 @@ module.exports = {
     proxyTable: {
   },
     publicPath: '',
-    //如果项目不知在一个域名的子域名，使用publicPath
+    //如果项目不只在一个域名的子域名，使用publicPath
 
     // Various Dev Server settings
     host: 'localhost', // can be overwritten by process.env.HOST

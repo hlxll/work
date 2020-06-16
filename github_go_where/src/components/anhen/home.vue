@@ -197,145 +197,147 @@ import ThreeTable from './ThreeTable.vue'
         flex-wrap: wrap;
     }
     .numShow{
-        padding-left: 18px;
-        height: 360px;
+        padding-left: 0.062rem;
+        // height: 360px;
         // width: 72%;
         display: flex;
         background-color: #eff2fa;
         .el-row{
             width: 72%;
+            height: 1.406rem;
+            &>div{
+                height: 100%;
+            }
         }
         .numUnit{
-            margin-left:22px;
+            margin-left:0.094rem;
             background-color: #ffffff;
             // width: 24%;
-            height: 360px;
+            // height: 360px;
             .Allnum{
                 // width: 277px;
-                height: 144px;
-                margin-left: 9px;
-                margin-right: 24px;
+                height: 0.563rem;
                 border-bottom:1px solid #eeeeee;
                 .AllnumOne{
                     // width: 148px;
                     color: #333333;
-                    line-height: 41px;
+                    line-height: 0.277rem;
                     font-size: 0.16rem;
-                    height: 41px;
+                    height: 0.16rem;
                     text-align:left;
-                    margin-left: 32px;
-                    padding-top: 34px;
-                    padding-bottom: 15px;
+                    margin-left: 0.219rem;
+                    padding-top: 0.133rem;
+                    padding-bottom: 0.059rem;
                 }
                 .AllnumTwo{
                     color: #333333;
                     opacity: 0.8;
-                    line-height: 26px;
+                    line-height: 0.129rem;
                     font-size: 0.074rem;
-                    height: 26px;
+                    height: 0.102rem;
                     text-align:left;
-                    margin-left: 32px;
+                    margin-left: 0.219rem;
                 }
             }
             .Childunit{
                 // width:300px;
-                height:215px;
-                margin-left: 9px;
+                height:0.84rem;
+                // margin-left: 9px;
                 background-repeat:no-repeat;
                 background-position:right bottom;
+                background-size: 0.43rem 0.586rem;
                 div{
-                    padding-top: 25px;
+                    padding-top: 0.094rem;
                     .ChildunitOne{
                         color: #666666;
-                        line-height: 24px;
-                        height: 24px;
+                        line-height: 0.164rem;
+                        height: 0.094rem;
                         // width: 73px;
                         text-align:left;
-                        margin-left: 32px;
-                        margin-bottom:13px;
+                        margin-left: 0.219rem;
+                        margin-bottom:0.051rem;
                         font-size: 0.094rem;
                     }
                     .ChildunitTwo{
                         text-align:left;
-                        margin-left: 32px;
+                        margin-left: 0.219rem;
                         color: #999999;
                         // width: 95px;
-                        height:26px;
-                        line-height: 26px;
+                        height:0.102rem;
+                        line-height: 0.129rem;
                         font-size: 0.074rem;
                     }
                 }
             }
         }
         .unitOrprople{
-            margin-left:23px;
+            margin-left:0.078rem;
             width: 28%;
-            height: 360px;
+            height: 1.406rem;
             .unit{
                 background-color: #ffffff;
-                height: 170px;
-                margin-bottom:20px;
+                height: 0.664rem;
+                margin-bottom:0.078rem;
                 display: flex;
                 img{
-                    padding-top: 43px;
-                    width:84px;
-                    height: 84px;
-                    margin-left:27px; 
+                    padding-top: 0.168rem;
+                    width:0.328rem;
+                    height: 0.328rem;
+                    margin-left:0.105rem; 
                 }
-                div{
-                    padding-top:43px;
-                    margin-left:40px;
-                    height: 84px;
+                &>div{
+                    padding-top:0.215rem;
+                    margin-left:0.156rem;
+                    // height: 84px;
                     display:flex;
                     flex-direction:column;
-                    justify-content:center;
+                    // justify-content:center;
                     .unitOne{
                         color: #333333;
-                        height: 34px;
-                        line-height: 34px;
-                        width: 123px;
+                        height: 0.133rem;
+                        line-height: 0.133rem;
+                        width: 0.48rem;
                         font-size: 0.133rem;
-                        padding-bottom: 5px;
                     }
                     .unitTwo{
                         color: #666666;
-                        height: 28px;
-                        line-height: 28px;
+                        height: 0.109rem;
+                        line-height: 0.109rem;
                         font-size: 0.078rem;
+                        margin-top: 0.023rem;
                     }
                 }
             }
             .People{
                 background-color: #ffffff;
-                height: 170px;
-                margin-bottom:20px;
+                height: 0.664rem;
+                margin-bottom:0.078rem;
                 display: flex;
                 img{
-                    padding-top: 43px;
-                    width:84px;
-                    height: 84px;
-                    margin-left:27px; 
+                    padding-top: 0.168rem;
+                    width:0.328rem;
+                    height: 0.328rem;
+                    margin-left:0.105rem;  
                 }
                 div{
-                    padding-top:43px;
-                    margin-left:40px;
-                    height: 84px;
+                    padding-top:0.215rem;
+                    margin-left:0.156rem;
+                    // height: 84px;
                     display:flex;
                     flex-direction:column;
-                    justify-content:center;
                     .peopleOne{
                         color: #333333;
-                        height: 34px;
-                        line-height: 34px;
-                        width: 123px;
+                        height: 0.133rem;
+                        line-height: 0.133rem;
+                        width: 0.48rem;
                         font-size: 0.133rem;
-                        padding-bottom: 5px;
                     }
                     .peopleTwo{
                         color: #666666;
-                        height: 28px;
-                        line-height: 28px;
+                        height: 0.109rem;
+                        line-height: 0.109rem;
                         font-size: 0.078rem;
+                        margin-top: 0.023rem;
                     }
                 }
             }
@@ -343,28 +345,32 @@ import ThreeTable from './ThreeTable.vue'
     }
     .Alltable{
         width: 100%;
-        margin-left: 40px;
-        margin-top: 20px;
+        // margin-left: 0.156rem;
+        margin-top: 0.078rem;
+        height: 1.523rem;
         .AlltableOne{
             display:flex;
+            height:1.523rem;
             .echarts{
-                width: 45%;
+                width: 52%;
                 background-color: #ffffff;
+                margin-left: 0.156rem;
             }
             .moneyecharts{
                 margin-left: 0.078rem;
-                width: 50%;
+                width: 46%;
                 background-color: #ffffff;
             }
         }
     }
     .backlog{
         width: 23.4%;
-        height: 770px;
-        margin-left: 20px;
+        height: 3.008rem;
+        margin-left: 0.082rem;
         background-color: #ffffff;
     }
     .BottomThree{
-        width: 100%
+        width: 100%;
+        // overflow: hidden;
     }
 </style>
