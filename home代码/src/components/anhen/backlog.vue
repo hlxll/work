@@ -33,9 +33,12 @@
         display: flex;
         align-items: center;
         margin: 0 0.109rem;
+        height: 0.117rem;
+        margin-top: 0.055rem;
+        margin-bottom: 0.066rem;
         p{
             margin-right: auto;
-            line-height: 0.184rem;
+            line-height: 0.117rem;
             color: #333333;
             font-size: 0.086rem;
         }

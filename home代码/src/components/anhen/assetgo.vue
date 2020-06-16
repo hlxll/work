@@ -161,7 +161,8 @@
                 padding: 0 0.082rem;
                 margin-top: 0.059rem;
                 font-size: 0.086rem;
-                height: 0.305rem;
+                height: 0.117rem;
+                margin-bottom: 0.129rem;
             }
             .beianArr{
                 margin: 0 0.082rem;
