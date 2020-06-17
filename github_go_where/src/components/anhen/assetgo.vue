@@ -1,6 +1,6 @@
 <template>
     <div class="assetEcharts">
-        <div :style="{height:'1.797rem',width:'70%'}" ref="assetEchart"></div>
+        <div :style="{height:'1.797rem',width:'70%'}" :auto-resize="true" ref="assetEchart"></div>
         <div class="Titledata">
             <p class="assetTitle">备案情况</p>
             <div v-for="(item,index) in TitleText" :key="index" class="beianArr">
@@ -49,11 +49,16 @@
             console.log(this.userJson)
             let myChart = echarts.init(this.$refs.assetEchart); //这里是为了获得容器所在位置
             window.onresize = myChart.resize;
-            myChart.setOption({ 
+            myChart.setOption({
                 title: {
                     text: '新增资产走势',
                     left: 10,
-                    top: 10
+                    top: 10,
+                    textStyle: {
+                        color: '#333333',
+                        fontWeight: 'normal',
+                        fontFamily: 'SourceHanSansCN-Regular'
+                    }
                 },
                 tooltip: {
                     trigger: 'axis',
@@ -87,6 +92,7 @@
                 },
                 yAxis: {
                     type: 'value'
+                    // offset: 10
                 },
                 color: ['#9170ca', '#4c9afb', '#5ad8a6'],
                 legend: {
@@ -94,6 +100,7 @@
                     left: 'center',
                     bottom: 5,
                     itemWidth:14,
+                    itemGap: 40,
                     itemHeight:14,
                     icon: 'circle',
                     formatter: function(params) {
@@ -105,22 +112,62 @@
                         name: '系统',
                         type: 'line',
                         // stack: '总量',
+                        areaStyle: {
+                            color: 'rgba(145,112,202,0.5)'
+                        },
+                        itemStyle: {
+                            // borderWidth:0,
+                            // borderType: 'solid',
+                            // shadowColor: '#000000',
+                            opacity: '0.1'
+                        },
+                        emphasis: {
+                            itemStyle: {
+                                opacity: '1',
+                                borderWidth: 2
+                            },
+                        },
                         data: [12,123,20,40,50,60,70,80,90,100,145,123]
                     },
                     {
                         name: '域名',
                         type: 'line',
+                        areaStyle: {
+                            color: 'rgba(76,154,251,0.5)'
+                        },
+                        itemStyle: {
+                            opacity: '0.1'
+                        },
+                        emphasis: {
+                            itemStyle: {
+                                opacity: '1',
+                                borderWidth: 2
+                            },
+                        },
                         // stack: '总量',
                         data: [220, 182, 191, 234, 290, 330, 310,3,4,5,6,87]
                     },
                     {
                         name: 'IP',
                         type: 'line',
+                        areaStyle: {
+                            color: 'rgba(90,216,166,0.5)'
+                        },
+                        itemStyle: {
+                            opacity: '0.1'
+                        },
+                        emphasis: {
+                            itemStyle: {
+                                opacity: '1',
+                                borderWidth: 2
+                            },
+                        },
                         // stack: '总量',
                         data: [150, 232, 201, 154, 190, 330, 410,1,2,3,5,7]
                     }
                 ]
             });
+            // window.onresize = myChart.resize;
         }
         }
     }
@@ -161,7 +208,10 @@
                 padding: 0 0.082rem;
                 margin-top: 0.059rem;
                 font-size: 0.086rem;
-                height: 0.305rem;
+                height: 0.117rem;
+                margin-bottom: 0.129rem;
+                color: #333333;
+                font-weight: normal;
             }
             .beianArr{
                 margin: 0 0.082rem;

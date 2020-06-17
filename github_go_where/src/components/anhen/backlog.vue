@@ -4,7 +4,7 @@
             <p>待办事项</p>
             <el-button type="text">查看更多></el-button>
         </div>
-        <div class="examine" v-for="(item, index) in 5" :key="index">
+        <div class="examine" v-for="(item, index) in 5" :key="index" :class="'examine'+index">
             <img src="/static/img/Image/路径234.png" />
             <div>
                 <p class="examineTitle">新疆少数名族公共文化网络出版平台</p>
@@ -33,11 +33,15 @@
         display: flex;
         align-items: center;
         margin: 0 0.109rem;
+        height: 0.117rem;
+        margin-top: 0.055rem;
+        margin-bottom: 0.066rem;
         p{
             margin-right: auto;
-            line-height: 0.184rem;
+            line-height: 0.117rem;
             color: #333333;
             font-size: 0.086rem;
+            font-weight: normal;
         }
         button{
             span{
@@ -45,6 +49,9 @@
                 color: #66afff;
             }
         }
+    }
+    .examine4{
+        border-bottom: none !important;
     }
     .examine{
         margin: 0 0.055rem;

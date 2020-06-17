@@ -1,6 +1,6 @@
 <template>
     <div class="moneyecharts">
-        <div :style="{height:'1.523rem',width:'100%'}" ref="moneymyEchart"></div>
+        <div :style="{height:'1.523rem',width:'100%'}" :auto-resize=true ref="moneymyEchart"></div>
     </div>
 </template>
 <script>
@@ -39,7 +39,12 @@ import echarts from "echarts";
                         text: '资产发现形式分布',
                         x:'left',
                         left: 10,
-                        top: 10
+                        top: 10,
+                        textStyle: {
+                            color: '#333333',
+                            fontWeight: 'normal',
+                            fontFamily: 'SourceHanSansCN-Regular'
+                        }
                     },
                     tooltip: {
                         trigger: 'item',
@@ -50,7 +55,8 @@ import echarts from "echarts";
                         top: 'center',
                         itemWidth:14,
                         padding: [5,0,5,0],
-                        itemHeight:34,
+                        itemHeight:14,
+                        itemGap: 30,
                         // height: 20,
                         right: '20%',
                         icon: 'circle',
@@ -67,6 +73,7 @@ import echarts from "echarts";
                         itemWidth: 7,
                         itemHeight: 16,
                         right: '10%',
+                        itemGap: 30,
                         bottom: 2,
                         icon: 'none',
                         data: that.tableData,
@@ -106,14 +113,17 @@ import echarts from "echarts";
                             },
                             itemStyle: {
                                 normal: {
-                                    borderColor: '#eff2fa',
-                                    borderWidth: 4
-                                }
+                                    borderColor: 'rgba(255,255,255,1)',
+                                    borderWidth: 4,
+                                    borderType : 'solid',
+                                    shadowColor: 'rgba(255,255,255,1)'
+                                },
                             },
                             data: that.tableData
                         }
                     ]
                 })
+                // window.onresize = myChart.resize;
             }
     }
     } 

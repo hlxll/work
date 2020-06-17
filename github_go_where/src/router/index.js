@@ -7,18 +7,18 @@ Vue.use(VueRouter)
 
 
   const routes = [
-    {
-      path: '/anh/changePwd',
-      meta: {
-        width: 1920,
-        height: 1080
-      },
-      component: r =>
-      require.ensure([], () =>
-        r(require('../components/anhen/iCountUp.vue'))
-      ),
-      name: 'iCountUp'
-    },
+    // {
+    //   path: '/anh/changePwd',
+    //   meta: {
+    //     width: 1920,
+    //     height: 1080
+    //   },
+    //   component: r =>
+    //   require.ensure([], () =>
+    //     r(require('../components/anhen/iCountUp.vue'))
+    //   ),
+    //   name: 'iCountUp'
+    // },
     {
       path: '/home',
       meta: {

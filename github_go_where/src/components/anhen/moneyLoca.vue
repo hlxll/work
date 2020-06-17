@@ -1,6 +1,6 @@
 <template>
   <div class="echarts">
-    <div :style="{height:'1.523rem',width:'100%'}" ref="myEchart"></div>
+    <div :style="{height:'1.523rem',width:'100%'}" :auto-resize=true ref="myEchart"></div>
   </div>
 </template>
 <script>
@@ -13,6 +13,7 @@
     },
     data() {
       return {
+        optionData: '',
         chart: null,
         subordinateData: []
       };
@@ -34,7 +35,7 @@
     },
     methods: {
       getLocationJson(){
-        let urlName = this.cascaJson[0] || this.$route.query.name
+        let urlName = this.cascaJson[0] || this.$route.query.name || 'zhejiang'
         //通过传递的数据，判断使用哪个省份
         if(!urlName){
           return
@@ -69,22 +70,34 @@
                 text: '资产区域分布',
                 x:'left',
                 left: 10,
-                top: 10
+                top: 10,
+                textStyle: {
+                  color: '#333333',
+                  fontWeight: 'normal',
+                  fontFamily: 'SourceHanSansCN-Regular'
+                }
             },
+            
             tooltip: {
                 show: true,
                 formatter: function(params) {
                     if (params.data) {
-                        return '咨询数:' + params.data.ask_num + '<br>' + '留言数:' + params.data.board_num + '<br>' + '用户数:' + params.data.sign_num + '<br>';
+                        return '<p class="shujutishi">系统</p>' +params.data.ask_num+'个' + '<br>' 
+                        + '<p class="shujutishi">域名</p>' + params.data.board_num +'个' + '<br>' + 
+                        '<p class="shujutishi">I P</p>' + params.data.sign_num +'个' +  '<br>';
                     } else {
-                        return '咨询数:' + 0 + '<br>' + '留言数:' + 0 + '<br>' + '用户数:' + 0 + '<br>';
+                        return '系统' + 0 + '<br>' + '域名' + 0 + '<br>' + 'IP' + 0 + '<br>';
                     }
                 },
                 textStyle: {
                     color: '#ffffff',
                     fontSize: 18,
-                    lineHeight: 30
-                }
+                    lineHeight: 30,
+                    fontWeight: 'normal',
+                    fontStretch: 'normal',
+                    letterSpacing: 0
+                },
+                backgroundColor : 'rgba(0,0,0,0.5)'
             },
             series:[
             	{
@@ -94,25 +107,41 @@
             		mapLocation:{
             			y:60
             		},
-            		itemSytle:{
-            			emphasis: {
-                    borderWidth:2,
-                    borderColor:'#fff',
+                label: {
+                  show: true,
+                  color: '#666666'
+                },
+                emphasis: {
+                    borderWidth:4,
+                    borderColor:'black',
                     areaColor: 'red',
                     label: {
                         show: true,
                         textStyle: {
-                            color: '#fff'
+                            color: '#ffffff',
                         }
+                    },
+                    itemSytle: {
+                      show: true,
+                      areaColor: '#4c9afb',
+                      color: '#4c9afb',
                     }
-                 } 
-            		},
+                 },
             		data: this.subordinateData
             	}
             ]
         })
+        // window.onresize = myChart.resize;
       }
     }
   }
 </script>
-
+<style>
+  .shujutishi{
+    width: 60px;
+    text-align: right;
+    padding-right: 10px;
+    display: inline-block;
+    margin-right: 10px;
+  }
+</style>
