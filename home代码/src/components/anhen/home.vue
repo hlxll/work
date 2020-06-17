@@ -245,7 +245,7 @@ import ThreeTable from './ThreeTable.vue'
                 // margin-left: 9px;
                 background-repeat:no-repeat;
                 background-position:right bottom;
-                background-size: 0.43rem 0.586rem;
+                background-size: 0.53rem 0.586rem;
                 div{
                     padding-top: 0.094rem;
                     .ChildunitOne{

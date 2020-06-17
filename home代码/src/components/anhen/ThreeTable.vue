@@ -1,14 +1,14 @@
 <template>
     <div class="threeTable">
-        <div :style="{height:'1.797rem',width:'37.5%'}" class="assetEcharts">
+        <div :style="{height:'1.797rem',width:'37.5%',position:'relative'}" :auto-resize='true' class="assetEcharts" >
             <div class="changeTable">
                 <el-button type="text" :class="wek" @click="changeTable('wek')">周</el-button>
                 <el-button type="text" :class="month" @click="changeTable('month')">月</el-button>
             </div>
-            <div :style="{height:'1.797rem',width:'100%'}" ref="OneEchart"></div>
+            <div :style="{height:'1.797rem',width:'100%'}" :auto-resize=true ref="OneEchart"></div>
         </div>
-        <div :style="{height:'1.797rem',width:'24%'}" ref="TwoEchart"></div>
-        <div :style="{height:'1.797rem',width:'32.3%'}" ref="ThreeEchart"></div>
+        <div :style="{height:'1.797rem',width:'24%'}" :auto-resize=true ref="TwoEchart"></div>
+        <div :style="{height:'1.797rem',width:'32.3%'}" :auto-resize=true ref="ThreeEchart"></div>
     </div>
 </template>
 <script>
@@ -17,32 +17,39 @@
         name: "echarts",
         props: ["userJson"],
         data() {
-        return {
-            wek: 'white',
-            month: 'lanse',
-            chart: null,
-            oneData: [
-                [10,20,30,40,50,60,70,80,90,100,120,130],
-                [20,30,40,50,60,70,80,90,100,110,120,130],
-                [30,40,50,60,70,80,90,100,110,120,130,140]
-            ],
-            WekoneData: [
-                [10,20,30,40,50,60,70],
-                [20,30,40,50,60,70,80],
-                [30,40,50,60,70,80,90]
-            ],
-            ThreeData: [
-                {value: 18, name: 'web服务'},
-                {value: 25, name: '前端框架'},
-                {value: 36, name: '系统类型'},
-                {value: 21, name: '服务器类型'},
-                {value: 12, name: '语音类型'},
-                {value: 23, name: '防护类型'},
-            ]
-        };
+            return {
+                setTime: '',
+                // screenWidth: document.body.clientWidth,
+                wek: 'white',
+                month: 'lanse',
+                chart: null,
+                oneData: [
+                    [10,20,30,40,50,60,70,80,90,100,120,130],
+                    [20,30,40,50,60,70,80,90,100,110,120,130],
+                    [30,40,50,60,70,80,90,100,110,120,130,140]
+                ],
+                WekoneData: [
+                    [10,20,30,40,50,60,70],
+                    [20,30,40,50,60,70,80],
+                    [30,40,50,60,70,80,90]
+                ],
+                ThreeData: [
+                    {value: 18, name: 'web服务'},
+                    {value: 25, name: '前端框架'},
+                    {value: 36, name: '系统类型'},
+                    {value: 21, name: '服务器类型'},
+                    {value: 12, name: '语音类型'},
+                    {value: 23, name: '防护类型'},
+                ]
+            };
+        },
+        watch: {
+            screenWidth (val) {
+                console.log(1)
+            }
         },
         mounted() {
-            this.wekOneConfigure();
+            this.oneConfigure();
             this.twoConfigure();
             this.threeConfigure()
         },
@@ -71,19 +78,25 @@
                 }
             },
             oneConfigure() {
-                let myChart = echarts.init(this.$refs.OneEchart); //这里是为了获得容器所在位置
-                window.onresize = myChart.resize;
-                myChart.setOption({ 
+                let onemyChart = echarts.init(this.$refs.OneEchart); //这里是为了获得容器所在位置
+                window.onresize = onemyChart.resize;
+                onemyChart.setOption({ 
                     title: {
                         text: '新增资产走势',
                         left: 10,
-                        top: 10
+                        top: 10,
+                        textStyle: {
+                            color: '#333333',
+                            fontWeight: 'normal',
+                            fontFamily: 'SourceHanSansCN-Regular'
+                        }
                     },
                     color: ['#b1000b', '#f93030', '#ffb01b'],
                     legend: {
                         orient: 'horizontal',
                         left: 'center',
                         bottom: 5,
+                        itemGap: 30,
                         itemWidth:14,
                         itemHeight:14,
                         icon: 'circle',
@@ -118,12 +131,28 @@
                     xAxis: {
                         type: 'category',
                         boundaryGap: false,
-                        data: ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月']
+                        data: ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'],
+                        splitLine: {
+                            show: true,
+                            interval: 0,
+                            lineStyle: {
+                                color: '#eeeeee',
+                                type: 'solid',
+                            }
+                        }
                     },
                     yAxis: {
                         type: 'value',
                         min: 0,
-                        max: 400
+                        max: 400,
+                        splitLine: {
+                            show: true,
+                            interval: 0,
+                            lineStyle: {
+                                color: '#eeeeee',
+                                type: 'solid',
+                            }
+                        }
                     },
                     series: [
                         {
@@ -144,15 +173,21 @@
                         }
                     ]
                 });
+                // window.onresize = onemyChart.resize;
             },
             wekOneConfigure() {
-                let myChart = echarts.init(this.$refs.OneEchart); //这里是为了获得容器所在位置
-                window.onresize = myChart.resize;
-                myChart.setOption({ 
+                let wekmyChart = echarts.init(this.$refs.OneEchart); //这里是为了获得容器所在位置
+                window.onresize = wekmyChart.resize;
+                wekmyChart.setOption({ 
                     title: {
                         text: '新增资产走势',
                         left: 10,
-                        top: 10
+                        top: 10,
+                        textStyle: {
+                            color: '#333333',
+                            fontWeight: 'normal',
+                            fontFamily: 'SourceHanSansCN-Regular'
+                        }
                     },
                     color: ['#b1000b', '#f93030', '#ffb01b'],
                     legend: {
@@ -161,6 +196,7 @@
                         bottom: 5,
                         itemWidth:14,
                         itemHeight:14,
+                        itemGap: 30,
                         icon: 'circle',
                         formatter: function(params) {
                             return params
@@ -193,12 +229,28 @@
                     xAxis: {
                         type: 'category',
                         boundaryGap: false,
-                        data: ['周一','周二','周三','周四','周五','周六','周日']
+                        data: ['周一','周二','周三','周四','周五','周六','周日'],
+                        splitLine: {
+                            show: true,
+                            interval: 0,
+                            lineStyle: {
+                                color: '#eeeeee',
+                                type: 'solid',
+                            }
+                        }
                     },
                     yAxis: {
                         type: 'value',
                         min: 0,
-                        max: 400
+                        max: 400,
+                        splitLine: {
+                            show: true,
+                            interval: 0,
+                            lineStyle: {
+                                color: '#eeeeee',
+                                type: 'solid',
+                            }
+                        }
                     },
                     series: [
                         {
@@ -219,28 +271,35 @@
                         }
                     ]
                 });
+                // window.onresize = wekmyChart.resize;
             },
             twoConfigure(){
-                let myChart = echarts.init(this.$refs.TwoEchart); //这里是为了获得容器所在位置
-                window.onresize = myChart.resize;
-                myChart.setOption({
+                let twomyChart = echarts.init(this.$refs.TwoEchart); //这里是为了获得容器所在位置
+                window.onresize = twomyChart.resize;
+                twomyChart.setOption({
                     title: {
                         text: '指标占比',
                         left: 10,
-                        top: 10
+                        top: 10,
+                        textStyle: {
+                            color: '#333333',
+                            fontWeight: 'normal',
+                            fontFamily: 'SourceHanSansCN-Regular'
+                        }
                     },
                     grid: {
-                        left: '3%',
-                        right: '4%',
-                        bottom: '12%',
-                        containLabel: true
+                        left: '6%',
+                        right: '6%',
+                        bottom: '9%',
+                        containLabel: true,
+                        backgroundColor: '#ffffff'
                     },
                     xAxis: {
                         type: 'category',
                         data: ['漏洞', '暗链', '后门'],
                         axisLabel: {
                             margin: 20,
-                            color: '#999',
+                            color: '#999999',
                             textStyle: {
                                 fontSize: 18
                             },
@@ -253,13 +312,21 @@
                         axisTick: {
                             show: false
                         },
+                        splitLine: {
+                            show: true,
+                            interval: 0,
+                            lineStyle: {
+                                color: '#eeeeee',
+                                type: 'solid',
+                            }
+                        }
                     },
                     yAxis: [{
                         min: 0,
                         max: 100,
                         axisLabel: {
                             formatter: '{value}%',
-                            color: '#999',
+                            color: '#999999',
                             textStyle: {
                                 fontSize: 8
                             },
@@ -274,8 +341,8 @@
                         },
                         splitLine: {
                             lineStyle: {
-                                color: 'rgba(131,101,101,0.2)',
-                                type: 'dashed',
+                                color: '#eeeeee',
+                                type: 'solid',
                             }
                         }
                     }],
@@ -283,6 +350,9 @@
                         data: [55,48,39],
                         barWidth: '20px',
                         type: 'bar',
+                        itemStyle: {
+                            color: '#ffb01b'
+                        },
                         label: {
                             show: true,
                             position: 'top',
@@ -293,18 +363,24 @@
                         }
                     }]
                 })
+                // window.onresize = twomyChart.resize;
             },
             threeConfigure() {
                 var that = this
                 console.log(this.userJson)
-                let myChart = echarts.init(this.$refs.ThreeEchart); //这里是为了获得容器所在位置
-                window.onresize = myChart.resize;
-                myChart.setOption({
+                let ThreemyChart = echarts.init(this.$refs.ThreeEchart); //这里是为了获得容器所在位置
+                window.onresize = ThreemyChart.resize;
+                ThreemyChart.setOption({
                     color: ['#9170ca', '#4c9afb', '#5ad8a6' ,'#ffb01b' ,'#ff7b33', '#b1000b'],
                     title: {
                         text: '指纹信息分布',
                         top: 10,
-                        left: 10
+                        left: 10,
+                        textStyle: {
+                            color: '#333333',
+                            fontWeight: 'normal',
+                            fontFamily: 'SourceHanSansCN-Regular'
+                        }
                     },
                     tooltip: {
                         trigger: 'item',
@@ -316,6 +392,7 @@
                         top: 'center',
                         itemWidth:14,
                         itemHeight:14,
+                        itemGap: 15,
                         icon: 'circle',
                         data: this.ThreeData,
                         formatter: function(params) {
@@ -328,6 +405,7 @@
                         itemWidth:7,
                         itemHeight:16,
                         icon: 'none',
+                        itemGap: 15,
                         data: this.ThreeData,
                         formatter: function(params) {
                             let tip = ''
@@ -362,8 +440,9 @@
                             },
                             itemStyle: {
                                 normal: {
-                                    borderColor: '#eff2fa',
-                                    borderWidth: 4
+                                    borderColor: 'rgba(255,255,255,1)',
+                                    borderWidth: 4,
+                                    shadowColor: 'rgba(255,255,255,1)'
                                 }
                             },
                             data: [
@@ -377,6 +456,7 @@
                         }
                     ]
                 })
+                // window.onresize = ThreemyChart.resize;
             }
         }
     }
@@ -385,7 +465,8 @@
 .changeTable{
     font-size: 0.055rem;
     position: absolute;
-    left: 34%;
+    right: 6%;
+    top: 0;
     margin-top: 0.078rem;
     display: flex;
     border: 1px solid #4c9afb;

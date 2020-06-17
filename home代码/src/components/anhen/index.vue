@@ -52,6 +52,7 @@ div , p{
     min-width: 1100px;
     background-color: #eff2fa;
     overflow: hidden;
+    padding-bottom: 0.2rem;
 }
 .titlePadd{
     width: 100%;
