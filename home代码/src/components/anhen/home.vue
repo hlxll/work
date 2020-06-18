@@ -6,16 +6,16 @@
                     <el-col :span="8" v-for="(item,index) in homeNumAll" :key="index">
                         <div class="numUnit">
                     <div class="Allnum">
-                        <p class="AllnumOne">{{item.allNum}}</p>
+                        <p class="AllnumOne">{{item.allNum | NumFormat}}</p>
                         <p class="AllnumTwo">{{item.name}}总数</p>
                     </div>
                     <div class="Childunit" :style="'background-image:url(/static/img/Image/'+item.name+'.png'">
                         <div>
-                        <p class="ChildunitOne">{{item.problemNum}}</p>
+                        <p class="ChildunitOne">{{item.problemNum | NumFormat}}</p>
                         <p class="ChildunitTwo">问题{{item.name}}</p>
                         </div>
                         <div>
-                        <p class="ChildunitOne" style="margin-top: 10px;">{{item.warmNum}}</p>
+                        <p class="ChildunitOne" style="margin-top: 10px;">{{item.warmNum | NumFormat}}</p>
                         <p class="ChildunitTwo">影响单位数</p>
                         </div>
                     </div>
@@ -26,14 +26,14 @@
                     <div class="unit">
                         <img src="/static/img/Image/danwei.png"/>
                         <div>
-                            <p class="unitOne">{{unitAllNum}}</p>
+                            <p class="unitOne">{{unitAllNum | NumFormat}}</p>
                             <p class="unitTwo">单位总数</p>
                         </div>
                     </div>
                     <div class="People">
                         <img src="/static/img/Image/people.png"/>
                         <div>
-                            <p class="peopleOne">{{peopleNum}}</p>
+                            <p class="peopleOne">{{peopleNum | NumFormat}}</p>
                             <p class="peopleTwo">安全人员数量</p>
                         </div>
                     </div>
@@ -63,6 +63,7 @@ import backlog from './backlog.vue'
 import moneyFind from './moneyFind.vue'
 import assetgo from './assetgo.vue'
 import ThreeTable from './ThreeTable.vue'
+import {numberToCurrency} from './tableSize/filterNum.js'
     export default{
         props: {
             cascaJson: Array
@@ -71,11 +72,11 @@ import ThreeTable from './ThreeTable.vue'
             return{
                 localname: 'anhui',
                 //获取到的动态数据
-                Allincreas:[144,143,142],
+                Allincreas:[1445,143,142],
                 problemincreas:[244,243,242],
                 unitincreas:[344,343,342],
                 unitAllincreas:666,
-                peopleincreas: 777,
+                peopleincreas: 1111,
                 //渲染数据
                 unitAllNum:1,
                 peopleNum: 1,
@@ -99,6 +100,14 @@ import ThreeTable from './ThreeTable.vue'
                     warmNum:1
                 }
                 ]
+            }
+        },
+        filters: { 
+            NumFormat: function(value) {
+                if(!value) return '0';
+                var intPart = Number(value).toFixed(0); //获取整数部分
+                var intPartFormat = intPart.toString().replace(/(\d)(?=(?:\d{3})+$)/g, '$1,'); //将整数部分逢三一断
+                return intPartFormat
             }
         },
         methods: {

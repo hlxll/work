@@ -5,6 +5,8 @@
 </template>
 <script>
   import echarts from "echarts";
+  import {fontSize} from "./tableSize/fontSize"
+  import {getWidth} from './tableSize/watchWidth.js'
   export default {
     name: "echarts",
     props: {
@@ -13,6 +15,7 @@
     },
     data() {
       return {
+        watchData: '',
         optionData: '',
         chart: null,
         subordinateData: []
@@ -20,6 +23,7 @@
     },
     mounted() {
       this.getLocationJson()
+      getWidth(document,window,this)
     },
     beforeDestroy() {
       if (!this.chart) {
@@ -31,6 +35,10 @@
     watch: {
       cascaJson: function(val){
         this.getLocationJson()
+      },
+      watchData: function(){
+        this.getLocationJson()
+        console.log('local改动')
       }
     },
     methods: {
@@ -50,21 +58,23 @@
       //处理下级
       subordinate(Jsondata){
         this.subordinateData = []
-        Jsondata.forEach(item=>{
+        Jsondata.forEach((item, index)=>{
           let JSON = {
             name: item.properties.name,
             ask_num: 1,
             board_num: 2,
-            sign_num: 3
+            sign_num: 3,
+            value: index*100
           }
           this.subordinateData.push(JSON)
         })
       },
       //画地图
       chinaConfigure(Jsonname) {
-        console.log(Jsonname)
+        // console.log(Jsonname)
         let myChart = echarts.init(this.$refs.myEchart); //这里是为了获得容器所在位置
-        window.onresize = myChart.resize;
+        // window.onresize = myChart.resize;// 覆盖了
+        window.addEventListener('resize', myChart.resize)
         myChart.setOption({ // 进行相关配置
             title: {
                 text: '资产区域分布',
@@ -74,10 +84,18 @@
                 textStyle: {
                   color: '#333333',
                   fontWeight: 'normal',
-                  fontFamily: 'SourceHanSansCN-Regular'
+                  fontFamily: 'SourceHanSansCN-Regular',
+                  fontSize: fontSize(0.086)
                 }
             },
-            
+            visualMap: {
+                show: false,
+                min: 0, // 指定 visualMapContinuous 组件的允许的最小值。'min' 必须用户指定。[visualMap.min, visualMax.max] 形成了视觉映射的『定义域』。
+                max: 1000, // 指定 visualMapContinuous 组件的允许的最大值
+                inRange: {
+                    color: ['#0494e1', '#004098']//地图颜色范围
+                }
+            },
             tooltip: {
                 show: true,
                 formatter: function(params) {
@@ -109,24 +127,24 @@
             		},
                 label: {
                   show: true,
-                  color: '#666666'
+                  color: '#999999'
                 },
                 emphasis: {
-                    borderWidth:4,
-                    borderColor:'black',
-                    areaColor: 'red',
-                    label: {
-                        show: true,
-                        textStyle: {
-                            color: '#ffffff',
-                        }
-                    },
-                    itemSytle: {
+                  borderWidth:4,
+                  borderColor:'black',
+                  areaColor: 'red',
+                  label: {
                       show: true,
-                      areaColor: '#4c9afb',
-                      color: '#4c9afb',
-                    }
-                 },
+                      textStyle: {
+                          color: '#ffffff',
+                      }
+                  },
+                  itemSytle: {
+                    show: true,
+                    areaColor: '#4c9afb',
+                    color: '#4c9afb',
+                  }
+                },
             		data: this.subordinateData
             	}
             ]
@@ -138,7 +156,7 @@
 </script>
 <style>
   .shujutishi{
-    width: 60px;
+    width: 0.3rem;
     text-align: right;
     padding-right: 10px;
     display: inline-block;

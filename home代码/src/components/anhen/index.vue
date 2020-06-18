@@ -1,7 +1,7 @@
 <template>
     <div class="shouye">
         <div class="titlePadd">
-            <p class="HeadTitle">{{Allname}}</p>
+            <p class="HeadTitle">{{Allname}}电教馆</p>
         </div>
         <div class="searchTitle">
             <p>资产管理/首页</p>
@@ -19,7 +19,7 @@ import home from './home.vue'
     export default {
         data() {
             return {
-                Allname: '江苏省点击',
+                Allname: '江苏省',
                 Plantionvalue: [],
                 options: [
                     {

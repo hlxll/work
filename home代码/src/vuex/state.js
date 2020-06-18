@@ -1,4 +1,5 @@
 export default {
   token:'',
-  name: ''
+  name: '',
+  ClientWidth: ''
 }
