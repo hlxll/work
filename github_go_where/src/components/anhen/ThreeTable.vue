@@ -13,25 +13,28 @@
 </template>
 <script>
     import echarts from "echarts";
+    import {fontSize} from "./tableSize/fontSize"
+    import {getWidth} from './tableSize/watchWidth.js'
     export default {
         name: "echarts",
         props: ["userJson"],
         data() {
             return {
+                watchData:'',
                 setTime: '',
                 // screenWidth: document.body.clientWidth,
                 wek: 'white',
                 month: 'lanse',
                 chart: null,
                 oneData: [
-                    [10,20,30,40,50,60,70,80,90,100,120,130],
-                    [20,30,40,50,60,70,80,90,100,110,120,130],
-                    [30,40,50,60,70,80,90,100,110,120,130,140]
+                    [10,40,30,10,50,20],
+                    [20,30,10,50,60,20],
+                    [30,40,80,30,70,50]
                 ],
                 WekoneData: [
-                    [10,20,30,40,50,60,70],
-                    [20,30,40,50,60,70,80],
-                    [30,40,50,60,70,80,90]
+                    [10,40,30,10,50,30,40],
+                    [20,50,40,50,60,80,23],
+                    [30,40,10,60,70,80,10]
                 ],
                 ThreeData: [
                     {value: 18, name: 'web服务'},
@@ -46,12 +49,19 @@
         watch: {
             screenWidth (val) {
                 console.log(1)
+            },
+            watchData: function(){
+                this.oneConfigure();
+                this.twoConfigure();
+                this.threeConfigure()
+                console.log('三个表格改动')
             }
         },
         mounted() {
             this.oneConfigure();
             this.twoConfigure();
             this.threeConfigure()
+            getWidth(document,window,this)
         },
         beforeDestroy() {
             if (!this.chart) {
@@ -80,15 +90,17 @@
             oneConfigure() {
                 let onemyChart = echarts.init(this.$refs.OneEchart); //这里是为了获得容器所在位置
                 window.onresize = onemyChart.resize;
+                window.addEventListener('resize', onemyChart.resize)
                 onemyChart.setOption({ 
                     title: {
-                        text: '新增资产走势',
+                        text: '资产问题汇总',
                         left: 10,
                         top: 10,
                         textStyle: {
                             color: '#333333',
                             fontWeight: 'normal',
-                            fontFamily: 'SourceHanSansCN-Regular'
+                            fontFamily: 'SourceHanSansCN-Regular',
+                            fontSize: fontSize(0.086)
                         }
                     },
                     color: ['#b1000b', '#f93030', '#ffb01b'],
@@ -98,10 +110,14 @@
                         bottom: 5,
                         itemGap: 30,
                         itemWidth:14,
-                        itemHeight:14,
+                        itemHeight:10,
                         icon: 'circle',
                         formatter: function(params) {
                             return params
+                        },
+                        textStyle: { 
+                            color: '#999999',
+                            fontSize: fontSize(0.078)
                         }
                     },
                     tooltip: {
@@ -115,6 +131,11 @@
                                 }
                             }
                             return tip;
+                        },
+                        itemWidth: 40,
+                        backgroundColor: '#ffffff',
+                        textStyle: {
+                            color: '#666666'
                         }
                     },
                     grid: {
@@ -131,7 +152,7 @@
                     xAxis: {
                         type: 'category',
                         boundaryGap: false,
-                        data: ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'],
+                        data: ['1月','2月','3月','4月','5月','6月'],
                         splitLine: {
                             show: true,
                             interval: 0,
@@ -139,7 +160,21 @@
                                 color: '#eeeeee',
                                 type: 'solid',
                             }
-                        }
+                        },
+                        axisLabel: {
+                            textStyle: {
+                                fontSize: fontSize(0.078),
+                                color: '#999999'
+                            },
+                        },
+                        axisTick: {
+                            show: false
+                        },
+                        axisLine: {
+                            lineStyle: {
+                                color: '#d2d2d2',
+                            }
+                        },
                     },
                     yAxis: {
                         type: 'value',
@@ -152,24 +187,68 @@
                                 color: '#eeeeee',
                                 type: 'solid',
                             }
-                        }
+                        },
+                        axisTick: {
+                            show: false
+                        },
+                        axisLine: {
+                            lineStyle: {
+                                color: '#d2d2d2',
+                            }
+                        },
+                        axisLabel: {
+                            textStyle: {
+                                fontSize: fontSize(0.078),
+                                color: '#999999'
+                            },
+                        },
                     },
                     series: [
                         {
                             name: '漏洞',
                             type: 'line',
                             // stack: '总量',  显示的数据是下面几个点加起来的
-                            data: this.oneData[0]
+                            data: this.oneData[0],
+                            itemStyle: {
+                                opacity: '0.1'
+                            },
+                            emphasis: {
+                                itemStyle: {
+                                    opacity: '1',
+                                    borderWidth: 2
+                                }
+                            },
+                            smooth: true
                         },
                         {
                             name: '暗链',
                             type: 'line',
-                            data: this.oneData[1]
+                            data: this.oneData[1],
+                            itemStyle: {
+                                opacity: '0.1'
+                            },
+                            emphasis: {
+                                itemStyle: {
+                                    opacity: '1',
+                                    borderWidth: 2
+                                }
+                            },
+                            mooth: true
                         },
                         {
                             name: '后门',
                             type: 'line',
-                            data: this.oneData[2]
+                            data: this.oneData[2],
+                            itemStyle: {
+                                opacity: '0.1'
+                            },
+                            emphasis: {
+                                itemStyle: {
+                                    opacity: '1',
+                                    borderWidth: 2
+                                }
+                            },
+                            mooth: true
                         }
                     ]
                 });
@@ -177,16 +256,18 @@
             },
             wekOneConfigure() {
                 let wekmyChart = echarts.init(this.$refs.OneEchart); //这里是为了获得容器所在位置
-                window.onresize = wekmyChart.resize;
+                // window.onresize = wekmyChart.resize;
+                window.addEventListener('resize', wekmyChart.resize)
                 wekmyChart.setOption({ 
                     title: {
-                        text: '新增资产走势',
+                        text: '资产问题汇总',
                         left: 10,
                         top: 10,
                         textStyle: {
                             color: '#333333',
                             fontWeight: 'normal',
-                            fontFamily: 'SourceHanSansCN-Regular'
+                            fontFamily: 'SourceHanSansCN-Regular',
+                            fontSize: fontSize(0.086)
                         }
                     },
                     color: ['#b1000b', '#f93030', '#ffb01b'],
@@ -195,11 +276,15 @@
                         left: 'center',
                         bottom: 5,
                         itemWidth:14,
-                        itemHeight:14,
+                        itemHeight:10,
                         itemGap: 30,
                         icon: 'circle',
                         formatter: function(params) {
                             return params
+                        },
+                        textStyle: { 
+                            color: '#999999',
+                            fontSize: fontSize(0.078)
                         }
                     },
                     tooltip: {
@@ -213,6 +298,11 @@
                                 }
                             }
                             return tip;
+                        },
+                        itemWidth: 40,
+                        backgroundColor: '#ffffff',
+                        textStyle: {
+                            color: '#666666'
                         }
                     },
                     grid: {
@@ -221,11 +311,6 @@
                         bottom: '12%',
                         containLabel: true
                     },
-                    // toolbox: {
-                    //     feature: {
-                    //         dataView: {show: true, readOnly: false}
-                    //     }
-                    // },
                     xAxis: {
                         type: 'category',
                         boundaryGap: false,
@@ -237,12 +322,40 @@
                                 color: '#eeeeee',
                                 type: 'solid',
                             }
+                        },
+                        axisTick: {
+                            show: false
+                        },
+                        axisLine: {
+                            lineStyle: {
+                                color: '#d2d2d2',
+                            }
+                        },
+                        axisLabel: {
+                            textStyle: {
+                                fontSize: fontSize(0.078),
+                                color: '#999999'
+                            },
                         }
                     },
                     yAxis: {
                         type: 'value',
                         min: 0,
                         max: 400,
+                        axisTick: {
+                            show: false
+                        },
+                        axisLine: {
+                            lineStyle: {
+                                color: '#d2d2d2',
+                            }
+                        },
+                        axisLabel: {
+                            textStyle: {
+                                fontSize: fontSize(0.078),
+                                color: '#999999'
+                            },
+                        },
                         splitLine: {
                             show: true,
                             interval: 0,
@@ -257,17 +370,47 @@
                             name: '漏洞',
                             type: 'line',
                             // stack: '总量',  显示的数据是下面几个点加起来的
-                            data: this.WekoneData[0]
+                            data: this.WekoneData[0],
+                            itemStyle: {
+                                opacity: '0.1'
+                            },
+                            emphasis: {
+                                itemStyle: {
+                                    opacity: '1',
+                                    borderWidth: 2
+                                }
+                            },
+                            smooth: true
                         },
                         {
                             name: '暗链',
                             type: 'line',
-                            data: this.WekoneData[1]
+                            data: this.WekoneData[1],
+                            itemStyle: {
+                                opacity: '0.1'
+                            },
+                            emphasis: {
+                                itemStyle: {
+                                    opacity: '1',
+                                    borderWidth: 2
+                                }
+                            },
+                            smooth: true
                         },
                         {
                             name: '后门',
                             type: 'line',
-                            data: this.WekoneData[2]
+                            data: this.WekoneData[2],
+                            itemStyle: {
+                                opacity: '0.1'
+                            },
+                            emphasis: {
+                                itemStyle: {
+                                    opacity: '1',
+                                    borderWidth: 2
+                                }
+                            },
+                            smooth: true
                         }
                     ]
                 });
@@ -275,7 +418,8 @@
             },
             twoConfigure(){
                 let twomyChart = echarts.init(this.$refs.TwoEchart); //这里是为了获得容器所在位置
-                window.onresize = twomyChart.resize;
+                // window.onresize = twomyChart.resize;
+                window.addEventListener('resize', twomyChart.resize)
                 twomyChart.setOption({
                     title: {
                         text: '指标占比',
@@ -284,7 +428,8 @@
                         textStyle: {
                             color: '#333333',
                             fontWeight: 'normal',
-                            fontFamily: 'SourceHanSansCN-Regular'
+                            fontFamily: 'SourceHanSansCN-Regular',
+                            fontSize: fontSize(0.086)
                         }
                     },
                     grid: {
@@ -301,7 +446,8 @@
                             margin: 20,
                             color: '#999999',
                             textStyle: {
-                                fontSize: 18
+                                fontSize: fontSize(0.078),
+                                color: '#999999'
                             },
                         },
                         axisLine: {
@@ -314,7 +460,7 @@
                         },
                         splitLine: {
                             show: true,
-                            interval: 0,
+                            // interval: 0,
                             lineStyle: {
                                 color: '#eeeeee',
                                 type: 'solid',
@@ -326,9 +472,9 @@
                         max: 100,
                         axisLabel: {
                             formatter: '{value}%',
-                            color: '#999999',
                             textStyle: {
-                                fontSize: 8
+                                fontSize: fontSize(0.078),
+                                color: '#999999',
                             },
                         },
                         axisLine: {
@@ -348,7 +494,7 @@
                     }],
                     series: [{
                         data: [55,48,39],
-                        barWidth: '20px',
+                        barWidth: '15px',
                         type: 'bar',
                         itemStyle: {
                             color: '#ffb01b'
@@ -356,6 +502,7 @@
                         label: {
                             show: true,
                             position: 'top',
+                            fontSize: fontSize(0.078),
                             color: '#999999',
                             formatter: (params)=>{//单独对第一个label使用样式
                                     return params.value+'%'
@@ -363,13 +510,13 @@
                         }
                     }]
                 })
-                // window.onresize = twomyChart.resize;
             },
             threeConfigure() {
                 var that = this
-                console.log(this.userJson)
+                // console.log(this.userJson)
                 let ThreemyChart = echarts.init(this.$refs.ThreeEchart); //这里是为了获得容器所在位置
-                window.onresize = ThreemyChart.resize;
+                // window.onresize = ThreemyChart.resize;
+                window.addEventListener('resize', ThreemyChart.resize)
                 ThreemyChart.setOption({
                     color: ['#9170ca', '#4c9afb', '#5ad8a6' ,'#ffb01b' ,'#ff7b33', '#b1000b'],
                     title: {
@@ -379,7 +526,8 @@
                         textStyle: {
                             color: '#333333',
                             fontWeight: 'normal',
-                            fontFamily: 'SourceHanSansCN-Regular'
+                            fontFamily: 'SourceHanSansCN-Regular',
+                            fontSize: fontSize(0.086)
                         }
                     },
                     tooltip: {
@@ -388,25 +536,33 @@
                     },
                     legend: [{
                         orient: 'vertical',
-                        right: '10%',
+                        right: '12%',
                         top: 'center',
                         itemWidth:14,
-                        itemHeight:14,
+                        itemHeight:10,
                         itemGap: 15,
                         icon: 'circle',
                         data: this.ThreeData,
                         formatter: function(params) {
                             return params 
+                        },
+                        textStyle: { 
+                            color: '#999999',
+                            fontSize: fontSize(0.078)
                         }
                     },{
                         orient: 'vertical',
-                        right: '1%',
+                        right: '4%',
                         top: 'center',
                         itemWidth:7,
-                        itemHeight:16,
+                        itemHeight:10,
                         icon: 'none',
                         itemGap: 15,
                         data: this.ThreeData,
+                        textStyle: { 
+                            color: '#999999',
+                            fontSize: fontSize(0.078)
+                        },
                         formatter: function(params) {
                             let tip = ''
                             for(let i=0;i<that.ThreeData.length;i++){
@@ -470,7 +626,7 @@
     margin-top: 0.078rem;
     display: flex;
     border: 1px solid #4c9afb;
-    border-radius: 4px;
+    border-radius: 5px;
     float: right;
     z-index: 999;
     .white{

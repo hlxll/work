@@ -4,35 +4,45 @@
     </div>
 </template>
 <script>
-import echarts from "echarts";
+    import echarts from "echarts";
+    import {fontSize} from "./tableSize/fontSize"
+    import {getWidth} from './tableSize/watchWidth.js'
     export default{
         props: ["userJson"],
         data() {
-        return {
-            tableData :[
-                {value: 40, name: '云端'},
-                {value: 35, name: 'gedb'},
-                {value: 25, name: '第三方'}
-            ],
-            chart: null
-        };
+            return {
+                watchData: '',
+                tableData :[
+                    {value: 40, name: '云端'},
+                    {value: 35, name: 'gedb'},
+                    {value: 25, name: '第三方'}
+                ],
+                chart: null
+            };
         },
         mounted() {
-        this.chinaConfigure();
+            this.chinaConfigure();
+            getWidth(document,window,this)
+        },
+        watch: {
+            watchData: function(){
+                this.chinaConfigure()
+                console.log('Find改动')
+            }
         },
         beforeDestroy() {
-        if (!this.chart) {
-            return;
-        }
-        this.chart.dispose();
-        this.chart = null;
+            if (!this.chart) {
+                return;
+            }
+            this.chart.dispose();
+            this.chart = null;
         },
         methods: {
             chinaConfigure() { 
                 var that = this
-                console.log(that.tableData)
                 let myChart = echarts.init(this.$refs.moneymyEchart); //这里是为了获得容器所在位置
-                window.onresize = myChart.resize;
+                // window.onresize = myChart.resize;
+                window.addEventListener('resize', myChart.resize)
                 myChart.setOption({
                     color: ['#9170ca', '#4c9afb', '#5ad8a6'],
                     title: {
@@ -43,7 +53,8 @@ import echarts from "echarts";
                         textStyle: {
                             color: '#333333',
                             fontWeight: 'normal',
-                            fontFamily: 'SourceHanSansCN-Regular'
+                            fontFamily: 'SourceHanSansCN-Regular',
+                            fontSize: fontSize(0.086)
                         }
                     },
                     tooltip: {
@@ -55,14 +66,15 @@ import echarts from "echarts";
                         top: 'center',
                         itemWidth:14,
                         padding: [5,0,5,0],
-                        itemHeight:14,
+                        itemHeight:10,
                         itemGap: 30,
                         // height: 20,
                         right: '20%',
                         icon: 'circle',
                         data: that.tableData,
                         textStyle: { 
-                            fontSize: '10'
+                            fontSize: fontSize(0.078),
+                            color: '#999999'
                         },
                         formatter: function(params) {
                             return params
@@ -71,14 +83,15 @@ import echarts from "echarts";
                         orient: 'vertical',
                         top: 'center',
                         itemWidth: 7,
-                        itemHeight: 16,
+                        itemHeight: 10,
                         right: '10%',
                         itemGap: 30,
                         bottom: 2,
                         icon: 'none',
                         data: that.tableData,
                         textStyle: { 
-                            fontSize: '10'
+                            fontSize: fontSize(0.078),
+                            color: '#999999'
                         },
                         formatter: function(params) {
                             let tip = ''
@@ -87,7 +100,7 @@ import echarts from "echarts";
                                     tip = that.tableData[i].value
                                 }
                             }
-                            return tip+'%'
+                            return tip+ '%'
                         }
                     }],
                     series: [
@@ -117,7 +130,7 @@ import echarts from "echarts";
                                     borderWidth: 4,
                                     borderType : 'solid',
                                     shadowColor: 'rgba(255,255,255,1)'
-                                },
+                                }
                             },
                             data: that.tableData
                         }
@@ -125,6 +138,6 @@ import echarts from "echarts";
                 })
                 // window.onresize = myChart.resize;
             }
+        }
     }
-    } 
 </script>
