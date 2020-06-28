@@ -6,7 +6,7 @@ Vue.use(VueRouter)
 
   const routes = [
     {
-      path: '/',
+      path: '/home',
       meta: {
         width: 1920,
         height: 1080
@@ -16,6 +16,13 @@ Vue.use(VueRouter)
         r(require('../components/anhen/index.vue'))
       ),
       name: 'home'
+    },
+    {
+      path: '/',
+      component: r => 
+      require.ensure([], () => 
+        r(require('../components/phone/index.vue'))
+      )
     }
   ]
 const router = new VueRouter({

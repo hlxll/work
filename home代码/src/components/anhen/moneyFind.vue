@@ -4,9 +4,9 @@
     </div>
 </template>
 <script>
-import echarts from "echarts";
-import {fontSize} from "./tableSize/fontSize"
-import {getWidth} from './tableSize/watchWidth.js'
+    import echarts from "echarts";
+    import {fontSize} from "./tableSize/fontSize"
+    import {getWidth} from './tableSize/watchWidth.js'
     export default{
         props: ["userJson"],
         data() {
@@ -100,7 +100,7 @@ import {getWidth} from './tableSize/watchWidth.js'
                                     tip = that.tableData[i].value
                                 }
                             }
-                            return tip+'%'
+                            return tip+ '%'
                         }
                     }],
                     series: [
@@ -130,7 +130,7 @@ import {getWidth} from './tableSize/watchWidth.js'
                                     borderWidth: 4,
                                     borderType : 'solid',
                                     shadowColor: 'rgba(255,255,255,1)'
-                                },
+                                }
                             },
                             data: that.tableData
                         }
@@ -138,6 +138,6 @@ import {getWidth} from './tableSize/watchWidth.js'
                 })
                 // window.onresize = myChart.resize;
             }
+        }
     }
-    } 
 </script>

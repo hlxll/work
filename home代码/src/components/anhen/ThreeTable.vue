@@ -460,7 +460,7 @@
                         },
                         splitLine: {
                             show: true,
-                            interval: 0,
+                            // interval: 0,
                             lineStyle: {
                                 color: '#eeeeee',
                                 type: 'solid',
@@ -494,7 +494,7 @@
                     }],
                     series: [{
                         data: [55,48,39],
-                        barWidth: '20px',
+                        barWidth: '15px',
                         type: 'bar',
                         itemStyle: {
                             color: '#ffb01b'
@@ -626,7 +626,7 @@
     margin-top: 0.078rem;
     display: flex;
     border: 1px solid #4c9afb;
-    border-radius: 4px;
+    border-radius: 5px;
     float: right;
     z-index: 999;
     .white{

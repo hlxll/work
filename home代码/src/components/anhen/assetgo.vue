@@ -17,24 +17,24 @@
         name: "echarts",
         props: ["userJson"],
         data() {
-        return {
-            watchData: '',
-            TitleText: [
-                {
-                    name: '系统备案',
-                    num: 40
-                },
-                {
-                    name: '域名备案',
-                    num: 40
-                },
-                {
-                    name: 'I P 备案',
-                    num: '40'
-                }
-            ],
-            chart: null
-        };
+            return {
+                watchData: '',
+                TitleText: [
+                    {
+                        name: '系统备案',
+                        num: 40
+                    },
+                    {
+                        name: '域名备案',
+                        num: 40
+                    },
+                    {
+                        name: 'I P 备案',
+                        num: '40'
+                    }
+                ],
+                chart: null
+            };
         },
         watch: {
             watchData: function(){

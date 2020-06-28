@@ -111,21 +111,33 @@ import {numberToCurrency} from './tableSize/filterNum.js'
             }
         },
         methods: {
+            AddArray(val){
+                let ADD = 0;
+                for(let i=0;i<val.length;i++){
+                    ADD +=val[i]
+                }
+                return ADD
+            },
             //总数
             gethomeNumAll(){
+                let timeNum = parseInt(this.AddArray(this.Allincreas)/6)
                 this.timerAll = setInterval(() => {
                     for(let i=0;i<this.homeNumAll.length;i++){
-                        if(this.homeNumAll[i].allNum<this.Allincreas[i]){
+                        if(this.Allincreas[i] && this.homeNumAll[i].allNum<this.Allincreas[i]){
                             this.homeNumAll[i].allNum = this.homeNumAll[i].allNum+1 
+                        }else{
+                            clearInterval(this.timerAll);
                         }
                     }
                     if(this.homeNumAll[0].allNum>=this.Allincreas[0]&&this.homeNumAll[1].allNum>=this.Allincreas[1]&&this.homeNumAll[2].allNum>=this.Allincreas[2]){
                         clearInterval(this.timerAll);
                     }
-                }, 1);
+                }, 1/timeNum);
             },
             //系统
             getproblemNum(){
+                let timeNum = parseInt(this.AddArray(this.problemincreas)/6)
+                console.log(timeNum)
                 this.timerproblem = setInterval(() => {
                     for(let i=0;i<this.homeNumAll.length;i++){
                         if(this.homeNumAll[i].problemNum<this.problemincreas[i]){
@@ -135,10 +147,12 @@ import {numberToCurrency} from './tableSize/filterNum.js'
                     if(this.homeNumAll[0].problemNum>=this.problemincreas[0]&&this.homeNumAll[1].problemNum>=this.problemincreas[1]&&this.homeNumAll[2].problemNum>=this.problemincreas[2]){
                         clearInterval(this.timerproblem);
                     }
-                }, 1);
+                }, 1/timeNum);
             },
             //单位数
             getwarmNum(){
+                let timeNum = parseInt(this.AddArray(this.unitincreas)/6)
+                console.log(timeNum)
                 this.timerunit = setInterval(() => {
                     for(let i=0;i<this.homeNumAll.length;i++){
                         if(this.homeNumAll[i].warmNum<this.unitincreas[i]){
@@ -148,27 +162,39 @@ import {numberToCurrency} from './tableSize/filterNum.js'
                     if(this.homeNumAll[0].warmNum>=this.unitincreas[0]&&this.homeNumAll[1].warmNum>=this.unitincreas[1]&&this.homeNumAll[2].warmNum>=this.unitincreas[2]){
                         clearInterval(this.timerunit);
                     }
-                }, 1);
+                }, 1/timeNum);
             },
             //单位总数
             getCode() {
+                let timeNum = parseInt(this.unitAllincreas/2)
+                console.log(timeNum)
                 this.timer = setInterval(() => {
                 if (this.unitAllNum < this.unitAllincreas) {
                     this.unitAllNum = this.unitAllNum+1;
                 } else {
                     clearInterval(this.timer);
                 }
-                }, 1);
+                }, 1/timeNum);
             },
             //人员数量
             getpeopleNum() {
+                let timeNum = parseInt(this.peopleincreas/2)
+                console.log(timeNum)
+                // var that = this
+                // if (this.peopleNum < this.peopleincreas){
+                //     this.peopleNum = this.peopleNum+1;
+                //     setTimeout(that.getpeoplNum(),1/timeNum)
+                // }else{
+                //     return 0;
+                // }
+                
                 this.timerpeople = setInterval(() => {
                 if (this.peopleNum < this.peopleincreas) {
                     this.peopleNum = this.peopleNum+1;
                 } else {
                     clearInterval(this.timerpeople);
                 }
-                }, 1);
+                }, 1/timeNum);
             }
         },
         mounted:function() {
