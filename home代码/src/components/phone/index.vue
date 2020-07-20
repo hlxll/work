@@ -2,7 +2,7 @@
     <div class="AllPhone">
         <div class="headImg">
             <el-image
-                style="width: 100%; height: 4.21rem"
+                style="width: 100%;"
                 src="/static/img/phone/head.png">
             </el-image>
         </div>
@@ -12,14 +12,14 @@
             </div>
             <div class="applyImg">
                 <el-image
-                    style="width: 0.864rem; height: 0.476rem"
+                    style="width: 100%;"
                     src="/static/img/phone/21.png">
                 </el-image>
             </div>
             <div class="applyBtn">
-            <div v-for="item in 5" :key="item">
-                <applyBtn :ApplyData="ApplyData[item-1]"></applyBtn>
-            </div>
+                <div v-for="item in 5" :key="item">
+                    <applyBtn :ApplyData="ApplyData[item-1]"></applyBtn>
+                </div>
             </div>
         </div>
         <div class="apply" style="margin-top: 0.741rem;">
@@ -28,7 +28,7 @@
             </div>
             <div class="applyImg">
                 <el-image
-                    style="width: 0.864rem; height: 0.476rem"
+                    style="width: 100%;"
                     src="/static/img/phone/21.png">
                 </el-image>
             </div>
@@ -36,6 +36,11 @@
             <div v-for="item in 3" :key="item">
                 <applyBtn :ApplyData="ApplyMoneyData[item-1]"></applyBtn>
             </div>
+            </div>
+        </div>
+        <div class="apply guizheapply" style="margin-top: 0.741rem;">
+            <div class="guizhe">
+                <p>规则</p>
             </div>
         </div>
     </div>
@@ -52,7 +57,7 @@ export default{
                 {
                     img: '疫情h5_03.png',
                     title: 'DDoS高防服务',
-                    ArrTitle: ['2.5T防御带宽','业务全天在线','专业级CC防护','可视化防护报表','防护3-7层DDoS攻击','可视化防护报表','支持TCP/UDP/HTTP/HTTPS等协议']
+                    ArrTitle: ['2.5T防御带宽','业务全天在线','专业级CC防护','可视化防护报表','防护3-7层DDoS攻击','可视化防护报表','TCP/UDP/HTTP/HTTPS等协议']
                 },
                 {
                     img: '疫情h5_10.png',
@@ -78,17 +83,17 @@ export default{
             ApplyMoneyData: [
                 {
                     img: '疫情h5_20.png',
-                    title: '关键基础设施监管服务',
+                    title: '企业复工防疫系统',
                     ArrTitle: ['全息掌握辖区企业/员工底数','自动统计分析复工企业数据','关联分析人员疫情期活动轨迹','疫情信息数字化一屏通览']
                 },
                 {
                     img: '疫情h5_22.png',
-                    title: '关键基础设施监管服务',
+                    title: '网络舆情监测系统',
                     ArrTitle: ['宏观掌握辖区内的舆情态势','查找虚假宣传、不良谣言舆情','查找哄抬物价、售假贩假舆情','梳理辖区企业救援支撑数据','推动辖区良好网络空间建设']
                 },
                 {
                     img: '疫情h5_24.png',
-                    title: '关键基础设施监管服务',
+                    title: '后疫期区域经济发展扶持监管',
                     ArrTitle: ['分析区域内经济影响因素','分析区域内企业运行状况','监管特定经济政策的落实','实现区域资产优化配置','精细化带动区域经济发展']
                 }
             ]
@@ -103,29 +108,84 @@ export default{
 .headImg{
     width: 100%;
 }
+.guizheapply{
+    height: 0.7rem;
+}
+@media only screen and (width: 768px){
+    .apply{
+        transform:translateY(-2.04rem) !important;
+    }
+}
 .apply{
     width: 97.3%;
     margin: 0 auto;
     background-color: #ffffff;
-    transform:translateY(-2.04rem);
+    transform:translateY(-3.04rem);
     display: flex;
     flex-wrap: wrap;
-    .safety{
-        width: 1.54rem;
-        height: 0.41rem;
-        background-color: #51b5f0;
-        text-align: center;
-        transform:translateY(-0.35rem);
-        p{
-            color: #ffffff;
-            margin: 0;
-            font-size: 0.2rem;
-            line-height: 0.41rem;
+    @media only screen and (max-width: 370px){
+        .safety{
+            width: 1.84rem;
             height: 0.41rem;
+            background-color: #51b5f0;
+            text-align: center;
+            transform:translateY(-0.35rem);
+            p{
+                color: #ffffff;
+                margin: 0;
+                font-size: 0.2rem;
+                line-height: 0.41rem;
+                height: 0.41rem;
+            }
+        }
+        .localtion{
+            width: 1.84rem;
+            height: 0.41rem;
+            background-color: #2371e7;
+            text-align: center;
+            transform:translateY(-0.35rem);
+            p{
+                color: #ffffff;
+                margin: 0;
+                font-size: 0.2rem;
+                line-height: 0.41rem;
+                height: 0.41rem;
+            }
         }
     }
-    .localtion{
-        width: 1.54rem;
+    @media only screen and (min-width: 370px){
+        .safety{
+            width: 1.54rem;
+            height: 0.41rem;
+            background-color: #51b5f0;
+            text-align: center;
+            transform:translateY(-0.35rem);
+            p{
+                color: #ffffff;
+                margin: 0;
+                font-size: 0.2rem;
+                line-height: 0.41rem;
+                height: 0.41rem;
+            }
+        }
+        .localtion{
+            width: 1.54rem;
+            height: 0.41rem;
+            background-color: #2371e7;
+            text-align: center;
+            transform:translateY(-0.35rem);
+            p{
+                color: #ffffff;
+                margin: 0;
+                font-size: 0.2rem;
+                line-height: 0.41rem;
+                height: 0.41rem;
+            }
+        }
+    }
+    
+    .guizhe{
+        width: 0.701rem;
         height: 0.41rem;
         background-color: #2371e7;
         text-align: center;
@@ -139,7 +199,7 @@ export default{
         }
     }
     .applyImg{
-        width: 0.864rem;
+        width: 17%;
         margin-left: auto;
         height: 0.476rem;
         .el-image{
@@ -150,6 +210,11 @@ export default{
     .applyBtn{
         width: 94%;
         margin: 0 auto;
+    }
+    .applyBtn>div:last-child{
+        .applYBtn{
+            border: 0 !important;
+        }
     }
 }
 </style>

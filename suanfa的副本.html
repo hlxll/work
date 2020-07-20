@@ -1,104 +1,204 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-	<script src="http://iapi.websaas.cn/cloud-waf/api/common/getChinaLocations"></script>
-	<input type="button" id="export" value="保存"/>
-    <script>
-        //全排列
-        function permutate(str) {
-            //split字符串转数组
-    var array = str.split('');
-    function loop(array, pre = []) {
-        if (array.length == 1) {
-            //concat数组拼接，join数组转字符串
-            return [pre.concat(array).join('')];
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title></title>
+        <style type="text/css">
+            *{
+                list-style: none;
+                margin: 0;
+                padding: 0;
+            }
+            #outer{
+                width: 960px;
+                height: 300px;
+                margin: 50px auto;
+                background-color: lightpink;
+                padding: 12px 0px ;/*上右下左*/
+                /* overflow: hidden; */
+                position: relative;
+            }
+            #imgList{
+                width: ;/*用js来自动设置#imgList宽度*/
+                position: absolute; /*子元素相对父元素的绝对定位*/
+                left:;/*每移320px 到下一张*/
+                
+            }
+            #imgList li{
+                float: left;
+                padding: 0px 10px;
+            }
+            #imgList li img{
+                width: 300px;
+                height: 300px;
+            }
+            #navDiv{
+                position: absolute;
+                bottom: 15px;
+                left: ;/*通过js来自动设置导航居中*/
+            }
+            #navDiv a{
+                width: 15px;
+                height: 15px;
+                background-color: red;
+                margin: 0 5px;
+                float: left;
+                opacity: 0.5;/*设置透明*/
+                
+            }
+            #navDiv a:hover{   /*设置鼠标移入效果*/
+                background-color: black;
+                
+            }
+        </style>
+    </head>
+    <body>
+        <div id="outer">
+            <ul id="imgList">
+                <li><img src="./home代码/static/img/big.png"/></li>
+                <li><img src="./home代码/static/img/big.png"/></li>
+                <li><img src="./home代码/static/img/big.png"/></li>
+                <li><img src="./home代码/static/img/big.png"/></li>
+                <li><img src="./home代码/static/img/big.png"/></li>
+            </ul>
+            <!--创建图片导航按钮-->
+            <div id="navDiv">
+                <a href="javascript:;"></a>
+                <a href="javascript:;"></a>
+                <a href="javascript:;"></a>
+                <a href="javascript:;"></a>
+            </div>
+        </div>
+    </body>
+    <script type="text/javascript" >
+        /*尝试构造一个可以执行简单动画的函数
+         * -参数：
+         *     obj:要执行动画的对象
+         *     attr:要执行动画的样式，如left top width height
+         *     target:执行动画的目标位置
+         *     speed:移动的速度（正数右移，负数左移）
+         *     callback:回调函数，这个函数会在动画执行完毕以后执行
+         */
+        function move(obj,attr,target,speed,callback){
+            //关闭上一个定时器，防止加速
+            clearInterval(obj.timer);
+            //获取元素目前的位置
+            var current=parseInt(getStyle(obj,attr));
+            //判断速度的正负
+             //如果从0到800移动，则speed为正,800到0移动，为负
+            if(current>target){
+                //此时speed为负
+                speed=-speed;
+            }
+            
+            //-开启一个定时器，来执行动画效果
+            obj.timer=setInterval(function(){
+                //获取目标原来的left值
+                var oldValue=parseInt(getStyle(obj,attr));
+                //在旧值的基础上增加
+                var newValue=oldValue+speed;
+                
+                if((speed<0&&newValue<target)||(speed>0&&newValue>target)){
+                    newValue=target;
+                }
+                
+                //将新值设置给目标
+                obj.style[attr]=newValue+"px";
+                
+                if(newValue==target){
+                    //到达目标值，关闭定时器
+                    clearInterval(obj.timer);
+                    //动画执行完毕，调用回调函数
+                    callback&&callback();
+                }
+            },30);
         }
-        let res = [];
-        for (let index = 0; index < array.length; index++) {
-            //pop删除数组最后一个并返回最后一个
-            var first = array.pop();
-            res = res.concat(loop(array, [...pre, first]));
-            //向数组开头添加元素，返回新长度
-            array.unshift(first);
+        
+        /*定义一个元素，来获取指定元素的当前的样式
+         * -参数：
+         *     obj:要获取样式的元素
+         *     name:要获取的样式名
+         */
+        function getStyle(obj,name){
+            return getComputedStyle(obj,null)[name];
         }
-        return res;
-    }
-    return Array.from(new Set(loop(array)))
-}
-var str = '123'
-console.log(permutate(str))
-
-function BubbleStr(arr){
-    const length = arr.length
-    for(var i=0;i<length-1;i++){
-        for(var j=0;j<length - i;j++){
-            arr[j+1]>arr[j]
-            const temp = arr[j]
-            arr[j] = arr[j+1]
-            arr[j+1]=temp
-        }
-    }
-    return arr;
-}
-
-function InsertionSort (arr) {
-    //规定前面是排好序的，取没有排好序的最左边一个，提前保存在常量，和排好序的从右往左比较，将符合排序要求的数往右赋值
-    //，然后j一直减一，最后不符合排序要求之后，j+1就是没有往右赋值，这个位置就是原先保存的常量插入的位置
-    const length = arr.length
-    for (let i = 1; i < length; i++) {
-        const temp = arr[i]//2
-        let j
-        for (j = i - 1; j >= 0 && temp < arr[j]; j--) {
-            arr[j+1] = arr[j]
-        }
-        console.log(j+1)
-        arr[j+1] = temp
-    }
-    return arr
-}
-var data = [1,2,4,3,6,5]
-console.log(InsertionSort(data))
-function IsURL(str_url){
-	var strRegex = "^(ht|f)tp(s?)\:\/\/[a-zA-Z0-9\-\._]+(\.[a-zA-Z0-9\-\._]+){2,}(\/?)([a-zA-Z0-9\-\.\?\,\'\/\\\+&amp;%\$#_]*)?$"
-	var re=new RegExp(strRegex);
-	if (re.test(str_url)){
-	return (true);
-	}else{
-	alert("请输入正确的公司主页地址!")
-	return (false);
-	}
-}
-IsURL('http://www.sbsb.com:80')
-function yuname(str){
-	var strRegex =  "^(?=^.{3,255}$)[a-zA-Z0-9][-a-zA-Z0-9]{0,62}(\.[a-zA-Z0-9][-a-zA-Z0-9]{0,62})+$"
-	var re = new RegExp(strRegex)
-	if(re.test(str)){
-		return (true)
-	}else{
-		alert("域名不正确")
-		return false
-	}
-}
-yuname('www.sbsb')
-
- 
- var button = document.getElementById("export");
- button.addEventListener("click", saveHandler, false);
- function saveHandler(){
-      let data = {
-          name:"hanmeimei",
-          age:88
-      }
-      var content = JSON.stringify(data);
-      var blob = new Blob([content], {type: "text/plain;charset=utf-8"});
-      saveAs(blob, "save.json");
- }
-
     </script>
-</body>
+    
+    
+    <script type="text/javascript">
+        //1.自动设置#imgList宽度
+        var imgList=document.getElementById("imgList");
+        var imgArr=document.getElementsByTagName("li");
+        //使宽度随图片自动变化
+        imgList.style.width=320*imgArr.length+"px";
+        
+        //2.自动设置导航居中
+        var navDiv=document.getElementById("navDiv");
+        var outer=document.getElementById("outer");
+        //设置#navDiv随图片自动变化
+        navDiv.style.left=(outer.offsetWidth-navDiv.offsetWidth)/2+"px";
+        
+        //3.默认当前图片下的导航按钮
+        var allA=document.getElementsByTagName("a");
+        var index=0;
+        allA[index].style.backgroundColor="black";
+        
+        //4.点击第x个超链接显示第x张图片
+        for(i=0;i<allA.length;i++){
+            //为获取点击的是第几个超连击，来添加一个num属性
+            allA[i].num=i;
+            //为a添加单击函数
+            allA[i].onclick=function(){
+                //设置点击动画优先，点击先结束自动动画
+                clearInterval(timer);
+//                alert(this);
+            //获取点击的a的索引
+//            alert(this.num);
+            index=this.num;
+            //切换图片
+//            imgList.style.left=-320*index+"px";
+            //换成动画效果
+            move(imgList,"left",-320*index,20,function(){
+                //设置点击动画优先，再又开始自动动画
+                start();
+            });
+            setA();
+            
+            }
+        }
+        
+        
+        //5.创建一个方法来设置选中的a
+        function setA(){
+            //判断
+            if(index>=imgArr.length-1){
+                index=0;
+                imgList.style.left=0;
+            }
+            //设置不点击的变回红色
+            for(i=0;i<allA.length;i++){
+                allA[i].style.backgroundColor="";
+            }
+            //选中的设置为黑色
+                allA[index].style.backgroundColor="black";
+        }
+        
+        //6.自动切换图片
+        start();
+        var timer;
+        function start(){
+        timer= setInterval(function(){
+            index++;
+            //判断
+            index=index % imgArr.length;//同上面的if判断 0%4=4 1%4=1 ...4%4=0
+            //轮播
+            move(imgList,"left",-320*index,20,function(){
+                //修改对应导航按钮
+                setA();
+            });
+            
+        },3000)
+        } 
+　　　　　　//动画轮播图终于完成
+    </script>
 </html>

@@ -6,6 +6,7 @@ import store from './vuex'
 import router from './router'
 import rem from './rem.js'
 import ElementUI from 'element-ui'
+import iview from 'iview'
 import 'element-ui/lib/theme-chalk/index.css'
 import VueRouter from 'vue-router'
 import echarts from 'echarts'
@@ -14,6 +15,7 @@ import Vueaxios from 'vue-axios'
 Vue.prototype.$echarts = echarts
 Vue.use(Vueaxios, axios)
 // 使用插件
+Vue.use(iview)
 Vue.use(ElementUI)
 Vue.use(VueRouter)
 Vue.config.productionTip = false

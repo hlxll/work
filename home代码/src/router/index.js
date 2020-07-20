@@ -6,6 +6,20 @@ Vue.use(VueRouter)
 
   const routes = [
     {
+      path: '/',
+      component: r => 
+      require.ensure([], () => 
+        r(require('../components/oceantus/index.vue'))
+      )
+    },
+    {
+      path: '/pingmu',
+      component: r => 
+      require.ensure([], () => 
+        r(require('../components/pingmu/index.vue'))
+      )
+    },
+    {
       path: '/home',
       meta: {
         width: 1920,
@@ -18,7 +32,7 @@ Vue.use(VueRouter)
       name: 'home'
     },
     {
-      path: '/',
+      path: '/phone',
       component: r => 
       require.ensure([], () => 
         r(require('../components/phone/index.vue'))
