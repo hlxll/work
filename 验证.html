@@ -21,18 +21,21 @@
 		<div id="">
 			<input id="email"/><span onclick="email()">验证邮箱</span>
 		</div>
+		<div id="">
+			<input id="RegExpFun"/><span onclick="RegExpFun()">验证邮箱</span>
+		</div>
 		<script>
 			function copy(){
 				var textarea = document.createElement("textarea");
-			                  document.body.appendChild(textarea);
-			                  textarea.setAttribute('readonly', 'readonly');
-			                  textarea.value = '复制数据'
-			                  textarea.select();
-			                  if (document.execCommand('copy')) {
-			                    document.execCommand('copy');
-			                    alert('复制成功')
-			                  }
-			    document.body.removeChild(textarea)
+				document.body.appendChild(textarea);
+				textarea.setAttribute('readonly', 'readonly');
+				textarea.value = '复制数据'
+				textarea.select();
+				// if (document.execCommand('copy')) {
+				// 	document.execCommand('copy');
+				// 	alert('复制成功')
+				// }
+				document.body.removeChild(textarea)
 			}
 			function yuming(){
 				let strRegex = /^((\*\.)?([a-zA-Z0-9]([\w\-]*[\w\-])?\.)+([a-zA-Z0-9]+)|([a-zA-Z0-9]([\w\-]*[\w\-])?\.)+([a-zA-Z0-9\-]+|\*))$/
@@ -75,6 +78,12 @@
 				var re=new RegExp(strRegex);
 				var data = document.getElementById('email').value
 				alert(re.test(data))
+			}
+			function RegExpFun() {
+				var strReg = /\d{2,4}/
+				var RegExpFun = new RegExp(strReg);
+				var RegData = document.getElementById('RegExpFun').value
+				alert(RegExpFun.test(RegData))
 			}
 		</script>
 		
