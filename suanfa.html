@@ -145,7 +145,36 @@
             console.log(o)
         }
 
-        
+        //利用递归，将四个数字实现加减乘除任意排序方法，使得数字等于24的验证
+        function judePoint24(nums) {
+            if(nums.length == 1){
+                const cha = nums[0] - 24;
+                return Math.abs(cha) < 0.00001;
+            }
+            for(let i=0;i<nums.length;i++){
+                for(let j=i+1;j<nums.length;j++){
+                    let dataArr = nums.slice();
+                    dataArr.splice(j, 1)
+                    dataArr.splice(i, 1)
+                    let aData = nums[i];
+                    let bData = nums[j];
+                    var retureData = false;
+                    retureData = retureData || judePoint24(dataArr.concat(aData + bData));
+                    retureData = retureData || judePoint24(dataArr.concat(aData - bData));
+                    retureData = retureData || judePoint24(dataArr.concat(bData - aData));
+                    retureData = retureData || judePoint24(dataArr.concat(aData * bData));
+                    if(bData != 0){
+                        retureData = retureData || judePoint24(dataArr.concat(aData / bData));
+                    }
+                    if(aData != 0){
+                        retureData = retureData || judePoint24(dataArr.concat(bData / aData));
+                    }
+                    if(retureData) return true;
+                }
+            }
+            return false;
+        }
+        console.log(judePoint24([6,6,6,6]))
         
     </script>
 </body>
