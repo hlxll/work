@@ -7,6 +7,9 @@ var http = require('http');
 var os = require('os');
 const dns = require('dns');
 var jwt = require('jsonwebtoken');
+var url = require('url');
+var axios = require('axios');
+var request = require('request')
 var vueServerRender = require('vue-server-renderer').createRenderer(
 // {
 // 	template:require('fs').readFileSync(path.join(__dirname,"./App.html"),'utf-8')
@@ -344,7 +347,6 @@ app.get('/searchShopping',function(req,res){
 		dbo.collection("people_train").find(whereStr).limit(10).toArray(function(err, result) {
 		    if (err) throw err;
 		    db.close();
-			console.log(result)
 			res.send(result)
 		});
 	})
@@ -361,11 +363,42 @@ app.get('/deleteTrain',function (req, res) {
 	    var whereStr = {"telephone": data.telephone,"trainTicket":data.trainTicket};  // 查询条件
 	    dbo.collection("people_train").deleteOne(whereStr, function(err, obj) {
 	        if (err) throw err;
-	        // console.log(obj);
 	        db.close();
 	    });
 	});
    res.send();
+})
+
+//爬虫接口
+app.get('/pullUrlData', function(req, res) {
+	let httpUrl = 'https://nodejs.org/dist/latest-v12.x/docs/api/';
+	let urlObj = url.parse(httpUrl)
+	//给地址解析成json对象
+	console.log(urlObj)
+	let http = "./xuexi/huanglin.html"
+	// 自动拼接URL地址
+	httpUrl = url.resolve(httpUrl, http)
+	console.log(httpUrl)
+	//爬虫。在node执行请求地址，获得数据
+	// axios.get('https://nodejs.org/dist/latest-v12.x/docs/api/')
+	// .then(function(res){
+	// 	console.log(res)
+	// })
+	request.get('https://nodejs.org/dist/latest-v12.x/docs/api/',
+		function(err, res, body){
+		//console.log(body)
+		//bode是爬虫得到的DOM节点。通过正则获取指定的内容
+		let reg1 = /<a href="(.*?)".*?>(.*?)<\/a>/igs;
+		let arrClass = []
+		var res;
+		while( res = reg1.exec(body)){
+			let obj = {
+				className: res[2],
+				urlL: res[1]
+			}
+			arrClass.push(obj)
+		}
+	})
 })
 var server = app.listen(8081, function () {
  
