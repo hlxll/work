@@ -10,6 +10,7 @@ var jwt = require('jsonwebtoken');
 var url = require('url');
 var axios = require('axios');
 var request = require('request')
+var cheerio = require('cheerio')
 var vueServerRender = require('vue-server-renderer').createRenderer(
 // {
 // 	template:require('fs').readFileSync(path.join(__dirname,"./App.html"),'utf-8')
@@ -398,7 +399,24 @@ app.get('/pullUrlData', function(req, res) {
 			}
 			arrClass.push(obj)
 		}
+		//正则是任何网站都可以爬，但是正则是有针对性，每次可能要针对写正则
+
 	})
+})
+//cheerio爬虫
+app.get('/cheerioPull', function (req, res) {
+	//获取HTML文档内容，内容的获取和jquery一样
+	let urlData;
+	let httpUrl = 'https://www.fabiaoqing.com/bqb/detail/id/54003.html';
+	axios.get(httpUrl).then((res) => {
+		// cheerio解析html文档
+		let $ = cheerio.load(res.data);
+		//通过cheerio得到DOM，复制给  $   之后，就能和jquery一样，操作DOM了
+		urlData = $('.bqppdiv1 img').attr('src');
+		console.log(urlData);
+		
+	})
+	res.send(urlData);
 })
 var server = app.listen(8081, function () {
  
