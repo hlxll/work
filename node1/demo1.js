@@ -11,6 +11,7 @@ var url = require('url');
 var axios = require('axios');
 var request = require('request')
 var cheerio = require('cheerio')
+var {gohttp} = require('gohttp')
 var vueServerRender = require('vue-server-renderer').createRenderer(
 // {
 // 	template:require('fs').readFileSync(path.join(__dirname,"./App.html"),'utf-8')
@@ -418,6 +419,47 @@ app.get('/cheerioPull', function (req, res) {
 	})
 	res.send(urlData);
 })
+//代理
+app.get('/httpDaili',function(req, res) {
+	let httpUrl = 'https://www.fabiaoqing.com/bqb/detail/id/54003.html';
+	let url = 'https://www.kuaidaili.com/free/';
+	let options = {
+		proxy: {
+			host: '112.111.217.38',
+			port: '9999'
+		}
+	}
+	//使用代理，网上有代理http地址，使用代理，改变options的ip和端口，默认是自己的地址127.0.0.1和8080
+	axios.get(httpUrl, options).then(function(res){
+		console.log(res.data)
+	})
+})
+//服务端渲染
+app.get('/serverDom',function(req, res) {
+	let name = [
+		{
+			name: 'huanglin',
+			age: 12
+		},
+		{
+			name: 'xulinlin',
+			age: 13
+		}
+	];
+	fs.readFile('./node.html', 'utf-8', function(err, data) {
+        if (err) {
+            res.send('文件读取失败');
+        } else {
+			res.send(data);
+        }
+    });
+	// let index = req.pathObj.base;
+	// res.render(name[index], './App.html');
+})
+http.get('/initNpmHttp',function(req, res){
+	//上传npm包，错误
+	console.log(gohttp)
+})
 var server = app.listen(8081, function () {
  
   var host = server.address().address
@@ -435,7 +477,6 @@ http.get('http://aicoder.com', res => {
 	console.log('http的get请求')
   });
 });
-
 server.on('connection', () => {
   console.log('握手');
 });

@@ -1,0 +1,14 @@
+{
+  "name": "gohttp",
+  "version": "1.0.1",
+  "description": "初始化去哪儿自定义node的http请求",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "goWhere的http请求"
+  ],
+  "author": "黄林",
+  "license": "ISC"
+}
