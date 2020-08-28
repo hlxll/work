@@ -1,22 +1,19 @@
 function greeter(person) {
     return "Hello, " + person;
 }
-var user = "Jane User";
+let user = "Jane User";
 console.log(greeter(user));
-var helloStr = '类型检验';
+const helloStr = '类型检验';
 console.log(helloStr);
-var Site = /** @class */ (function () {
-    function Site() {
-    }
-    Site.prototype.name = function () {
+class Site {
+    name() {
         console.log('runoob');
-    };
-    return Site;
-}());
+    }
+}
 var obj = new Site();
 obj.name();
 //元祖类型,数组类型可以不一样，但是对应类型必须一样
-var yuanzuArr;
+let yuanzuArr;
 yuanzuArr = ['huang', 1];
 console.log(yuanzuArr[0]);
 //void用于定义没有返回值的方法
@@ -35,17 +32,20 @@ var str2 = str1;
 console.log(str2);
 //作用域，全局，类，局部
 var All_num = 12; //全局
-var Numbers = /** @class */ (function () {
-    function Numbers() {
+class Numbers {
+    constructor() {
         this.num_val = 13; //实例
     }
-    Numbers.prototype.storeNum = function () {
+    storeNum() {
         var local_num = 14; // 局部
-    };
-    Numbers.sval = 10; //静态
-    return Numbers;
-}());
+    }
+}
+Numbers.sval = 10; //静态
 console.log(All_num);
 console.log(Numbers.sval);
 var Classobj = new Numbers();
 console.log(Classobj.num_val);
+//Map对象
+let myMap = new Map();
+myMap.set("key3", "value3");
+console.log(myMap);
