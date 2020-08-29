@@ -456,10 +456,32 @@ app.get('/serverDom',function(req, res) {
 	// let index = req.pathObj.base;
 	// res.render(name[index], './App.html');
 })
-http.get('/initNpmHttp',function(req, res){
-	//上传npm包，错误
-	console.log(gohttp)
+//中间件
+app.use(function(req, res, next){
+	console.log('此页面会备调用');
+	//定义中间件方法，在请求中调用
+	res.addNum = function(a, b) {
+		return a+b;
+	}
+	next();
 })
+app.get('/initNpmHttp',function(req, res){
+	//上传npm包，错误
+	console.log(req.query)
+	console.log(gohttp)
+	res.send('中间件'+res.addNum(1, 2))
+})
+//路由模块
+let router1 = express.Router()
+router1.get('/', (req, res)=> {
+	res.send('首页')
+})
+router1.get('/list', (req, res)=> {
+	res.send('列表页')
+})
+app.use('/mall',router1)
+//定义了模块之后，访问/mall就是访问首页，/mall/list就是访问列表页
+
 var server = app.listen(8081, function () {
  
   var host = server.address().address
