@@ -2,10 +2,15 @@ var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
+//可以将错误日志保存在text文件
 var logger = require('morgan');
+
+let session = require('express-session')
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var loginRouter = require('./routes/login');
+var sessionRouter = require('./routes/session')
 
 var app = express();
 
@@ -13,6 +18,14 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
+//express中间件
+
+//session配置
+app.use(session({
+  secret: "huanglin",
+  cookie:{}//cokkies配置，比如过期时间等
+}))
+//日志输出
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -21,13 +34,15 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-
+app.use('/login', loginRouter)
+app.use('/session', sessionRouter)
 // catch 404 and forward to error handler
+//404页面
 app.use(function(req, res, next) {
   next(createError(404));
 });
 
-// error handler
+// error handler错误页面
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
