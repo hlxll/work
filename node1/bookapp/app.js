@@ -11,8 +11,10 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var loginRouter = require('./routes/login');
 var sessionRouter = require('./routes/session')
+var uploadRouter = require('./routes/upload')
 
 var app = express();
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -21,10 +23,10 @@ app.set('view engine', 'ejs');
 //express中间件
 
 //session配置
-app.use(session({
-  secret: "huanglin",
-  cookie:{}//cokkies配置，比如过期时间等
-}))
+// app.use(session({
+//   secret: "huanglin",
+//   cookie:{}//cokkies配置，比如过期时间等
+// }))
 //日志输出
 app.use(logger('dev'));
 app.use(express.json());
@@ -32,7 +34,9 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+
 app.use('/', indexRouter);
+app.use('/imgUpload',uploadRouter);
 app.use('/users', usersRouter);
 app.use('/login', loginRouter)
 app.use('/session', sessionRouter)
