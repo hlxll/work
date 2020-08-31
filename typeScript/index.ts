@@ -82,7 +82,7 @@ interface arrStr {
     [index:string]:number
 }
 var ageList:arrStr;
-ageList["lin"] = 5
+ageList["lin"] = 5;
 // 接口继承
 interface firend {
     firstName: string
@@ -92,3 +92,13 @@ interface ChildPerson extends firend {
 }
 var firendChild = <ChildPerson>{};
 firendChild.firstName = 'huang'
+
+// 命名空间，解决重名问题
+/// <reference path = "IShape.ts" /> 
+namespace Drawing { 
+    export class Circle implements IShape { 
+        public draw() { 
+            console.log("Circle is drawn"); 
+        }  
+    }
+}
