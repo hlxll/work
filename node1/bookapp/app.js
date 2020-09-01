@@ -12,6 +12,7 @@ var usersRouter = require('./routes/users');
 var loginRouter = require('./routes/login');
 var sessionRouter = require('./routes/session')
 var uploadRouter = require('./routes/upload')
+var cryptoRouter = require('./routes/cryptoware')
 
 var app = express();
 
@@ -37,6 +38,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/imgUpload',uploadRouter);
+app.use('/crypto',cryptoRouter);
 app.use('/users', usersRouter);
 app.use('/login', loginRouter)
 app.use('/session', sessionRouter)
