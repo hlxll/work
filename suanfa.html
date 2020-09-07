@@ -174,8 +174,58 @@
             }
             return false;
         }
-        console.log(judePoint24([6,6,6,6]))
-        
+        // console.log(judePoint24([6,6,6,6]))
+        let arrLength = 0;
+        function lengthofSunstring(s, leftArr = 0) {
+            let arrS = s.split('')
+            let arrData = [];
+            
+            for(let i=leftArr;i<arrS.length;i++){
+                let pushTure = true;
+                for(let j=0;j<arrData.length;j++){
+                    if(arrS[i] == arrData[j]){
+                        pushTure = false;
+                    }
+                }
+                if(pushTure){
+                    arrData.push(arrS[i])
+                }else{
+                    arrLength = arrData.length>arrLength?arrData.length:arrLength;
+                    lengthofSunstring(s, arrLength)
+                }
+            }
+            console.log(arrLength)
+        }
+        lengthofSunstring('asdasdxczcas')
+
+//输入: "abcabcbb"
+// 输出: 3 
+// 解释: 因为无重复字符的最长子串是 "abc"，所以其长度为 3。
+        var lengthOfLongestSubstring = function(d) {
+            let s = d.split('')
+            let TopNum = 0;
+            for(let i=0;i<s.length;i++){
+                let data = s.splice(0, i+1)
+                var arrData = [];
+                arrData.push(s[i])
+                function addNum(data){
+                    let bloom = false;
+                    arrData.forEach(item=> {
+                        if(item = data[0]){
+                            bloom = true;
+                        }
+                    })
+                    if(!bloom){
+                        arrData.push(data[0])
+                        let childData = data.splice(0, 1)
+                        return addNum(childData);
+                    }
+                }
+                addNum(data)
+                TopNum = (arrData.length>TopNum)?arrData.length:TopNum;
+            }
+            return TopNum;
+        };
     </script>
 </body>
 </html>
