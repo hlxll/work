@@ -3,7 +3,7 @@ var crypto = require('crypto')
 var router = express.Router();
 //加密原理解析
 router.get('/',function(req,res){
-    let password = 'huang';
+    let password = '2';
     //使用的加密算法
     var sf = crypto.createHash('md5')
     //对字符加密

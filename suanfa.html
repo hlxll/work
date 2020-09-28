@@ -177,7 +177,7 @@
         // console.log(judePoint24([6,6,6,6]))
         let arrLength = 0;
         function lengthofSunstring(s, leftArr = 0) {
-            let arrS = s.split('')
+            let arrS = s.split(' ')
             let arrData = [];
             
             for(let i=leftArr;i<arrS.length;i++){
@@ -226,6 +226,65 @@
             }
             return TopNum;
         };
+
+        //牛客算法
+        // 输入一行，两个数字
+        while(line=readline()){
+            var lines = line.split(' ');
+            var a = parseInt(lines[0]);
+            var b = parseInt(lines[1]);
+            print(a+b);
+        }
+        //输入多行
+        // 输入
+        // 2 
+        // 1 2
+        // 3 4
+        // 输出两行
+        var a =parseInt(readline());
+        if(a>0){
+            for(var i=0;i<a;i++){
+                var lines=readline();
+                var line=lines.split(' ');
+                var b=parseInt(line[0]);
+                var c=parseInt(line[1]);
+            console.log(b+c);
+            } 
+        }
+        //输入多行数据，每行两个，计算结果
+        var input = []
+        while(line = readline()) {
+            if(line == '0 0') {
+                break;
+            } else {
+                input.push(line);
+            }
+        }
+        
+        var resultArr = [];
+        
+        for(let i = 0; i < input.length; i++) {
+            var tempArr = input[i].split(' ');
+            var res = parseInt(tempArr[0]) + parseInt(tempArr[1]);
+            resultArr.push(res);
+        }
+        
+        for(let i = 0; i < resultArr.length; i++) {
+            print(resultArr[i]);
+        }
+
+        //第一行数字显示后面有几行，后面每行第一个，显示后面有几个数，求后面数的和
+        let num = parseInt(readline())
+        for(let i=0; i<num; i++){
+            let arr = readline().split(' ')
+            let first = parseInt(arr.shift())
+            let newArr = arr.map(item=>parseInt(item))
+            print(newArr.reduce((a,b)=>a+b))
+        }
+
+
+
+
     </script>
 </body>
 </html>

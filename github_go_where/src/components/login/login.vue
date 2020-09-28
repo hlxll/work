@@ -30,6 +30,9 @@
         colorVersity: false
       }
     },
+    beforeRouteEnter(to, from, next){
+      console.log('shuju')
+    },
     methods: {
       defaultIng(){
         let data = 'defaultImgRef'

@@ -310,3 +310,69 @@ firendChild.firstName = 'huang'
         work():void;
     }
 
+
+// 泛型 可以支持任意类型，传入的参数和返回参数一致,any类型没有类型检查，
+    function getData<T>(value:T):T{
+        
+        return value;
+    }
+    //调用时候，参数和返回和<>内部定义类型一样
+    getData<number>(123)
+
+    // 泛型类
+    class Minclass<T>{
+        public list:T[] = [];
+        add(num:T):void{
+            this.list.push(num)
+        }
+        min():T{
+            var minNum = this.list[0];
+            for(let i=0;i<this.list.length;i++){
+                if(minNum>this.list[i]){
+                    minNum = this.list[i];
+                }
+            }
+            return minNum;
+        }
+    }
+    var m1 = new Minclass<number>();
+    // 泛型接口
+    interface ConfigFn{
+        <T>(value:T):T
+    }
+    var setData:ConfigFn=function<T>(value1:T):T{
+        return value1;
+    }
+    getData<string>('asd')
+    // 泛型类
+    class User{
+        username:string | undefined;
+    }
+    class MysqlDb{
+        add(user:User):boolean{
+            console.log(user)
+            return true;
+        }
+    }
+    var u = new User();
+    u.username = '黄林';
+    var Db = new MysqlDb();
+    Db.add(u);
+    // 泛型类
+    class Mysql<T>{
+        add(info:T):boolean{
+            console.log(info);
+            return true;
+        }
+    }
+    class UserMysql{
+        username:string | undefined;
+    }
+    var i = new UserMysql();
+    i.username = '黄林';
+    var dbmysql = new Mysql<UserMysql>();
+    dbmysql.add(i)
+
+    15节
+    
+

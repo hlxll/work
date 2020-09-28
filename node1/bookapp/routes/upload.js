@@ -15,7 +15,8 @@ router.post('/',upload.single('imgFile'),(req,res)=> {
 })
 //下载文件
 router.get('/download/:bookid',(req, res)=> {
+  // res.send('doenload');
     let bookid = req.params.bookid;
-    res.download(bookid)
+    res.download('../bookapp/public/download/'+bookid+'.txt',bookid+'.txt')
 })
 module.exports = router;
