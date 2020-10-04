@@ -20,15 +20,16 @@ const createLintingRule = () => ({
 })
 
 module.exports = {
-  context: path.resolve(__dirname, '../'),
+  mode:"none",//选择模块，告诉webpack相应的使用内置优化
+  context: path.resolve(__dirname, '../'),//基础目录，从配置中解析入口起点
   entry: {//入口
     app: './src/main.js'
   },
   output: {
-    path: config.build.assetsRoot,
+    path: config.build.assetsRoot,//output目录对应一个绝对路径
     filename: '[name].js',//输出文件名。[]是占位符，表示多个入口，文件名不同
-    publicPath: process.env.NODE_ENV === 'production'
-      ? config.build.assetsPublicPath
+    publicPath: process.env.NODE_ENV === 'production'//按需加载，或者加载外部资源文件来说很重要，浏览器引用的，相对服务器或者协议的，还有把数据
+      ? config.build.assetsPublicPath // 存在cdn上的，必须要用
       : config.dev.assetsPublicPath,
     chunkLoadTimeout: 120000,// 加载快超时的时间
     crossOriginLoading: "anonymous",// 只在对象是web时候，jsonp加载快时候，跨域
@@ -45,6 +46,9 @@ module.exports = {
     }
   },
   module: {
+    noParse: function(content){//忽略正则匹配的文件，不解析，忽略的文件中不应该含有import， require，define的调用，或任何其他调用机制
+      return /jquery|lodash/.test(content);
+    },
     rules: [
       ...(config.dev.useEslint ? [createLintingRule()] : []),
       {
