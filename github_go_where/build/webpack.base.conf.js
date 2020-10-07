@@ -52,9 +52,10 @@ module.exports = {
     mainFiles: ["index"],//解析目录时要使用的文件名
     // modules: [path.resolve(__dirname, "src"), "node_modules"]，解析模块设置的目录，自己添加一个目录到模块搜索目录，此目录优先于node_modules
     // unsafeCache: //可以用布尔值或者正则，用于匹配文件路径或者缓存某些模块
-    plugins:[
+    plugins:[//使用额外的解析插件列表
       
-    ]
+    ],
+    
     
   },
   module: {

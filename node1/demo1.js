@@ -101,7 +101,7 @@ app.get('/register',function (req, res) {
 	var data = req.query;
 	console.log(data)
 	var MongoClient = require('mongodb').MongoClient;
-	var url = "mongodb://localhost:27017/";
+	var url = "mongodb://localhost:27017";
 	 
 	MongoClient.connect(url, { useNewUrlParser: true }, function(err, db) {
 	    if (err) throw err;
