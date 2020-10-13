@@ -4,11 +4,72 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        #uploadFile{
+            opacity: 1;
+            height: 100px;
+        }
+        .MoneyBtn{
+            background-color: blue;
+        }
+        #money{
+            display: none;
+            position: fixed;
+            width: 50%;
+            left: 25%;
+        }
+        .rotateClass{
+            line-height: 100px;
+            text-align: center;
+            border-radius: 50px;
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            animation: identifier 5s;
+        }
+
+        @keyframes identifier {
+            from{transform:rotateY(0deg)}
+            to{transform: rotateY(360deg);}
+        }
+    </style>
 </head>
 <body>
 	<!-- <script src="http://iapi.websaas.cn/cloud-waf/api/common/getChinaLocations"></script> -->
-	<input type="button" id="export" value="保存"/>
+    <input type="button" id="export" value="保存"/>
+    <div>
+        <p>红包模拟器</p>
+        <div><span>红包个数</span><input id="num" type="text">个</div>
+        <div><span>总金额</span><input id="age" type="text">元</div>
+        <button class="MoneyBtn" onclick="MakeMoney()">发红包</button>
+    </div>
+    <div id="money">
+        <div style="width: 100%;padding-left: 80%;"><button style="width: 20px;margin-left: auto;" onclick="deleteMoney()">x</button></div>
+        <div style="width: 200px;height: 200px;border-radius: 100px;background-color: red;">
+            <!-- <img src="ImgURL" alt="头像"> -->
+        </div>
+        
+        <div class="rotateClass">拆红包</div>
+    </div>
+    <input type="file" id="uploadFile"/>
+    <img />
     <script>
+        function MakeMoney(){
+            let geshu = document.getElementById('num').value;
+            let num = document.getElementById('age').value;
+            document.getElementById('money').style.display = 'block';
+            console.log(geshu+num)
+            console.log(document.getElementById('uploadFile').value)
+        }
+        function deleteMoney(){
+            document.getElementById('money').style.display = 'none';
+        }
+        // 匹配空格
+        function Replacetrim(str){
+            str.replace(/^\s+/,"")
+            return str
+        }
+        console.log(Replacetrim('  asd'))
         //全排列
         function permutate(str) {
             //split字符串转数组
@@ -229,37 +290,37 @@
 
         //牛客算法
         // 输入一行，两个数字
-        while(line=readline()){
-            var lines = line.split(' ');
-            var a = parseInt(lines[0]);
-            var b = parseInt(lines[1]);
-            print(a+b);
-        }
+        // while(line=readline()){
+        //     var lines = line.split(' ');
+        //     var a = parseInt(lines[0]);
+        //     var b = parseInt(lines[1]);
+        //     print(a+b);
+        // }
         //输入多行
         // 输入
         // 2 
         // 1 2
         // 3 4
         // 输出两行
-        var a =parseInt(readline());
-        if(a>0){
-            for(var i=0;i<a;i++){
-                var lines=readline();
-                var line=lines.split(' ');
-                var b=parseInt(line[0]);
-                var c=parseInt(line[1]);
-            console.log(b+c);
-            } 
-        }
+        // var a =parseInt(readline());
+        // if(a>0){
+        //     for(var i=0;i<a;i++){
+        //         var lines=readline();
+        //         var line=lines.split(' ');
+        //         var b=parseInt(line[0]);
+        //         var c=parseInt(line[1]);
+        //     console.log(b+c);
+        //     } 
+        // }
         //输入多行数据，每行两个，计算结果
         var input = []
-        while(line = readline()) {
-            if(line == '0 0') {
-                break;
-            } else {
-                input.push(line);
-            }
-        }
+        // while(line = readline()) {
+        //     if(line == '0 0') {
+        //         break;
+        //     } else {
+        //         input.push(line);
+        //     }
+        // }
         
         var resultArr = [];
         
@@ -274,15 +335,31 @@
         }
 
         //第一行数字显示后面有几行，后面每行第一个，显示后面有几个数，求后面数的和
-        let num = parseInt(readline())
-        for(let i=0; i<num; i++){
-            let arr = readline().split(' ')
-            let first = parseInt(arr.shift())
-            let newArr = arr.map(item=>parseInt(item))
-            print(newArr.reduce((a,b)=>a+b))
-        }
-
-
+        // let num = parseInt(readline())
+        // for(let i=0; i<num; i++){
+        //     let arr = readline().split(' ')
+        //     let first = parseInt(arr.shift())
+        //     let newArr = arr.map(item=>parseInt(item))
+        //     print(newArr.reduce((a,b)=>a+b))
+        // }
+        // function strPaixu(){
+        //     // let str = parseInt(readline()).split(' ');
+        //     let str = '1QEjTeEpG6'.split(' ');
+        //     // let n = parseInt(readline());
+        //     let n = 8;
+        //     let allArr = str;
+        //     for(let i=0;i<n;i++){
+        //         let data = readline().split('');
+        //         let arr = allArr.slice(parseInt(data[0]), parseInt(data[0])+parseInt(data[1]));
+        //         let daoArr = [];
+        //         for(let j=arr.length-1;j>=0;j--){
+        //             daoArr.push(arr[i])
+        //         }
+        //         allArr.concat(daoArr)
+        //     }
+        //     return allArr;
+        // }
+        
 
 
     </script>
