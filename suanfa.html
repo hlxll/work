@@ -37,11 +37,11 @@
 <body>
 	<!-- <script src="http://iapi.websaas.cn/cloud-waf/api/common/getChinaLocations"></script> -->
     <input type="button" id="export" value="保存"/>
-    <div>
-        <p>红包模拟器</p>
-        <div><span>红包个数</span><input id="num" type="text">个</div>
-        <div><span>总金额</span><input id="age" type="text">元</div>
-        <button class="MoneyBtn" onclick="MakeMoney()">发红包</button>
+    <div id="nodeList">
+        <p id="p">1</p>
+        <div id="div"><span id="span">2</span><input id="num" type="text"></div>
+        <div class="div"><span class="span">3</span><input id="age" type="text"></div>
+        <button class="MoneyBtn" onclick="MakeMoney()">4</button>
     </div>
     <div id="money">
         <div style="width: 100%;padding-left: 80%;"><button style="width: 20px;margin-left: auto;" onclick="deleteMoney()">x</button></div>
@@ -54,6 +54,53 @@
     <input type="file" id="uploadFile"/>
     <img />
     <script>
+        //解析DOM节点，生产json格式
+        function setNodeList(node){
+            var node = node;
+            var nodeChild = node.childNodes;
+            function pushList(node){
+                var nodeChild = node.childNodes;
+                var returnArr = [];//每次遍历子节点，返回的json数组
+                for(let i=0;i<nodeChild.length;i++){
+                    if(nodeChild[i].nodeType == 3){
+                        let child = {
+                            tag: 'text'
+                        }
+                        returnArr.push(child)
+                    }
+                    if(nodeChild[i].nodeType == 1&&!nodeChild[i].childNodes){
+                        let idName = nodeChild[i].getAttribute("id");
+                        let claName = nodeChild[i].getAttribute("class");
+                        let child = {
+                            tag: nodeChild[i].nodeName,
+                            content: nodeChild[i].innerText,
+                            attribute: {
+                                id: idName||'',
+                                class: claName||'',
+                            }
+                        }
+                        returnArr.push(child)
+                    }
+                    if(nodeChild[i].nodeType == 1&&nodeChild[i].childNodes){
+                        let idName = nodeChild[i].getAttribute("id");
+                        let claName = nodeChild[i].getAttribute("class");
+                        let child = {
+                            tag: nodeChild[i].nodeName,
+                            content: nodeChild[i].innerText,
+                            attribute: {
+                                id: idName||'',
+                                class: claName||'',
+                            },
+                            children: pushList(nodeChild[i])
+                        }
+                        returnArr.push(child)
+                    }
+                }
+                return returnArr;
+            }
+            console.log(pushList(node))
+        }
+        setNodeList(document.getElementById('nodeList'))
         function MakeMoney(){
             let geshu = document.getElementById('num').value;
             let num = document.getElementById('age').value;
