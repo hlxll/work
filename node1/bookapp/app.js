@@ -2,6 +2,7 @@ var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
+var cors = require('cors');
 //可以将错误日志保存在text文件
 var logger = require('morgan');
 
@@ -35,7 +36,12 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-
+//后端单独配置就可以跨域
+// app.use(cors({
+//   origin: ['http://localhost:3001'], // 所要允许跨域的ip
+//   methods: ['GET', 'POST'],
+//   alloweHeaders: ['Conten-Type', 'Authorization']
+// }));
 app.use('/', indexRouter);
 app.use('/imgUpload',uploadRouter);
 app.use('/crypto',cryptoRouter);
@@ -58,5 +64,5 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-app.listen(5000)
+// app.listen('8080')
 module.exports = app;
