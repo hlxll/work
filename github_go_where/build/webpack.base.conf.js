@@ -18,13 +18,14 @@ const createLintingRule = () => ({
     emitWarning: !config.dev.showEslintErrorsInOverlay
   }
 })
-
+//loader是处理js以外的文件，Plugins插件比loader处理范围更广，mode模式指示webpack模块
 module.exports = {
-  mode:"none",//选择模块，告诉webpack相应的使用内置优化
+  //mode:"none",//选择模块，告诉webpack相应的使用内置优化
   context: path.resolve(__dirname, '../'),//基础目录，从配置中解析入口起点
-  entry: {//入口
+  entry: {//入口起点，指明以哪个文件开始打包
     app: './src/main.js'
   },
+  //打包后输出
   output: {
     path: config.build.assetsRoot,//output目录对应一个绝对路径
     filename: '[name].js',//输出文件名。[]是占位符，表示多个入口，文件名不同
@@ -54,9 +55,7 @@ module.exports = {
     // unsafeCache: //可以用布尔值或者正则，用于匹配文件路径或者缓存某些模块
     plugins:[//使用额外的解析插件列表
       
-    ],
-    
-    
+    ]
   },
   module: {
     noParse: function(content){//忽略正则匹配的文件，不解析，忽略的文件中不应该含有import， require，define的调用，或任何其他调用机制

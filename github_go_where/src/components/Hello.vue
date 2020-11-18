@@ -90,7 +90,6 @@ export default {
     }
   },
   created() {
-    console.log(window.sessionStorage.getItem('token') || '')
     let loginToken = window.sessionStorage.getItem('token') || ''
     axios.get('http://127.0.0.1:8081/Verifylogin',{
       params: {

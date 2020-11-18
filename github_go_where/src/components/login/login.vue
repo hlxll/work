@@ -9,8 +9,8 @@
           <p :class="{'colorClass':colorVersity}" @click="changeColor(true)">二维码登陆</p>
           <p :class="{'colorClass':!colorVersity}" @click="changeColor(false)">密码登陆</p>
         </div>
-        <tel-login v-show="!colorVersity"></tel-login>
-        <qr-code v-show="colorVersity"></qr-code>
+          <tel-login v-show="!colorVersity"></tel-login>
+          <qr-code v-show="colorVersity"></qr-code>
       </div>
     </div>
     <div></div>
@@ -30,9 +30,9 @@
         colorVersity: false
       }
     },
-    beforeRouteEnter(to, from, next){
-      console.log('shuju')
-    },
+    // beforeRouteEnter(to, from, next){
+    //   console.log('shuju')
+    // },
     methods: {
       defaultIng(){
         let data = 'defaultImgRef'

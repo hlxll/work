@@ -32,6 +32,14 @@
             from{transform:rotateY(0deg)}
             to{transform: rotateY(360deg);}
         }
+        #rotate_all{
+            width: 200px;
+            height: 200px;
+            background-color: rgba(0,0,0,0.5);
+        }
+        /* .rotate_one{
+            transform: rotateX(90deg);
+        } */
     </style>
 </head>
 <body>
@@ -48,12 +56,38 @@
         <div style="width: 200px;height: 200px;border-radius: 100px;background-color: red;">
             <!-- <img src="ImgURL" alt="头像"> -->
         </div>
-        
         <div class="rotateClass">拆红包</div>
     </div>
     <input type="file" id="uploadFile"/>
     <img />
+
+    <div id="rotate_all">
+        <div id="rotate_one" style="transform: rotateX(90deg);"><img src="../../老大/123.jpg" style="width: 100px;height: 100px;"/></div>
+    </div>
     <script>
+        var node = document.getElementById('rotate_all');
+        node.onmousedown = function(ev){
+            var ev = ev||event;
+
+            var x1 = ev.clientX;
+            var y1 = ev.clientY;
+            console.log(x1,y1)
+            node.onmousemove = function(ev){
+                //event的兼容性
+                var ev = ev||event;
+                //获取鼠标移动时的坐标
+                var x2 = ev.clientX;
+                var y2 = ev.clientY;
+                console.log(x2,y2)
+                //计算出鼠标的移动距离
+                var x = x2-x1;
+                var y = y2-y1;
+                var xx = x*10;
+                var yy = y*10;
+                var rotate_node = document.getElementById('rotate_one');
+                rotate_node.style.transform = "rotateX("+xx+"deg)";
+            }
+        }
         //解析DOM节点，生产json格式
         function setNodeList(node){
             var node = node;
@@ -64,9 +98,12 @@
                 for(let i=0;i<nodeChild.length;i++){
                     if(nodeChild[i].nodeType == 3){
                         let child = {
-                            tag: 'text'
+                            tag: 'text',
+                            content: nodeChild[i].innerText
                         }
-                        returnArr.push(child)
+                        if(nodeChild[i].innerText){
+                            returnArr.push(child)
+                        }
                     }
                     if(nodeChild[i].nodeType == 1&&!nodeChild[i].childNodes){
                         let idName = nodeChild[i].getAttribute("id");
@@ -100,7 +137,7 @@
             }
             console.log(pushList(node))
         }
-        setNodeList(document.getElementById('nodeList'))
+        setNodeList(document.getElementById('money'))
         function MakeMoney(){
             let geshu = document.getElementById('num').value;
             let num = document.getElementById('age').value;
@@ -140,7 +177,28 @@
         }
         var str = '123'
         console.log(permutate(str))
-
+        //全排列
+        function shujuPailie(){
+            var allData = [];
+            function Allpailie(arr, res=[]){
+                if(arr.length == 0){
+                    res.concat(arr[0])
+                    allData.push(res)
+                }
+                for(let i=0;i<arr.length;i++){
+                    var queryArray = [];
+                    for(let j=0;j<arr.length;j++){
+                        if(i!=j){
+                            queryArray.push(arr[j])
+                        }
+                    }
+                    Allpailie(queryArray,[...res, arr[i]])
+                }
+            }
+            Allpailie([1,2,3,4])
+            return allData;
+        }
+        console.log(shujuPailie())
         function BubbleStr(arr){
             const length = arr.length
             for(var i=0;i<length-1;i++){
@@ -406,9 +464,46 @@
         //     }
         //     return allArr;
         // }
-        
+        function calculateStatistics( dataArr ) {
+    for(let i=0;i<dataArr.length-1;i++){
+        for(let j=0;j<dataArr.length-i-1;j++){
+            if(dataArr[j]>dataArr[j+1]){
+                let center = dataArr[j+1];
+                dataArr[j+1] = dataArr[j];
+                dataArr[j] = center;
+            }
+        }
+	}
+	var centerData = (dataArr.length/2);
+	let len = dataArr.length;
+	var tpNine = (dataArr.length*0.9);
+	let resArr = [];
+    console.log(len,centerData,tpNine)
+	centerData = centerData>parseInt(centerData)?parseInt(centerData)+1:centerData;
+	tpNine = tpNine>parseInt(tpNine)?parseInt(tpNine)+1:tpNine;
+	console.log(centerData,tpNine)
+    resArr.push(dataArr[centerData-1])
+    resArr.push(dataArr[0])
+    resArr.push(dataArr[len-1])
+    resArr.push(dataArr[tpNine-1])
+    return resArr;
+}
+var data = calculateStatistics([10,11, 9, 8, 7,1,3,6,5]);
+console.log(data)
 
-
+function arr(arr){
+    var resArr = []; 
+				for(let i=0;i<arr.length;i++){
+					for(let j=arr.length-1;j>i;j--){
+						if(arr[i]==arr[j]){
+							resArr.push(arr[j])
+							arr.splice(j,1)
+						}
+					}
+				}
+				return resArr;
+}
+console.log(arr([1,2,3,1,2,3]))
     </script>
 </body>
 </html>

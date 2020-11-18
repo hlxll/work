@@ -96,6 +96,7 @@ app.get('/api', function(req, res) {
 	})
 });
 
+app.get()
 //添加数据/register?name=xxx&work=xxx
 app.get('/register',function (req, res) {
 	var data = req.query;
@@ -507,3 +508,5 @@ server.on('close', () => {
 });
 // 关闭服务功能
 // server.close();
+
+

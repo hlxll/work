@@ -6,7 +6,10 @@
 			<td>出票状态查询</td>
 			<td></td>
 		</tr>
-		<router-view/>
+		<keep-alive>
+			<router-view/>
+		</keep-alive>
+		
 	</div>
 </template>
 
